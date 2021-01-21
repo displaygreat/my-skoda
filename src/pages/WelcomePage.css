@@ -1,0 +1,28 @@
+.c-welcome-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.myskoda-welcome-label {
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+.welcome-input {
+  margin-bottom: 40px;
+}
+.welcome-button {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.wrap-welcome-img {
+  position: relative;
+  margin-bottom: 40px;
+}
+.welcome-logo {
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  z-index: 100;
+}

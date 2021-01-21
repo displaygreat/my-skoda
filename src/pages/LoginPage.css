@@ -1,0 +1,22 @@
+.prev-next-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-prev {
+  width: 47%;
+}
+.btn-next {
+  width: 47%;
+}
+.login-link {
+  display: inline-block;
+  color: #000;
+  border-bottom: 1px solid #000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+.login-link:hover {
+  color: #000;
+  text-decoration: none;
+}
