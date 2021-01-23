@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
-import './SignupPage.css';
+import './SignupLicensePage.css';
 
-class SignupPage extends React.Component {
+class SignupLicensePage extends React.Component {
   // constructor() {
   //   super();
   // }
@@ -15,27 +15,12 @@ class SignupPage extends React.Component {
             <Col className="column column-aside" xs={12} md={4}>
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Create account</h4>
-              <span className="step">Step 2</span>
+              <span className="step">Step 1</span>
               <p className="home-text">for My Skoda</p>
               <Form>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Create Password</Form.Label>
-                  <div className="input-password">
-                    <Form.Control type="password" placeholder="Password" />
-                  <Image className="icon-eye-off" src="img/eye-off.png" />
-                  <Image className="icon-eye" src="img/eye.png" />
-                  </div>
-                  <Form.Text className="text-muted">
-                    Perfect
-                  </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Confirm password</Form.Label>
-                  <div className="input-password">
-                    <Form.Control className="input-password" type="password" placeholder="Password" />
-                  <Image className="icon-eye-off" src="img/eye-off.png" />
-                  <Image className="icon-eye" src="img/eye.png" />
-                  </div>
+                  <Form.Label>License Number</Form.Label>
+                  <Form.Control type="text" placeholder="License Number" />
                   <Form.Text className="text-muted">
                     Perfect
                   </Form.Text>
@@ -72,4 +57,4 @@ class SignupPage extends React.Component {
     )
   }
 }
-export default SignupPage;
+export default SignupLicensePage;

@@ -1,11 +1,54 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './WelcomePage.css';
+import usersJSON from '../data/users.json';
 
 class WelcomePage extends React.Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor(props) {
+    super(props);
+    let users;
+    if(localStorage.getItem('usersData')) {
+      users = JSON.parse(localStorage.getItem('usersData'))
+    } else {
+      users = usersJSON;
+    }
+    this.state = {
+      inputEmail: '',
+      users: users
+    }
+  }
+
+  validateEmail = () => {
+    if (!localStorage.getItem('usersData')) {
+      for(let i=0; i<usersJSON.length; i++) {
+        if(usersJSON[i].email === this.state.inputEmail) {
+          // this.setState({
+          // userEmail: usersJSON[i].email
+          // });
+          window.location = '/#/login';
+          return;
+      }
+      this.props.callbackUserEmail(this.state.inputEmail);
+    } 
+    // if (localStorage.getItem('usersData') && this.state.users.email === this.state.inputEmail) {
+    //     window.location = '/#/login';
+    //     return;
+    //   }
+      window.location = '/#/signup-license';
+    }
+  }
+
+  handleChangeInputEmail = (e) => {
+    e.preventDefault();
+    this.setState({
+      inputEmail: e.target.value
+    });
+  }
+
+  handleClickOnCreateAccount () {
+    window.location = '/#/signup-license';
+  }
+
   render() {
     return(
       <div className="c-welcome-page">
@@ -19,7 +62,7 @@ class WelcomePage extends React.Component {
               <Form>
                 <Form.Group className="welcome-input"controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
+                  <Form.Control type="email" placeholder="Enter email" value={this.state.inputEmail} onChange={this.handleChangeInputEmail}/>
                   <Form.Text className="text-muted">
                     Perfect
                   </Form.Text>
@@ -32,15 +75,15 @@ class WelcomePage extends React.Component {
                 {/* <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group> */}
-                <Button className="welcome-button" variant="success">Next</Button>
-                <Button className="welcome-button" variant="outline-success">Create account
+                <Button className="welcome-button" variant="success" onClick={this.validateEmail} >Next</Button>
+                <Button className="welcome-button" variant="outline-success" onClick={this.handleClickOnCreateAccount}>Create account
                 </Button>
               </Form>
             </Col>
             <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src="img/skoda-logo.png" rounded />
+              <Image className="logo welcome-logo" src="img/skoda-logo-min.png" rounded />
               <div className="wrap-welcome-img">
-                <Image className="home-img" src="img/skoda-welcome-martin-katlerI-unsplash.jpg" rounded />
+                <Image className="home-img" src="img/skoda-welcome-martin-katlerI-unsplash-min.jpg" rounded />
               </div>
             </Col>
           </Row>

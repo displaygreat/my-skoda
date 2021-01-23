@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+.show {
+  display: block;
+}
+
+hide {
+  display: none;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

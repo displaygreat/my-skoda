@@ -3,9 +3,16 @@ import { Container, Col, Image, Row, Button, Nav } from 'react-bootstrap';
 import './HomePage.css'
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.handleClickOnHomeButton = this.handleClickOnHomeButton.bind(this);
   }
+
+  handleClickOnHomeButton () {
+    window.location = '/#/welcome';
+    console.log('hi');
+  }
+
   render() {
     return(
       <div className="wrapper">
@@ -15,15 +22,15 @@ class HomePage extends React.Component {
             <Col className="column column-aside" xs={12} md={8}>
               <span className="myskoda-home-label">my<span className="letter-green">Skoda</span></span>
               <div className="wrap-home-img">
-                <Image className="home-img" src="img/skoda-home-page.jpg" rounded />
+                <Image className="home-img" src="img/skoda-home-page-min.jpg" rounded />
               </div>
               <h2 className="home-title">The digital access<br/>to your Skoda.<br/>Anywhere.<br/>Anytime.</h2>
             </Col>
             <Col className="column column-aside" xs={12} md={4}>
-              <Image className="logo" src="img/skoda-logo.png" rounded />
+              <Image className="logo" src="img/skoda-logo-min.png" rounded />
               <h4 className="home-subtitle">Welcome to My Skoda!</h4>
               <p className="home-text">mySkoda gives you access to all the digital services from Skoda. Access important vehicle data, manage your data, and set up services.</p>
-              <Button className="home-button" variant="success">Let's go<Image src="img/chevron-right.png" /></Button>
+              <Button className="home-button" variant="success" onClick={this.handleClickOnHomeButton}>Let's go<Image src="img/chevron-right.png" /></Button>
             </Col>
           </Row>
           </Container>
