@@ -12,27 +12,57 @@ import SignupLicensePage from './pages/SignupLicensePage';
 import MySkodaPage from './pages/MySkodaPage';
 // import ServiceCalendarPage from './pages/ServiceCalendarPage';
 // import AppointmentPage from './pages/AppointmentPage';
-// import MySkodaNavbar from './components/MySkodaNavbar/MySkodaNavbar';
+import MySkodaNavbar from './components/MySkodaNavbar/MySkodaNavbar';
 // import vehicleJSON from './data/vehicle.json';
+import Parse from 'parse';
+Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+    Parse.initialize(
+      'Iwo7VyOadOaF4eiiOJjWPPRpYkypMvslH1TxL1Jq', // This is your Application ID
+      'eRJ2OisGhdgtimmV0E815KDSnEcmogdtUZqxFnc1' // This is your Javascript key
+    );
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: '',
       userEmail: '',
-      userCarPlate: ''
+      userCarPlate: '',
+      userPwd: '',
+      activeUser: null
     }
+  }
+
+  handleLogin = (userObj) => {
+    this.setState({
+      activeUser: userObj
+    })
+  }
+
+  handleLogout = () => {
+    this.setState({
+      activeUser: null
+    })
   }
 
   handleCallbackUserEmail = (email) => {
     this.setState({
       userEmail: email
     });
+    console.log(this.state);
   }
 
-  handleCallbackUserCarPlate = (plate) => {
+  handleCallbackUserCarPlate = (plate, id) => {
     this.setState({
-      userCarPlate: plate
+      userCarPlate: plate,
+      userId: id
+    });
+    console.log(this.state);
+  }
+
+  handleCallbackUserPwd = (pwd) => {
+    this.setState({
+      userPwd: pwd
     });
     console.log(this.state);
   }
@@ -40,8 +70,9 @@ class App extends React.Component {
   render() {
     return (
           <HashRouter>
-            {/* <Route exact path={['/myskoda', '/service-calendar', '/appointment']}>
-              <MySkodaNavbar />
+            {/* <Route exact path={['/my-skoda', '/service-calendar', '/appointment']}> */}
+            {/* <Route exact path="/my-skoda">
+              <MySkodaNavbar handleLogout={this.handleLogout} activeUser={this.state.activeUser}/>
             </Route> */}
               <Switch>
                 <Route exact path="/">
@@ -54,16 +85,16 @@ class App extends React.Component {
                   <ServiceCalendarPage />
                 </Route> */}
                 <Route exact path="/my-skoda">
-                  <MySkodaPage />
+                  <MySkodaPage sendUserCarPlate={this.state.userCarPlate} />
                 </Route>
                 <Route exact path="/login">
-                  <LoginPage sendUserEmail={this.state.userEmail}/>
+                  <LoginPage sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin}/>
                 </Route>
                 <Route exact path="/signup-license">
                   <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate}/>
                 </Route>
                 <Route exact path="/signup">
-                  <SignupPage />
+                  <SignupPage callbackUserPwd={this.handleCallbackUserPwd} />
                 </Route>
                 <Route exact path="/welcome">
                   <WelcomePage callbackUserEmail={this.handleCallbackUserEmail} />

@@ -3,8 +3,8 @@ import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupPage.css';
 
 class SignupPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       type: "password",
       offPwd: 'show',
@@ -40,7 +40,6 @@ class SignupPage extends React.Component {
     this.setState({
       newUserPwd: e.target.value
     });
-    console.log(this.state);
   }
 
   handleChangeConfirmPwd = (e) => {
@@ -48,12 +47,14 @@ class SignupPage extends React.Component {
     this.setState({
       confirmUserPwd: e.target.value
     });
-    console.log(this.state);
   }
 
   isTheSameValue = () => {
-    if(this.state.newUserPwd === this.state.confirmUserPwd) {
-       window.location = '/#/my-skoda'
+    let newUserPwd = this.state.newUserPwd.toString();
+    let confirmUserPwd = this.state.confirmUserPwd.toString();
+    if(newUserPwd === confirmUserPwd) {
+       window.location = '/#/my-skoda';
+       this.props.callbackUserPwd(newUserPwd);
     }
     this.setState({
       showAlert: false,
@@ -63,6 +64,7 @@ class SignupPage extends React.Component {
   }
 
 
+
   render() {
     return(
       <div className="c-welcome-page">
@@ -70,7 +72,7 @@ class SignupPage extends React.Component {
         <Container>
           <Row className="">
             <Col className="column column-aside" xs={12} md={4}>
-              <div class="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
+              <div className="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
                 <p className="alert-text">The fields are not the same</p>
                   <button className="button-close" onClick={() => this.setState({showAlert: true})} >
                     &#215;  

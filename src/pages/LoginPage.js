@@ -1,12 +1,17 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form, Alert } from 'react-bootstrap';
 import './LoginPage.css';
-import usersJSON from '../data/users.json';
+//solution with json
+// import usersJSON from '../data/users.json';
+
+//solution with back4You
+import Parse from 'parse';
+import UserModel from '../models/UserModel';
+
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       type: "password",
       offPwd: 'show',
@@ -36,19 +41,39 @@ class LoginPage extends React.Component {
     window.location = '/#/welcome';
   }
 
+  //solution with json
+  // validatePassword = () => {
+  //   let getUserEmail = this.props.sendUserEmail;
+  //   let getUserPwd = this.state.userPwd;
+  //   for(let i=0; i<usersJSON.length; i++) {
+  //     if(usersJSON[i].email === getUserEmail && usersJSON[i].pwd === getUserPwd ) {
+  //       window.location = '/#/my-skoda';
+  //       return;
+  //     } 
+  //   }
+  //   this.setState({
+  //     showAlert: false,
+  //     userPwd: ''
+  //   })
+  // }
+
+  //solution with back4you
   validatePassword = () => {
-    let getUserEmail = this.props.sendUserEmail;
-    let getUserPwd = this.state.userPwd;
-    for(let i=0; i<usersJSON.length; i++) {
-      if(usersJSON[i].email === getUserEmail && usersJSON[i].pwd === getUserPwd ) {
-        window.location = '/#/my-skoda';
-        return;
-      } 
-    }
-    this.setState({
-      showAlert: false,
-      userPwd: ''
-    })
+    let userEmail = this.props.sendUserEmail;
+    let userPwd = this.state.userPwd;
+    // Pass the username and password to logIn function
+    Parse.User.logIn(userEmail, userPwd).then((user) => {
+  // Do stuff after successful login
+    console.log('Logged in user', user);
+    this.props.handleLogin(new UserModel(user));
+    window.location = '/#/my-skoda';
+    }).catch(error => {
+      console.error('Error while logging in user', error);
+    // this.setState({
+    //     showAlert: false,
+    //     userPwd: ''
+    // })
+})
   }
 
   handleChangeInputPwd = (e) => {
@@ -56,7 +81,6 @@ class LoginPage extends React.Component {
     this.setState({
       userPwd: e.target.value
     });
-    console.log(this.state);
   }
 
   render() {
@@ -66,8 +90,8 @@ class LoginPage extends React.Component {
         <Container>
           <Row className="">
             <Col className="column column-aside" xs={12} md={4}>
-              <div class="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
-                <p className="alert-text">Invalid Password</p>
+              <div className="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
+                <p className="alert-text">Check <a href="/#/welcome">email </a>and password</p>
                   <button className="button-close" onClick={() => this.setState({showAlert: true})} >
                     &#215;  
                   </button>

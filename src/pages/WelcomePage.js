@@ -1,41 +1,39 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './WelcomePage.css';
-import usersJSON from '../data/users.json';
+
+//solution with json
+// import usersJSON from '../data/users.json';
+
+//solution with back4you
+import Parse from 'parse';
 
 class WelcomePage extends React.Component {
   constructor(props) {
     super(props);
-    let users;
-    if(localStorage.getItem('usersData')) {
-      users = JSON.parse(localStorage.getItem('usersData'))
-    } else {
-      users = usersJSON;
-    }
     this.state = {
-      inputEmail: '',
-      users: users
+      inputEmail: ''
     }
   }
 
+  //solution with json
+  // validateEmail = () => {
+  //     for(let i=0; i<usersJSON.length; i++) {
+  //       if(usersJSON[i].email === this.state.inputEmail) {
+  //         window.location = '/#/login';
+  //         return;
+  //     }
+  //     this.props.callbackUserEmail(this.state.inputEmail);
+  //   } 
+  //     window.location = '/#/signup-license';
+  // }
+  
+
+  //solution with back4you
   validateEmail = () => {
-    if (!localStorage.getItem('usersData')) {
-      for(let i=0; i<usersJSON.length; i++) {
-        if(usersJSON[i].email === this.state.inputEmail) {
-          // this.setState({
-          // userEmail: usersJSON[i].email
-          // });
-          window.location = '/#/login';
-          return;
-      }
-      this.props.callbackUserEmail(this.state.inputEmail);
-    } 
-    // if (localStorage.getItem('usersData') && this.state.users.email === this.state.inputEmail) {
-    //     window.location = '/#/login';
-    //     return;
-    //   }
-      window.location = '/#/signup-license';
-    }
+    this.props.callbackUserEmail(this.state.inputEmail);
+    window.location = '/#/login';
+    //!!!write validation RegEx
   }
 
   handleChangeInputEmail = (e) => {
@@ -67,14 +65,6 @@ class WelcomePage extends React.Component {
                     Perfect
                   </Form.Text>
                 </Form.Group>
-
-                {/* <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
-                </Form.Group> */}
-                {/* <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
                 <Button className="welcome-button" variant="success" onClick={this.validateEmail} >Next</Button>
                 <Button className="welcome-button" variant="outline-success" onClick={this.handleClickOnCreateAccount}>Create account
                 </Button>

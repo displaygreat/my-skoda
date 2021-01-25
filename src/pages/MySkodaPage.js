@@ -1,34 +1,34 @@
 import './MySkodaPage.css';
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import MySkodaData from '../components/MySkodaData/MySkodaData';
 
 class MySkodaPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      userCarPlate: this.props.sendUserCarPlate
+    }
   }
+
+  // getDataVehicle = async (e) => {
+  //   e.preventDefault();
+  //   let carPlate = this.props.sendUserCarPlate;
+  //   console.log(carPlate);
+  //   this.setState({
+  //     userCarPlate: carPlate
+  //   })
+  //   const apiUrl = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${carPlate}%22]}`);
+
+  //   const data = await apiUrl.json();
+  //   console.log(data);
+  // }
+
   render() {
     return(
       <Container>
-        <div>
-          <h1>My Skoda: </h1>
-          <img src="https://via.placeholder.com/150/92c952" /> 
-          <p>license-plate-number:: </p>
-          <p>make: </p>
-          <p>model: </p>
-          <p>year: </p>
-          <p>last annual vehicle licensing test: </p>
-          <p>valid car licence: </p>
-          <p>VIN: </p>
-        </div>
+        <MySkodaData sendUserCarPlate={this.state.userCarPlate} />
       </Container>
-      
-    // "license-plate-number": "37559002",
-    // "make": "Skoda",
-    // "model": "Octavia",
-    // "year": "2010",
-    // "last annual vehicle licensing test": "2021-01-01",
-    // "valid car licence": "2021-12-31",
-    // "VIN": "TMBAP7NX3MY027070"
     )
   }
 }

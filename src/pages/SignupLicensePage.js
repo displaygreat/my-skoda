@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupLicensePage.css';
+import { v4 as uuidv4 } from 'uuid';
 
 class SignupLicensePage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       licensePlate: ''
     }
@@ -19,7 +20,6 @@ class SignupLicensePage extends React.Component {
      this.setState({
        licensePlate: e.target.value
      })
-     console.log(this.state);
   }
   
   getVehicle = async (e) => {
@@ -31,7 +31,8 @@ class SignupLicensePage extends React.Component {
     console.log(data);
     let receivedPlate = data.result.records[0].mispar_rechev;
     if(receivedPlate == sentPlate) {
-      this.props.callbackUserCarPlate(sentPlate);
+      let userId = uuidv4();
+      this.props.callbackUserCarPlate(sentPlate, userId);
       window.location = '/#/signup';
     }
   }
@@ -40,7 +41,7 @@ class SignupLicensePage extends React.Component {
       <div className="c-welcome-page">
         <div className="main">
         <Container>
-          <Row className="">
+          <Row>
             <Col className="column column-aside" xs={12} md={4}>
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Create account</h4>
