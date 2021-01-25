@@ -19,7 +19,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userEmail: ''
+      userEmail: '',
+      userCarPlate: ''
     }
   }
 
@@ -27,6 +28,13 @@ class App extends React.Component {
     this.setState({
       userEmail: email
     });
+  }
+
+  handleCallbackUserCarPlate = (plate) => {
+    this.setState({
+      userCarPlate: plate
+    });
+    console.log(this.state);
   }
 
   render() {
@@ -45,14 +53,14 @@ class App extends React.Component {
                 {/* <Route exact path="/service-calendar">
                   <ServiceCalendarPage />
                 </Route> */}
-                <Route exact path="/myskoda">
+                <Route exact path="/my-skoda">
                   <MySkodaPage />
                 </Route>
                 <Route exact path="/login">
                   <LoginPage sendUserEmail={this.state.userEmail}/>
                 </Route>
                 <Route exact path="/signup-license">
-                  <SignupLicensePage />
+                  <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate}/>
                 </Route>
                 <Route exact path="/signup">
                   <SignupPage />

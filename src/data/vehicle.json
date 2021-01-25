@@ -1,0 +1,29 @@
+[
+  {
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "license-plate-number": "1743867",
+    "year": "2008",
+    "last annual vehicle licensing test": "2020-10-05",
+    "valid car licence": "2021-10-11",
+    "VIN": "WVWZZZ1KZ8M151117"
+  },
+  {
+    "license-plate-number": "66241801",
+    "make": "Skoda",
+    "model": "Fabia",
+    "year": "2010",
+    "last annual vehicle licensing test": "2019-02-14",
+    "valid car licence": "2022-02-23",
+    "VIN": "TMBER6NJ6KZ056541"
+  },
+  {
+    "license-plate-number": "37559002",
+    "make": "Skoda",
+    "model": "Octavia",
+    "year": "2010",
+    "last annual vehicle licensing test": "2021-01-01",
+    "valid car licence": "2021-12-31",
+    "VIN": "TMBAP7NX3MY027070"
+  }
+]

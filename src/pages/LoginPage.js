@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
     let getUserPwd = this.state.userPwd;
     for(let i=0; i<usersJSON.length; i++) {
       if(usersJSON[i].email === getUserEmail && usersJSON[i].pwd === getUserPwd ) {
-        window.location = '/#/myskoda';
+        window.location = '/#/my-skoda';
         return;
       } 
     }
@@ -72,12 +72,6 @@ class LoginPage extends React.Component {
                     &#215;  
                   </button>
               </div>
-              {/* <Alert className="alert-wrap" variant="danger" hidden={this.state.showAlert}>
-                  <p className="alert-text">Invalid Password</p>
-                  <button className="button-close" onClick={() => this.setState=({showAlert: true})} >
-                    &#215;  
-                  </button>
-              </Alert> */}
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Login</h4>
               <p className="home-text">for My Skoda</p>

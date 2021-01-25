@@ -3,9 +3,38 @@ import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupLicensePage.css';
 
 class SignupLicensePage extends React.Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor() {
+    super();
+    this.state = {
+      licensePlate: ''
+    }
+  }
+
+  handleClickOnBackButton() {
+    window.location = '/#/welcome';
+  }
+
+  handleChangeInputPlate = (e) => {
+     e.preventDefault();
+     this.setState({
+       licensePlate: e.target.value
+     })
+     console.log(this.state);
+  }
+  
+  getVehicle = async (e) => {
+    e.preventDefault();
+    let sentPlate = this.state.licensePlate;
+    const apiUrl = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${sentPlate}%22]}`);
+
+    const data = await apiUrl.json();
+    console.log(data);
+    let receivedPlate = data.result.records[0].mispar_rechev;
+    if(receivedPlate == sentPlate) {
+      this.props.callbackUserCarPlate(sentPlate);
+      window.location = '/#/signup';
+    }
+  }
   render() {
     return(
       <div className="c-welcome-page">
@@ -19,15 +48,15 @@ class SignupLicensePage extends React.Component {
               <p className="home-text">for My Skoda</p>
               <Form>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>License Number</Form.Label>
-                  <Form.Control type="text" placeholder="License Number" />
+                  <Form.Label>License plate number</Form.Label>
+                  <Form.Control type="text" placeholder="License plate number" onChange={this.handleChangeInputPlate} />
                   <Form.Text className="text-muted">
                     Perfect
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="login-button btn-prev" variant="outline-success">Back</Button>
-                  <Button className="login-button btn-next" variant="success">Next
+                  <Button className="login-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="login-button btn-next" variant="success" onClick={this.getVehicle}>Next
                   </Button>
                 </div>
               </Form>
