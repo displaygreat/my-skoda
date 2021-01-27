@@ -9,7 +9,7 @@ class HomePage extends React.Component {
   }
 
   handleClickOnHomeButton () {
-    window.location = '/#/welcome';
+    window.location = '/#/login';
     console.log('hi');
   }
 
@@ -22,11 +22,12 @@ class HomePage extends React.Component {
             <Col className="column column-aside" xs={12} md={8}>
               <span className="myskoda-home-label">my<span className="letter-green">Skoda</span></span>
               <div className="wrap-home-img">
-                <Image className="home-img" src="img/skoda-home-page-min.jpg" rounded />
+                <Image className="home-img" src="img/skoda-black-logo.jpg" rounded />
               </div>
-              <h2 className="home-title">The digital access<br/>to your Skoda.<br/>Anywhere.<br/>Anytime.</h2>
+              <h2 className="home-title">The<br/>digital<br/>access<br/>to<br/>your<br/>Skoda
+              </h2>
             </Col>
-            <Col className="column column-aside" xs={12} md={4}>
+            <Col className="column column-aside pt-5" xs={12} md={4}>
               <Image className="logo" src="img/skoda-logo-min.png" rounded />
               <h4 className="home-subtitle">Welcome to My Skoda!</h4>
               <p className="home-text">mySkoda gives you access to all the digital services from Skoda. Access important vehicle data, manage your data, and set up services.</p>
@@ -35,7 +36,7 @@ class HomePage extends React.Component {
           </Row>
           </Container>
           </div>
-          <Row className="footer">
+          <div className="footer">
             <Container>
             <Nav className="footer-nav" as="ul">
               <Nav.Item as="li">
@@ -46,7 +47,7 @@ class HomePage extends React.Component {
               </Nav.Item>
             </Nav>
             </Container>
-          </Row>
+          </div>
       </div>
     )
   }

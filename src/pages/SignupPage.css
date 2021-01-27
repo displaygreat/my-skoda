@@ -24,3 +24,9 @@
 .input-password {
   position: relative;
 }
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}

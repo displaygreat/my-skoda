@@ -5,7 +5,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/HomePage';
-import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import SignupLicensePage from './pages/SignupLicensePage';
@@ -52,10 +51,9 @@ class App extends React.Component {
     console.log(this.state);
   }
 
-  handleCallbackUserCarPlate = (plate, id) => {
+  handleCallbackUserCarPlate = (plate) => {
     this.setState({
-      userCarPlate: plate,
-      userId: id
+      userCarPlate: plate
     });
     console.log(this.state);
   }
@@ -87,17 +85,14 @@ class App extends React.Component {
                 <Route exact path="/my-skoda">
                   <MySkodaPage sendUserCarPlate={this.state.userCarPlate} />
                 </Route>
-                <Route exact path="/login">
-                  <LoginPage sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin}/>
-                </Route>
                 <Route exact path="/signup-license">
-                  <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate}/>
+                  <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
                 </Route>
                 <Route exact path="/signup">
-                  <SignupPage callbackUserPwd={this.handleCallbackUserPwd} />
+                  <SignupPage callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
                 </Route>
-                <Route exact path="/welcome">
-                  <WelcomePage callbackUserEmail={this.handleCallbackUserEmail} />
+                <Route exact path="/login">
+                  <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate}/>
                 </Route>
               </Switch> 
         </HashRouter>

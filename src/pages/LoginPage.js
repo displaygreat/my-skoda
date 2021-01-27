@@ -1,22 +1,24 @@
 import React from 'react';
-import { Container, Button, Col, Image, Nav, Row, Form, Alert } from 'react-bootstrap';
+import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './LoginPage.css';
+
 //solution with json
 // import usersJSON from '../data/users.json';
 
-//solution with back4You
+//solution with back4you
 import Parse from 'parse';
 import UserModel from '../models/UserModel';
-
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userEmail: '',
+      userPwd: '',
+      userCarPlate: '',
       type: "password",
       offPwd: 'show',
       onPwd: 'hide',
-      userPwd: '',
       showAlert: true
     }
   }
@@ -38,41 +40,65 @@ class LoginPage extends React.Component {
   }
 
   handleClickOnBackButton() {
-    window.location = '/#/welcome';
+    window.location = '/';
   }
 
   //solution with json
-  // validatePassword = () => {
-  //   let getUserEmail = this.props.sendUserEmail;
-  //   let getUserPwd = this.state.userPwd;
-  //   for(let i=0; i<usersJSON.length; i++) {
-  //     if(usersJSON[i].email === getUserEmail && usersJSON[i].pwd === getUserPwd ) {
-  //       window.location = '/#/my-skoda';
-  //       return;
-  //     } 
-  //   }
-  //   this.setState({
-  //     showAlert: false,
-  //     userPwd: ''
-  //   })
+  // validateEmail = () => {
+  //     for(let i=0; i<usersJSON.length; i++) {
+  //       if(usersJSON[i].email === this.state.inputEmail) {
+  //         window.location = '/#/login';
+  //         return;
+  //     }
+  //     this.props.callbackUserEmail(this.state.inputEmail);
+  //   } 
+  //     window.location = '/#/signup-license';
   // }
+  
 
   //solution with back4you
+  // validateEmail = () => {
+  //   Parse.User.logIn("newUserName","#Password123").then((user) => {
+  //     const currentUser = Parse.User.current();
+  //     if (typeof document !== 'undefined') document.write(`Current logged in user: ${JSON.stringify(currentUser)}`);
+  //     console.log('Current logged in user', currentUser);
+  //   }).catch(error => {
+  //     if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);
+  //     console.error('Error while logging in user', error);
+  //   });
+  //   this.props.callbackUserEmail(this.state.inputEmail);
+  //   window.location = '/#/login';
+  //   //!!!write validation RegEx
+  // }
+
   validatePassword = () => {
-    let userEmail = this.props.sendUserEmail;
+    let userEmail = this.state.userEmail;
     let userPwd = this.state.userPwd;
     // Pass the username and password to logIn function
     Parse.User.logIn(userEmail, userPwd).then((user) => {
   // Do stuff after successful login
-    console.log('Logged in user', user);
+    let carPlate = user.attributes.plateNumber;
+    this.setState({
+      userCarPlate: carPlate
+    })
+    this.props.callbackUserCarPlate(carPlate);
+    console.log(carPlate);
+    console.log('Logged in user', user.id);
+    // this.getUserCarPlate(userId);
     this.props.handleLogin(new UserModel(user));
     window.location = '/#/my-skoda';
     }).catch(error => {
       console.error('Error while logging in user', error);
-    // this.setState({
-    //     showAlert: false,
-    //     userPwd: ''
-    // })
+
+    // !!!write if user not exists(alert)
+
+    this.setState({
+        showAlert: false,
+        userEmail: '',
+        userPwd: ''
+    })
+
+    //!!!write validation RegEx for input email and imput password
 })
   }
 
@@ -83,6 +109,17 @@ class LoginPage extends React.Component {
     });
   }
 
+  handleChangeInputEmail = (e) => {
+    e.preventDefault();
+    this.setState({
+      userEmail: e.target.value
+    });
+  }
+
+  handleClickOnCreateAccount () {
+    window.location = '/#/signup-license';
+  }
+
   render() {
     return(
       <div className="c-welcome-page">
@@ -91,16 +128,23 @@ class LoginPage extends React.Component {
           <Row className="">
             <Col className="column column-aside" xs={12} md={4}>
               <div className="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
-                <p className="alert-text">Check <a href="/#/welcome">email </a>and password</p>
+                <p className="alert-text">Check email and password<br/><em>or</em><br/> <a href="/#/signup-license">Create account</a></p>
                   <button className="button-close" onClick={() => this.setState({showAlert: true})} >
                     &#215;  
                   </button>
               </div>
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Login</h4>
-              <p className="home-text">for My Skoda</p>
+              <p className="text">for My Skoda</p>
               <Form>
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group className="login-input"controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" value={this.state.userEmail} onChange={this.handleChangeInputEmail}/>
+                  <Form.Text className="text-muted">
+                    Perfect
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group className="login-input" controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <div className="input-password">
                     <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeInputPwd} value={this.state.userPwd} />
@@ -110,13 +154,17 @@ class LoginPage extends React.Component {
                   <Form.Text className="text-muted">
                     Perfect
                   </Form.Text>
+                  
                 </Form.Group>
+                <a className="login-link" href="https://google.com">Forgot password?</a>
                 <div className="prev-next-buttons">
                   <Button className="login-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
                   <Button className="login-button btn-next" variant="success" onClick={this.validatePassword} >Next
                   </Button>
                 </div>
-                <a className="login-link" href="https://google.com">Forgot password?</a>
+                <a className="login-link" href="https://google.com">Don't have an account?</a>
+                <Button className="welcome-button" variant="success" onClick={this.handleClickOnCreateAccount}>Create account
+                </Button>
               </Form>
             </Col>
             <Col className="column column-aside" xs={12} md={8}>
@@ -128,7 +176,7 @@ class LoginPage extends React.Component {
           </Row>
           </Container>
           </div>
-          <Row className="footer">
+          <div className="footer">
             <Container>
             <Nav as="ul">
               <Nav.Item as="li">
@@ -139,7 +187,7 @@ class LoginPage extends React.Component {
               </Nav.Item>
             </Nav>
             </Container>
-          </Row>
+          </div>
       </div>
     )
   }

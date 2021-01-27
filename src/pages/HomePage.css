@@ -1,4 +1,21 @@
 .myskoda-home-label {
   font-size: 0.8rem;
-  margin: 0 0 20px 100px;
+  margin: 0 0 20px 0;
+}
+.home-title {
+  color: #218838;
+  position: absolute;
+  bottom: 160px;
+  left: 60px;
+}
+.home-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.wrap-home-img {
+  margin-bottom: 40px;
+}
+.home-text {
+  margin-bottom: 40px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupPage.css';
+import Parse from 'parse';
 
 class SignupPage extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class SignupPage extends React.Component {
       confirmUserPwd: '',
       showAlert: true
     }
+    console.log(this.props);
   }
 
   showPassword = () => {
@@ -54,7 +56,9 @@ class SignupPage extends React.Component {
     let confirmUserPwd = this.state.confirmUserPwd.toString();
     if(newUserPwd === confirmUserPwd) {
        window.location = '/#/my-skoda';
-       this.props.callbackUserPwd(newUserPwd);
+       this.props.callbackUserPwd(this.state.newUserPwd);
+
+       this.signupUser();
     }
     this.setState({
       showAlert: false,
@@ -63,7 +67,22 @@ class SignupPage extends React.Component {
     })
   }
 
+  signupUser = () => {
+    console.log(this.state.sendUserCarPlate);
+    const user = new Parse.User()
+    user.set('username', this.props.sendUserEmail);
+    user.set('email', this.props.sendUserEmail);
+    user.set('password', this.state.newUserPwd);
+    user.set('plateNumber', this.props.sendUserCarPlate)
 
+    user.signUp().then((user) => {
+      
+      console.log('User signed up', user);
+    }).catch(error => {
+      
+      console.error('Error while signing up user', error);
+    });
+  }
 
   render() {
     return(
@@ -81,7 +100,7 @@ class SignupPage extends React.Component {
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Create account</h4>
               <span className="step">Step 2</span>
-              <p className="home-text">for My Skoda</p>
+              <p className="text">for My Skoda</p>
               <Form>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
@@ -121,7 +140,7 @@ class SignupPage extends React.Component {
           </Row>
           </Container>
           </div>
-          <Row className="footer">
+          <div className="footer">
             <Container>
             <Nav as="ul">
               <Nav.Item as="li">
@@ -132,7 +151,7 @@ class SignupPage extends React.Component {
               </Nav.Item>
             </Nav>
             </Container>
-          </Row>
+          </div>
       </div>
     )
   }

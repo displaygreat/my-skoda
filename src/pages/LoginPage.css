@@ -1,42 +1,57 @@
+.c-welcome-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.myskoda-welcome-label {
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+.login-input {
+  margin-bottom: 20px;
+}
+.welcome-button {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 1rem;
+}
+.wrap-welcome-img {
+  position: relative;
+  margin-bottom: 40px;
+}
+.welcome-logo {
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  z-index: 100;
+}
 .prev-next-buttons {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
-.btn-prev {
-  width: 47%;
-}
-.btn-next {
+.login-button {
   width: 47%;
 }
 .login-link {
-  display: inline-block;
-  color: #000;
-  border-bottom: 1px solid #000;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-decoration: none;
+  color: #218838 !important;
+  border-bottom: 1px solid #218838;
 }
 .login-link:hover {
-  color: #000;
   text-decoration: none;
-}
-.hide {
-  display: none;
-}
-.show {
-  display: block;
+  background-color: yellow;
 }
 .button-close {
-  background-color: transparent;
-  padding: 5px;
-  border: none;
   position: absolute;
-  top: -3px;
-  right: 5px;
-}
-.alert-wrap {
-  position: relative;
+  top: 0;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  padding: 10px;
 }
 .alert-text {
-  margin-bottom: 0;
+  position: relative;
 }
