@@ -55,36 +55,19 @@ class LoginPage extends React.Component {
   //     window.location = '/#/signup-license';
   // }
   
-
-  //solution with back4you
-  // validateEmail = () => {
-  //   Parse.User.logIn("newUserName","#Password123").then((user) => {
-  //     const currentUser = Parse.User.current();
-  //     if (typeof document !== 'undefined') document.write(`Current logged in user: ${JSON.stringify(currentUser)}`);
-  //     console.log('Current logged in user', currentUser);
-  //   }).catch(error => {
-  //     if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);
-  //     console.error('Error while logging in user', error);
-  //   });
-  //   this.props.callbackUserEmail(this.state.inputEmail);
-  //   window.location = '/#/login';
-  //   //!!!write validation RegEx
-  // }
-
   validatePassword = () => {
     let userEmail = this.state.userEmail;
     let userPwd = this.state.userPwd;
     // Pass the username and password to logIn function
     Parse.User.logIn(userEmail, userPwd).then((user) => {
-  // Do stuff after successful login
+    // Do stuff after successful login
     let carPlate = user.attributes.plateNumber;
     this.setState({
       userCarPlate: carPlate
     })
     this.props.callbackUserCarPlate(carPlate);
     console.log(carPlate);
-    console.log('Logged in user', user.id);
-    // this.getUserCarPlate(userId);
+    console.log('Logged in user', user);
     this.props.handleLogin(new UserModel(user));
     window.location = '/#/my-skoda';
     }).catch(error => {
@@ -127,12 +110,6 @@ class LoginPage extends React.Component {
         <Container>
           <Row className="">
             <Col className="column column-aside" xs={12} md={4}>
-              <div className="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
-                <p className="alert-text">Check email and password<br/><em>or</em><br/> <a href="/#/signup-license">Create account</a></p>
-                  <button className="button-close" onClick={() => this.setState({showAlert: true})} >
-                    &#215;  
-                  </button>
-              </div>
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Login</h4>
               <p className="text">for My Skoda</p>
@@ -154,13 +131,18 @@ class LoginPage extends React.Component {
                   <Form.Text className="text-muted">
                     Perfect
                   </Form.Text>
-                  
                 </Form.Group>
                 <a className="login-link" href="https://google.com">Forgot password?</a>
-                <div className="prev-next-buttons">
+                  <div className="prev-next-buttons">
                   <Button className="login-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
                   <Button className="login-button btn-next" variant="success" onClick={this.validatePassword} >Next
                   </Button>
+                </div>
+                <div className="error-alert" hidden={this.state.showAlert}>
+                <p className="alert-text">Check email and password<br/><em>or</em><br/> <a href="/#/signup-license">Create account</a></p>
+                  <button className="button-close" onClick={() => this.setState({showAlert: true})} >
+                    &#215;  
+                  </button>
                 </div>
                 <a className="login-link" href="https://google.com">Don't have an account?</a>
                 <Button className="welcome-button" variant="success" onClick={this.handleClickOnCreateAccount}>Create account

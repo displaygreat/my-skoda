@@ -5,10 +5,9 @@ import './HomePage.css'
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClickOnHomeButton = this.handleClickOnHomeButton.bind(this);
   }
 
-  handleClickOnHomeButton () {
+  handleClickOnHomeButton = () => {
     window.location = '/#/login';
     console.log('hi');
   }
@@ -17,8 +16,8 @@ class HomePage extends React.Component {
     return(
       <div className="wrapper">
         <div className="main">
-        <Container>
-          <Row>
+        <Container >
+         <Row>
             <Col className="column column-aside" xs={12} md={8}>
               <span className="myskoda-home-label">my<span className="letter-green">Skoda</span></span>
               <div className="wrap-home-img">
@@ -33,7 +32,7 @@ class HomePage extends React.Component {
               <p className="home-text">mySkoda gives you access to all the digital services from Skoda. Access important vehicle data, manage your data, and set up services.</p>
               <Button className="home-button" variant="success" onClick={this.handleClickOnHomeButton}>Let's go<Image src="img/chevron-right.png" /></Button>
             </Col>
-          </Row>
+            </Row>
           </Container>
           </div>
           <div className="footer">

@@ -54,4 +54,11 @@
 }
 .alert-text {
   position: relative;
+  margin: 0;
+}
+.error-alert {
+  position: relative;
+  background-color: yellow;
+  border-radius: 3px;
+  padding: 20px;
 }

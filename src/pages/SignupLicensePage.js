@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupLicensePage.css';
-// import { v4 as uuidv4 } from 'uuid';
 
 class SignupLicensePage extends React.Component {
   constructor(props) {
@@ -40,12 +39,11 @@ class SignupLicensePage extends React.Component {
     console.log(data);
     let receivedPlate = data.result.records[0].mispar_rechev;
     if(receivedPlate == sentPlate) {
-      // let userId = uuidv4();
       this.props.callbackUserCarPlate(sentPlate);
       this.props.callbackUserEmail(sentEmail);
       window.location = '/#/signup';
     }
-    //!!write if this car plate not exists in database of data.gov.il (alert) + validation input email RegEx (alert if not valid)
+    //!!write if this car plate not exists in database of data.gov.il (alert) + if this car plate exists in database back4app + validation input email RegEx (alert if not valid)
   }
 
   render() {

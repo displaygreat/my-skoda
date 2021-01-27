@@ -14,7 +14,6 @@ class SignupPage extends React.Component {
       confirmUserPwd: '',
       showAlert: true
     }
-    console.log(this.props);
   }
 
   showPassword = () => {
@@ -57,7 +56,6 @@ class SignupPage extends React.Component {
     if(newUserPwd === confirmUserPwd) {
        window.location = '/#/my-skoda';
        this.props.callbackUserPwd(this.state.newUserPwd);
-
        this.signupUser();
     }
     this.setState({
@@ -68,6 +66,7 @@ class SignupPage extends React.Component {
   }
 
   signupUser = () => {
+    //!write condition if user or vehicle exist in database
     console.log(this.state.sendUserCarPlate);
     const user = new Parse.User()
     user.set('username', this.props.sendUserEmail);
@@ -81,6 +80,7 @@ class SignupPage extends React.Component {
     }).catch(error => {
       
       console.error('Error while signing up user', error);
+      //write if error alert
     });
   }
 
