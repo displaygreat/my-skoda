@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Col, Image, Row, Button, Nav } from 'react-bootstrap';
-import './HomePage.css'
+import './HomePage.css';
+import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -35,18 +36,7 @@ class HomePage extends React.Component {
             </Row>
           </Container>
           </div>
-          <div className="footer">
-            <Container>
-            <Nav className="footer-nav" as="ul">
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Terms of use</Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Contacts</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            </Container>
-          </div>
+          <MySkodaFooter />
       </div>
     )
   }

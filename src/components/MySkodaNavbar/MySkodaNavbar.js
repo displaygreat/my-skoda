@@ -5,7 +5,17 @@ import './MySkodaNavbar.css';
 class MySkodaNavbar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+
+    }
   }
+
+  logOut = () => {
+    this.setState({
+
+    })
+  }
+
   render() {
     return(
       <div class="myskoda-navbar">
@@ -34,7 +44,7 @@ class MySkodaNavbar extends React.Component {
                   <img className="user-avatar" src="https://via.placeholder.com/150/92c952" />
                 </div>
               </Nav.Link>
-              <Nav.Link className="myskoda-nav-link" href="/">
+              <Nav.Link className="myskoda-nav-link" href="/" onClick={this.logOut}>
                 LogOut
               </Nav.Link>
             </Nav>

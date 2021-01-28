@@ -5,6 +5,7 @@ import ServiceCalendar from '../components/ServiceCalendar/ServiceCalendar';
 import MySkodaService from '../components/MySkodaService/MySkodaService';
 import MySkodaData from '../components/MySkodaData/MySkodaData';
 import MySkodaNavbar from '../components/MySkodaNavbar/MySkodaNavbar';
+import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import Parse from 'parse';
 
 class MySkodaPage extends React.Component {
@@ -13,6 +14,7 @@ class MySkodaPage extends React.Component {
     this.state = {
       userCarPlate: this.props.sendUserCarPlate
     }
+    console.log(this.state);
   }
   //check for if this plate number exists
   // getAllPlateNumbers = () => {
@@ -33,28 +35,27 @@ class MySkodaPage extends React.Component {
   //   });
   // }
 
+  handleLogout = () => {
+    this.setState({
+      userId: '',
+      userEmail: '',
+      userCarPlate: '',
+      userPwd: '',
+      activeUser: null
+    })
+  }
+
   render() {
     return(
       <div className="c-my-skoda-page">
-         <MySkodaNavbar />
+         <MySkodaNavbar handleLogout={this.handleLogout}/>
         <Container className="myskoda-wrap">
         <MySkodaData sendUserCarPlate={this.state.userCarPlate} />
         {/* <button onClick={this.getAllPlateNumbers}></button> */}
         <MySkodaService />
         <ServiceCalendar />
       </Container>
-      <div className="footer">
-            <Container>
-            <Nav as="ul">
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Terms of use</Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Contacts</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            </Container>
-          </div>
+       <MySkodaFooter />
       </div>
     )
   }

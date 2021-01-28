@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupLicensePage.css';
+import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 
 class SignupLicensePage extends React.Component {
   constructor(props) {
@@ -88,18 +89,7 @@ class SignupLicensePage extends React.Component {
           </Row>
           </Container>
           </div>
-          <div className="footer">
-            <Container>
-            <Nav as="ul">
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Terms of use</Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Contacts</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            </Container>
-          </div>
+          <MySkodaFooter />
       </div>
     )
   }

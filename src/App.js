@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
+
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import SignupLicensePage from './pages/SignupLicensePage';
 import MySkodaPage from './pages/MySkodaPage';
+import SheduleServicePage from './pages/SheduleServicePage';
 // import ServiceCalendarPage from './pages/ServiceCalendarPage';
 // import AppointmentPage from './pages/AppointmentPage';
 import MySkodaNavbar from './components/MySkodaNavbar/MySkodaNavbar';
@@ -76,12 +78,9 @@ class App extends React.Component {
                 <Route exact path="/">
                   <HomePage />
                 </Route>
-                {/* <Route exact path="/appointment">
-                  <AppointmentPage />
-                </Route> */}
-                {/* <Route exact path="/service-calendar">
-                  <ServiceCalendarPage />
-                </Route> */}
+                <Route exact path="/shedule">
+                  <SheduleServicePage />
+                </Route>
                 <Route exact path="/my-skoda">
                   <MySkodaPage sendUserCarPlate={this.state.userCarPlate} />
                 </Route>

@@ -1,0 +1,12 @@
+.service-cell {
+  width: 33.33%;
+}
+.shedule-link {
+  color: #218838 !important;
+  border-bottom: 1px solid #218838;
+  text-decoration: none;
+}
+.shedule-link:hover {
+  text-decoration: none;
+  background-color: yellow;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './LoginPage.css';
+import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 
 //solution with json
 // import usersJSON from '../data/users.json';
@@ -158,18 +159,7 @@ class LoginPage extends React.Component {
           </Row>
           </Container>
           </div>
-          <div className="footer">
-            <Container>
-            <Nav as="ul">
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Terms of use</Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link className="footer-link" href="#">Contacts</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            </Container>
-          </div>
+           <MySkodaFooter />
       </div>
     )
   }
