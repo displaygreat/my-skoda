@@ -1,4 +1,14 @@
-.c-my-skoda-page {
-  background-image: url("/img/myskoda-bg.jpg");
+/* .c-my-skoda-page {
+  background-image: url("/assets/myskoda-bg.jpg");
   background-repeat: no-repeat;
+} */
+.myskoda-wrap {
+  padding-top: 70px;
+  padding-bottom: 80px;
+  display: flex;
+}
+.myskoda-title {
+  margin-top: 10px;
+  margin-left: 25px;
+  font-size: 2.5rem;
 }

@@ -108,7 +108,7 @@ class LoginPage extends React.Component {
       <div className="c-welcome-page">
         <div className="main">
         <Container>
-          <Row className="">
+          <Row>
             <Col className="column column-aside" xs={12} md={4}>
               <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Login</h4>

@@ -1,0 +1,50 @@
+.text-green {
+  color: #28a745;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  width: max-content;
+}
+.text-black {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.plate-number {
+  position: relative;
+  display: block;
+  width: max-content;
+  padding: 10px;
+  background-color: #f8f9fa;
+  margin-bottom: 5px;
+}
+.wrap-vehicle-info {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 40px 0;
+}
+.wrap-vehicle-img {
+  width: 200px;
+}
+.vehicle-img {
+  width: 100%;
+  object-fit: cover;
+}
+.text-small {
+  color: #6c757d;
+  font-weight: normal;
+  font-size: 80%;
+  margin-bottom: 5px;
+}
+.year {
+  margin-bottom: 10px;
+}
+code {
+  color: #6c757d;
+  margin: 10px 0 40px;
+}
+.text-bg {
+  background-color: rgb(41, 168, 71, 0.2);
+}

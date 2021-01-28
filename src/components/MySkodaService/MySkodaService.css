@@ -1,0 +1,8 @@
+.text-regular {
+  width: max-content;
+  margin-bottom: 5px;
+}
+.text-small {
+  width: max-content;
+  display: block;
+}

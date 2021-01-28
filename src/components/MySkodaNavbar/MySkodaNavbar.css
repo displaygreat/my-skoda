@@ -1,4 +1,8 @@
-.navbar-myskoda {
+.myskoda-navbar {
+  height: 100px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 .myskoda-label {
   font-size: 0.8rem;
@@ -6,5 +10,27 @@
   color: #000;
 }
 .myskoda-nav-link {
-  color: #000;
+  color: #000 !important;
+  padding-left: 40px !important;
+  padding-right: 20px !important;
+}
+.myskoda-label-link {
+  color: #000 !important;
+  padding-left: 0 !important;
+  padding-right: 20px !important;
+}
+.wrap-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 20px;
+  /* margin-right: 20px; */
+}
+.user-avatar {
+  width: 100%;
+  object-fit: cover;
+}
+.user-avatar-link {
+  display: flex;
 }

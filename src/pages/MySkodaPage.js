@@ -1,6 +1,8 @@
 import './MySkodaPage.css';
 import React from 'react';
 import { Container, Nav } from 'react-bootstrap';
+import ServiceCalendar from '../components/ServiceCalendar/ServiceCalendar';
+import MySkodaService from '../components/MySkodaService/MySkodaService';
 import MySkodaData from '../components/MySkodaData/MySkodaData';
 import MySkodaNavbar from '../components/MySkodaNavbar/MySkodaNavbar';
 import Parse from 'parse';
@@ -35,9 +37,11 @@ class MySkodaPage extends React.Component {
     return(
       <div className="c-my-skoda-page">
          <MySkodaNavbar />
-        <Container>
+        <Container className="myskoda-wrap">
         <MySkodaData sendUserCarPlate={this.state.userCarPlate} />
         {/* <button onClick={this.getAllPlateNumbers}></button> */}
+        <MySkodaService />
+        <ServiceCalendar />
       </Container>
       <div className="footer">
             <Container>
