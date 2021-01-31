@@ -12,5 +12,12 @@
   height: 38px;
 }
 .shedule-submit {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
+.shedule-submit:hover {
   background-color: #218838;
+  color: #fff;
+  border: none;
 }

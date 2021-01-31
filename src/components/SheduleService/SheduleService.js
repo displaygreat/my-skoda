@@ -13,14 +13,20 @@ import styled from "styled-components";
 import Parse from 'parse';
 
 const Styles = styled.div`
- .react-datepicker-wrapper,
- .react-datepicker__input-container,
- .react-datepicker__input-container input {
-    width: 290px;
- }
+.react-datepicker__input-container input,
+.react-datepicker__input-container,
+.react-datepicker-wrapper {
+  width: 290px;
+  height: 38px;
+  margin-bottom: 30px;
+}
  .react-datepicker__close-icon::before,
  .react-datepicker__close-icon::after {
-    background-color: #218838;
+    background-color: #28a745;
+ }
+ .react-datepicker__time-container,
+ .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+   width: 240px;
  }
  .react-datepicker__day--keyboard-selected,
  .react-datepicker__day--selected {
@@ -139,16 +145,16 @@ class SheduleService extends React.Component {
   }
 
   handleSelect = (date, event) => {
-        console.log('onSelect', date, event);
-        if(moment(date).format('YYYY/MM/DD') === moment('Thu Feb 04 2021 08:00:13 GMT+0200 (Israel Standard Time').format('YYYY/MM/DD')) {
-          console.log('yes');
-        }
-        const selectedDate = moment(date).format('YYYY/MM/DD');
-        console.log(selectedDate);
-        const transDate = moment(selectedDate).toObject();
-        console.log(transDate);
+    console.log('onSelect', date, event);
+    if(moment(date).format('YYYY/MM/DD') === moment('Thu Feb 04 2021 08:00:13 GMT+0200 (Israel Standard Time').format('YYYY/MM/DD')) {
+      console.log('yes');
+    }
+    const selectedDate = moment(date).format('YYYY/MM/DD');
+    console.log(selectedDate);
+    const transDate = moment(selectedDate).toObject();
+    console.log(transDate);
 
-        const Vehicle = Parse.Object.extend('Vehicle');
+    const Vehicle = Parse.Object.extend('Vehicle');
     const query = new Parse.Query(Vehicle);
     // query.equalTo("lastService", 'A string');
     // query.equalTo("sheduledDate", 'A string');
@@ -173,13 +179,13 @@ class SheduleService extends React.Component {
     });
   }
 
-  handleFocus = (event) => {
-        console.log('onFocus', event.nativeEvent.path[0].defaultValue);
-  }
+  // handleFocus = (event) => {
+  //       console.log('onFocus', event.nativeEvent.path[0].defaultValue);
+  // }
 
-   handleCalendarClose = (e) => {
-        console.log('CalendarClose', e);
-    };
+  // handleCalendarClose = (e) => {
+  //       console.log('CalendarClose', e);
+  // }
 
   handleClickOnButtonSubmit = (e) => {
     
@@ -273,26 +279,7 @@ class SheduleService extends React.Component {
             </div>
 
             <div class="col-md-12">
-              <label for="validationServer03" class="col-2 col-form-label pl-0">Email</label>
-              <div class="col-10 pl-0">
-                <input class="form-control is-invalid" type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
-                <div id="validationServer03Feedback" class="invalid-feedback">
-                Please provide a valid email.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-12">
-              <label for="validationServer03" class="col-2 col-form-label pl-0">Telephone</label>
-              <div class="col-10 pl-0">
-                <input class="form-control is-invalid" type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
-                <div id="validationServer03Feedback" class="invalid-feedback">
-                Please provide a valid telephone.
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-12">
+              <p className="mt-2">Select Date and Time</p>
               <Styles>
                 <DatePicker
                 isClearable
@@ -302,6 +289,18 @@ class SheduleService extends React.Component {
                 // onFocus={this.handleFocus}
                 // onCalendarClose={this.handleCalendarClose}
                 placeholderText="Select Date and Time"
+                popperPlacement="right-start"
+                popperModifiers={{
+                  offset: {
+                    enabled: true,
+                    offset: "5px, 10px"
+                  },
+                  preventOverflow: {
+                    enabled: true,
+                    escapeWithReference: false,
+                    boundariesElement: "viewport"
+                  }
+                }}
                 // showTimeSelect
                 // timeIntervals={15}
                 // timeFormat="HH:mm"
@@ -333,6 +332,18 @@ class SheduleService extends React.Component {
                 // onFocus={this.handleFocus}
                 // onCalendarClose={this.handleCalendarClose}
                 placeholderText="Select Date and Time"
+                popperPlacement="right-start"
+                popperModifiers={{
+                  offset: {
+                    enabled: true,
+                    offset: "0px, 10px"
+                  },
+                  preventOverflow: {
+                    enabled: true,
+                    escapeWithReference: false,
+                    boundariesElement: "viewport"
+                  }
+                }}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
@@ -354,14 +365,35 @@ class SheduleService extends React.Component {
                 excludeTimes={[exDate]}
                 // filterDate={this.isWeekday}
                 // filterTime={this.filterPassedTime}
-                // minTime={setHours(setMinutes(new Date(), 0), 8)}
-                // maxTime={setHours(setMinutes(new Date(), 45), 14)}
+                minTime={setHours(setMinutes(new Date(), 0), 8)}
+                maxTime={setHours(setMinutes(new Date(), 45), 14)}
               />
               </Styles>
-              {/* <div>{startDate.toString()}</div> */}
             </div>
+
+            <div class="col-md-12">
+              <label for="validationServer03" class="col-2 col-form-label pl-0 pt-0">Email</label>
+              <div class="col-10 pl-0">
+                <input class="form-control is-invalid" type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid email.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label for="validationServer03" class="col-2 col-form-label pl-0">Telephone</label>
+              <div class="col-10 pl-0">
+                <input class="form-control is-invalid" type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <div id="validationServer03Feedback" class="invalid-feedback">
+                Please provide a valid telephone.
+                </div>
+              </div>
+            </div>
+            
+            
             <div class="col-12">
-              <button class="btn btn-primary shedule-submit" type="submit" onClick={this.handleClickOnButtonSubmit}>Submit form</button>
+              <button class="btn btn-primary shedule-submit my-4" type="submit" onClick={this.handleClickOnButtonSubmit}>Submit form</button>
             </div>
           </form> 
         </Col>
