@@ -28,10 +28,19 @@ class App extends React.Component {
     this.state = {
       userId: '',
       userEmail: '',
-      userCarPlate: '',
       userPwd: '',
-      activeUser: null
+      activeUser: null,
+      isAdmin: false,
+      userCarPlate: '',
+      // userCarMake: '',
+      // userCarModel: '',
+      // userCarYear: '',
+      // userLastTest: '',
+      // userLastService: '',
+      // userServiceCenter: '',
+      // userServiceDate: ''
     }
+    console.log(this.state);
   }
 
   handleLogin = (userObj) => {
@@ -79,7 +88,7 @@ class App extends React.Component {
                   <HomePage />
                 </Route>
                 <Route exact path="/shedule">
-                  <SheduleServicePage />
+                  <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} />
                 </Route>
                 <Route exact path="/my-skoda">
                   <MySkodaPage sendUserCarPlate={this.state.userCarPlate} />

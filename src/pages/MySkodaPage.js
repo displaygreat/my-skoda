@@ -35,20 +35,20 @@ class MySkodaPage extends React.Component {
   //   });
   // }
 
-  handleLogout = () => {
-    this.setState({
-      userId: '',
-      userEmail: '',
-      userCarPlate: '',
-      userPwd: '',
-      activeUser: null
-    })
-  }
+  // handleLogout = () => {
+  //   this.setState({
+  //     userId: '',
+  //     userEmail: '',
+  //     userCarPlate: '',
+  //     userPwd: '',
+  //     activeUser: null
+  //   })
+  // }
 
   render() {
     return(
       <div className="c-my-skoda-page">
-         <MySkodaNavbar handleLogout={this.handleLogout}/>
+         <MySkodaNavbar />
         <Container className="myskoda-wrap">
         <MySkodaData sendUserCarPlate={this.state.userCarPlate} />
         {/* <button onClick={this.getAllPlateNumbers}></button> */}

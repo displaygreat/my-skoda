@@ -1,0 +1,16 @@
+.shedule-form {
+  width: 396px;
+}
+.last {
+  margin-left: 25px;
+}
+.shedule-label {
+  display: block;
+}
+.shedule-select {
+  width: 100%;
+  height: 38px;
+}
+.shedule-submit {
+  background-color: #218838;
+}

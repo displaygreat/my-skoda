@@ -1,11 +1,38 @@
 import './MySkodaService.css';
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
+import Parse from 'parse';
 
 class MySkodaService extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      carLastService: ''
+    }
   }
+
+  componentDidMount () {
+    const Vehicle = Parse.Object.extend('Vehicle');
+    const query = new Parse.Query(Vehicle);
+    // query.equalTo("lastService", 'A string');
+    // query.equalTo("sheduledDate", 'A string');
+    query.equalTo("userId", Parse.User.current());
+    query.find().then((results) => {
+      // You can use the "get" method to get the value of an attribute
+      // Ex: response.get("<ATTRIBUTE_NAME>")
+      
+      console.log('Vehicle found', results);
+      console.log(results[results.length-1].attributes.lastService);
+      const lastService = results[results.length-1].attributes.lastService;
+      this.setState({
+        carLastService: lastService
+      })
+    }, (error) => {
+      
+      console.error('Error while fetching Vehicle', error);
+    });
+  }
+
   render() {
     return(
       <div class="c-myskoda-service">
@@ -23,7 +50,7 @@ class MySkodaService extends React.Component {
               <Card className="mb-4" style={{ width: '397px'}}>
                 <Card.Body>
                   <p className="text-regular">Multi-Point Inspection</p>
-                  <p className="text-regular text-bg">your last multi-point inspection: <strong>12/07/2020</strong></p>
+                  <p className="text-regular text-bg">your last multi-point inspection: <strong>{this.state.carLastService}</strong></p>
                   <span className="text-small">Full Synthetic Oil Change</span>
                   <span className="text-small">Tire Rotation</span>
                   <span className="text-small">Windshield Wiper Replacement</span>

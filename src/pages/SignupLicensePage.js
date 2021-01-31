@@ -7,8 +7,8 @@ class SignupLicensePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      licensePlate: '',
-      userEmail: ''
+      userEmail: '',
+      userCarPlate: ''
     }
   }
 
@@ -19,7 +19,7 @@ class SignupLicensePage extends React.Component {
   handleChangeInputPlate = (e) => {
      e.preventDefault();
      this.setState({
-       licensePlate: e.target.value
+       userCarPlate: e.target.value
      })
   }
 
@@ -32,7 +32,7 @@ class SignupLicensePage extends React.Component {
   
   getVehicle = async (e) => {
     e.preventDefault();
-    let sentPlate = this.state.licensePlate;
+    let sentPlate = this.state.userCarPlate;
     let sentEmail = this.state.userEmail
     const apiUrl = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${sentPlate}%22]}`);
 

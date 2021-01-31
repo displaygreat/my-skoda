@@ -56,7 +56,7 @@ class SignupPage extends React.Component {
     let confirmUserPwd = this.state.confirmUserPwd.toString();
     if(newUserPwd === confirmUserPwd) {
        window.location = '/#/my-skoda';
-       this.props.callbackUserPwd(this.state.newUserPwd);
+      //  this.props.callbackUserPwd(this.state.newUserPwd);
        this.signupUser();
     }
     this.setState({
