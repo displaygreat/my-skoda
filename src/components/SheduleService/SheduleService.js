@@ -104,6 +104,7 @@ class SheduleService extends React.Component {
       // console.log(this.state);
     })
 
+    //get last inspection from databse User
     const User = new Parse.User();
     const query = new Parse.Query(User);
     query.get(this.state.userId).then((user) => {
@@ -116,6 +117,25 @@ class SheduleService extends React.Component {
     }, (error) => {
       
       console.error('Error while fetching Vehicle', error);
+    });
+
+    //get sheduled dates and times from database Shedule
+    const Shedule = Parse.Object.extend('Shedule');
+    const queryDate = new Parse.Query(Shedule);
+    // query.equalTo("sheduledDate", 'A string');
+    // query.equalTo("plateNumber", 'A string');
+    // query.equalTo("carModel", 'A string');
+    // query.equalTo("dealer", 'A string');
+    // query.equalTo("service", 'A string');
+    // query.equalTo("userEmail", 'A string');
+    // query.equalTo("userPhone", 'A string');
+    // query.equalTo("userId", Parse.User.current());
+    queryDate.find().then((results) => {
+      
+      console.log('Shedule found', results);
+    }, (error) => {
+      
+      console.error('Error while fetching Shedule', error);
     });
     
   }
@@ -140,9 +160,9 @@ class SheduleService extends React.Component {
 
   handleSelect = (date, event) => {
     console.log('onSelect', date, event);
-    if(moment(date).format('YYYY/MM/DD') === moment('Thu Feb 04 2021 08:00:13 GMT+0200 (Israel Standard Time').format('YYYY/MM/DD')) {
-      console.log('yes');
-    }
+    // if(moment(date).format('YYYY/MM/DD') === moment('Thu Feb 04 2021 08:00:13 GMT+0200 (Israel Standard Time').format('YYYY/MM/DD')) {
+    //   console.log('yes');
+    // }
     const selectedDate = moment(date).format('YYYY/MM/DD');
     console.log(selectedDate);
     const transDate = moment(selectedDate).toObject();
@@ -152,9 +172,32 @@ class SheduleService extends React.Component {
     const query = new Parse.Query(Shedule);
     // query.equalTo("lastService", 'A string');
     // query.equalTo("sheduledDate", 'A string');
-    query.equalTo("userId", Parse.User.current());
+    // query.equalTo("userId", Parse.User.current());
     query.find().then((results) => {
       console.log(results);
+      let arrDates = [];
+      for (let i=0; i<results.length; i++) {
+         arrDates.push(results[i].attributes.sheduledDate);
+         console.log(arrDates);
+       }
+       let arrExcludeDates = [];
+       for (let i=0; i<arrDates.length; i++) {
+        if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
+          arrExcludeDates.push(arrDates[i]);
+          console.log(arrExcludeDates);
+        }
+      }
+       
+      // const arrDates = results.attributes.sheduledDate;
+
+      // for (let i=0; i<arrDates.length; i++) {
+      //   let excludeDates = [];
+      //   if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
+      //     excludeDates.push(arrDates[i]);
+      //     console.log(excludeDates);
+      //   }
+      // }
+
       // const exDate = results[results.length-1].attributes.sheduledDate;
       // console.log(moment(exDate).format('YYYY/MM/DD'));
       // if (moment(exDate).format('YYYY/MM/DD') === '2021/02/04') {
