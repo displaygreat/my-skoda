@@ -36,6 +36,7 @@ class MySkodaData extends React.Component {
       let license = moment(data.tokef_dt).format('L');
       let vin = data.misgeret;
       console.log(make, model, year, test, license, vin);
+      this.props.callbackUserLastTest(test);
       this.setState({
         carPlate: plate,
         carMake: make,

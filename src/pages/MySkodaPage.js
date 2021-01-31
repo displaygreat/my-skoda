@@ -12,10 +12,19 @@ class MySkodaPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userCarPlate: this.props.sendUserCarPlate
+      userCarPlate: this.props.sendUserCarPlate,
+      userLastTest: ''
     }
+    console.log(this.props);
+  }
+
+  handleCallbackUserLastTest = (test) => {
+    this.setState({
+      userLastTest: test
+    });
     console.log(this.state);
   }
+
   //check for if this plate number exists
   // getAllPlateNumbers = () => {
   //   const user = Parse.Object.extend("User");
@@ -50,9 +59,9 @@ class MySkodaPage extends React.Component {
       <div className="c-my-skoda-page">
          <MySkodaNavbar />
         <Container className="myskoda-wrap">
-        <MySkodaData sendUserCarPlate={this.state.userCarPlate} />
+        <MySkodaData sendUserCarPlate={this.state.userCarPlate} callbackUserLastTest={this.handleCallbackUserLastTest}/>
         {/* <button onClick={this.getAllPlateNumbers}></button> */}
-        <MySkodaService />
+        <MySkodaService sendUserLastTest={this.state.userLastTest}/>
         <ServiceCalendar />
       </Container>
        <MySkodaFooter />
