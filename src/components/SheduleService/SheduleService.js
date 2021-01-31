@@ -72,7 +72,6 @@ class SheduleService extends React.Component {
         carLastTest: '',
         carLastService: '',
         startDate: setHours(setMinutes(new Date(), 0), 8),
-        excludeDates: [],
         excludeTimes: []
       }
   }
@@ -178,15 +177,51 @@ class SheduleService extends React.Component {
       let arrDates = [];
       for (let i=0; i<results.length; i++) {
          arrDates.push(results[i].attributes.sheduledDate);
-         console.log(arrDates);
        }
-       let arrExcludeDates = [];
-       for (let i=0; i<arrDates.length; i++) {
+       console.log(arrDates);
+
+
+
+      let arrExcludeDates = [];
+      for (let i=0; i<arrDates.length; i++) {
         if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
-          arrExcludeDates.push(arrDates[i]);
+          arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
           console.log(arrExcludeDates);
         }
       }
+      
+      let arrExcludeTimes = [];
+        for (let j=0; j<arrExcludeDates.length; j++) {
+          arrExcludeTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
+          console.log(arrExcludeTimes);
+
+          this.setState({
+            excludeTimes: arrExcludeTimes
+          })
+          console.log(this.state);
+        }
+
+       //half solition
+    //    for (let i=0; i<arrDates.length; i++) {
+        
+    //     if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
+          
+    //       let arrExcludeDates = [];
+    //       arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
+    //       console.log(arrExcludeDates);
+
+    //       let arrExcludeTimes = [];
+    //       for (let j=0; j<arrExcludeDates.length; j++) {
+    //         arrExcludeTimes.concat(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
+    //       }
+    //       console.log(arrExcludeTimes);
+    //       this.setState({
+    //         excludeTimes: arrExcludeTimes
+    //       })
+    //       console.log(this.state);
+    //     }
+    // }
+      
        
       // const arrDates = results.attributes.sheduledDate;
 
@@ -259,10 +294,12 @@ class SheduleService extends React.Component {
 
   render() {
     const { startDate } = this.state;
-    const formExDate = moment( Date.parse(this.state.excludeDates)).toObject();
-    // console.log(formExDate);
-    const exDate = setHours(setMinutes(new Date(formExDate.years, formExDate.months, formExDate.date), formExDate.minutes), formExDate.hours);
-    // console.log(exDate);
+    console.log(this.state.excludeTimes);
+     
+    // const formExDate = moment( Date.parse(this.state.excludeDates)).toObject();
+    // // console.log(formExDate);
+    // const exDate = setHours(setMinutes(new Date(formExDate.years, formExDate.months, formExDate.date), formExDate.minutes), formExDate.hours);
+    // // console.log(exDate);
     return(
       <div>
         <h1 className="display-4 myskoda-title">Shedule Service Appointment</h1>
@@ -347,7 +384,7 @@ class SheduleService extends React.Component {
                 // onCalendarOpen={handleCalendarOpen}
                 // excludeDates={[new Date(), subDays(new Date(), 1)]}
                 // excludeOutOfBoundTimes
-                excludeDates={[this.state.excludeTimes]}
+                // excludeDates={[this.state.excludeTimes]}
                 // excludeTimes={[
                 //   setHours(setMinutes(new Date(2021, 2, 12), 15), 8),
                 //   setHours(setMinutes(new Date(2021, 3, 15), 15), 9),
@@ -398,7 +435,7 @@ class SheduleService extends React.Component {
                 //   setHours(setMinutes(new Date(2021, 4, 25), 15), 10),
                 //   setHours(setMinutes(new Date(2021, 5, 14), 15), 11)
                 // ]}
-                excludeTimes={[exDate]}
+                excludeTimes={this.state.excludeTimes}
                 // filterDate={this.isWeekday}
                 // filterTime={this.filterPassedTime}
                 minTime={setHours(setMinutes(new Date(), 0), 8)}
