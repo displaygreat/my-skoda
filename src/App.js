@@ -76,6 +76,13 @@ class App extends React.Component {
     console.log(this.state);
   }
 
+  handleCallbackUserId = (id) => {
+    this.setState({
+      userId: id
+    });
+    console.log(this.state);
+  }
+
   render() {
     return (
           <HashRouter>
@@ -88,10 +95,10 @@ class App extends React.Component {
                   <HomePage />
                 </Route>
                 <Route exact path="/shedule">
-                  <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} />
+                  <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
                 </Route>
                 <Route exact path="/my-skoda">
-                  <MySkodaPage sendUserCarPlate={this.state.userCarPlate} />
+                  <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
                 </Route>
                 <Route exact path="/signup-license">
                   <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
@@ -100,7 +107,7 @@ class App extends React.Component {
                   <SignupPage callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
                 </Route>
                 <Route exact path="/login">
-                  <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate}/>
+                  <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserId={this.handleCallbackUserId}/>
                 </Route>
               </Switch> 
         </HashRouter>

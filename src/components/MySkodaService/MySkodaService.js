@@ -2,48 +2,74 @@ import './MySkodaService.css';
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
 import Parse from 'parse';
+import axios from 'axios';
+import moment from 'moment';
 
 class MySkodaService extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props);
     this.state = {
-      carLastTest: this.props.sendUserLastTest,
+      userId: this.props.sendUserId,
+      userCarPlate: this.props.sendUserCarPlate,
+      carMake: '',
+      carModel: '',
+      carYear: '',
+      carTest: '',
+      carLicense: '',
+      carVIN: '',
       carLastService: ''
     }
     console.log(this.state);
   }
 
   componentDidMount () {
-    const User = Parse.Object.extend('User');
+    let plate = this.props.sendUserCarPlate;
+    console.log(plate);
+    axios.get(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${plate}%22]}`)
+    .then((result) => {
+      let data = result.data.result.records[0];
+      console.log(data);
+      let make = data.tozeret_nm;
+      if(make === `סקודה צ'כיה`) {
+        make = "Skoda"
+      }
+      let model = data.kinuy_mishari;
+      let year = data.shnat_yitzur;
+      let test = moment(data.mivchan_acharon_dt).format('DD/MM/YYYY');
+      // let test = data.mivchan_acharon_dt;
+      let license = moment(data.tokef_dt).format('DD/MM/YYYY');
+      let vin = data.misgeret;
+      console.log(make, model, year, test, license, vin);
+      // this.props.callbackUserLastTest(test);
+      this.setState({
+        carMake: make,
+        carModel: model,
+        carYear: year,
+        carTest: test,
+        carLicense: license,
+        carVIN: vin
+      })
+    })
+
+    const User = new Parse.User();
     const query = new Parse.Query(User);
-    // query.equalTo("lastService", 'A string');
-    // query.equalTo("sheduledDate", 'A string');
-    // query.equalTo("userId", Parse.User.current());
-    query.find().then((results) => {
-      // You can use the "get" method to get the value of an attribute
-      // Ex: response.get("<ATTRIBUTE_NAME>")
-      
-      console.log('User found', results);
-      console.log(results);
-      // if (!results[results.length-1].attributes.lastInspection) {
-      //   return
-      // } else {
-        console.log(results[results.length-1].attributes.lastInspection);
-        const lastInspection = results[results.length-1].attributes.lastInspection;
-        this.setState({
-          carLastService: lastInspection
-        })
-      // }
-      
+    query.get(this.state.userId).then((user) => {
+      console.log(user);
+      const lastInspection = user.attributes.lastInspection;
+      this.setState({
+        carLastService: lastInspection
+      })
+
     }, (error) => {
       
       console.error('Error while fetching Vehicle', error);
     });
+  
   }
 
   render() {
-    console.log(this.state.carLastTest);
+    console.log(this.state.carLastService);
     return(
       <div class="c-myskoda-service">
         <h1 className="display-4 myskoda-title">Vehicle Service</h1>
@@ -52,7 +78,7 @@ class MySkodaService extends React.Component {
               <Card className="mb-4" style={{ width: '397px' }}>
                 <Card.Body>
                   <p className="text-regular">Inspection Before Annual Vehicle Licensing Test</p>
-                  <p className="text-regular text-bg">your last annual vehicle licensing test: <strong>{this.state.carLastTest}</strong></p>
+                  <p className="text-regular text-bg">your last annual vehicle licensing test: <strong>{this.state.carTest}</strong></p>
                   <strong>Recommended</strong>
                     <p className="text-regular">See your service calendar</p>
                 </Card.Body>

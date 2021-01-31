@@ -10,6 +10,10 @@ import moment from 'moment';
 class ServiceCalendar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userId: this.props.sendUserId,
+      userCarPlate: this.props.sendUserCarPlate,
+    }
   }
 
   render() {

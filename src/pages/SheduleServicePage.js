@@ -10,7 +10,8 @@ class SheduleServicePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userCarPlate: this.props.sendUserCarPlate
+      userCarPlate: this.props.sendUserCarPlate,
+      userId: this.props.sendUserId
     }
     console.log(this.state);
   }
@@ -21,7 +22,7 @@ class SheduleServicePage extends React.Component {
           <Container>
             <div className="c-shedule-service-page">
               <ServiceCalendar />
-              <SheduleService sendUserCarPlate={this.state.userCarPlate} />
+              <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
             </div>
           </Container>
         <MySkodaFooter />

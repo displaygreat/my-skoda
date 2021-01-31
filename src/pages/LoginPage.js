@@ -63,9 +63,12 @@ class LoginPage extends React.Component {
     Parse.User.logIn(userEmail, userPwd).then((user) => {
     // Do stuff after successful login
     let carPlate = user.attributes.plateNumber;
+    let userId = user.id;
+    console.log(userId);
     this.setState({
       userCarPlate: carPlate
     })
+    this.props.callbackUserId(userId);
     this.props.callbackUserCarPlate(carPlate);
     console.log(carPlate);
     console.log('Logged in user', user);

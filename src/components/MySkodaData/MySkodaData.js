@@ -9,6 +9,8 @@ class MySkodaData extends React.Component {
     super(props);
     console.log(this.props);
     this.state = {
+      userId: this.props.sendUserId,
+      userCarPlate: this.props.sendUserCarPlate,
       carPlate: '',
       carMake: '',
       carModel: '',
@@ -33,10 +35,11 @@ class MySkodaData extends React.Component {
       let model = data.kinuy_mishari;
       let year = data.shnat_yitzur;
       let test = moment(data.mivchan_acharon_dt).format('L');
+      // let test = data.mivchan_acharon_dt;
       let license = moment(data.tokef_dt).format('L');
       let vin = data.misgeret;
       console.log(make, model, year, test, license, vin);
-      this.props.callbackUserLastTest(test);
+      // this.props.callbackUserLastTest(test);
       this.setState({
         carPlate: plate,
         carMake: make,

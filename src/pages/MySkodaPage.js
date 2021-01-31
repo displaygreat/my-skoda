@@ -6,16 +6,17 @@ import MySkodaService from '../components/MySkodaService/MySkodaService';
 import MySkodaData from '../components/MySkodaData/MySkodaData';
 import MySkodaNavbar from '../components/MySkodaNavbar/MySkodaNavbar';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
-import Parse from 'parse';
 
 class MySkodaPage extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
+      userId: this.props.sendUserId,
       userCarPlate: this.props.sendUserCarPlate,
       userLastTest: ''
     }
-    console.log(this.props);
+    console.log(this.state);
   }
 
   handleCallbackUserLastTest = (test) => {
@@ -55,13 +56,13 @@ class MySkodaPage extends React.Component {
   // }
 
   render() {
+    console.log(this.state.carTest, this.state.carMake);
     return(
       <div className="c-my-skoda-page">
          <MySkodaNavbar />
         <Container className="myskoda-wrap">
         <MySkodaData sendUserCarPlate={this.state.userCarPlate} callbackUserLastTest={this.handleCallbackUserLastTest}/>
-        {/* <button onClick={this.getAllPlateNumbers}></button> */}
-        <MySkodaService sendUserLastTest={this.state.userLastTest}/>
+        <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>
         <ServiceCalendar />
       </Container>
        <MySkodaFooter />

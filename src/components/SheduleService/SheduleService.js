@@ -64,6 +64,7 @@ class SheduleService extends React.Component {
     super(props);
     // console.log(this.props);
     this.state = {
+        userId: this.props.sendUserId,
         // carPlate: '',
         carMake: '',
         carModel: '',
@@ -89,7 +90,7 @@ class SheduleService extends React.Component {
       }
       let model = data.kinuy_mishari;
       let year = data.shnat_yitzur;
-      let test = moment(data.mivchan_acharon_dt).format('L');
+      let test = moment(data.mivchan_acharon_dt).format('DD/MM/YYYY');
       // console.log(make, model, year, test);
       this.setState({
         carPlate: plate,
@@ -103,22 +104,15 @@ class SheduleService extends React.Component {
       // console.log(this.state);
     })
 
-    const Vehicle = Parse.Object.extend('Vehicle');
-    const query = new Parse.Query(Vehicle);
-    // query.equalTo("lastService", 'A string');
-    // query.equalTo("sheduledDate", 'A string');
-    query.equalTo("userId", Parse.User.current());
-    query.find().then((results) => {
-      
-      // console.log('Vehicle found', results);
-      // console.log(results[results.length-1].attributes.lastService);
-      // console.log(results[results.length-1].attributes.sheduledDate);
-      const lastService = results[results.length-1].attributes.lastService;
-      const exDate = results[results.length-1].attributes.sheduledDate
+    const User = new Parse.User();
+    const query = new Parse.Query(User);
+    query.get(this.state.userId).then((user) => {
+      console.log(user);
+      const lastInspection = user.attributes.lastInspection;
       this.setState({
-        carLastService: lastService,
-        excludeDates: exDate
+        carLastService: lastInspection
       })
+
     }, (error) => {
       
       console.error('Error while fetching Vehicle', error);
@@ -154,28 +148,28 @@ class SheduleService extends React.Component {
     const transDate = moment(selectedDate).toObject();
     console.log(transDate);
 
-    const Vehicle = Parse.Object.extend('Vehicle');
-    const query = new Parse.Query(Vehicle);
+    const Shedule = Parse.Object.extend('Shedule');
+    const query = new Parse.Query(Shedule);
     // query.equalTo("lastService", 'A string');
     // query.equalTo("sheduledDate", 'A string');
     query.equalTo("userId", Parse.User.current());
     query.find().then((results) => {
-      
-      const exDate = results[results.length-1].attributes.sheduledDate;
-      console.log(moment(exDate).format('YYYY/MM/DD'));
-      if (moment(exDate).format('YYYY/MM/DD') === '2021/02/04') {
-        console.log('!!!');
-        const arrExDates = [];
-        arrExDates.push(moment(exDate).format('hh:mm'))
-        console.log(arrExDates);
-        this.setState({
-          excludeTimes: arrExDates
-        })
-      }
+      console.log(results);
+      // const exDate = results[results.length-1].attributes.sheduledDate;
+      // console.log(moment(exDate).format('YYYY/MM/DD'));
+      // if (moment(exDate).format('YYYY/MM/DD') === '2021/02/04') {
+      //   console.log('!!!');
+      //   const arrExDates = [];
+      //   arrExDates.push(moment(exDate).format('hh:mm'))
+      //   console.log(arrExDates);
+      //   this.setState({
+      //     excludeTimes: arrExDates
+      //   })
+      // }
 
     }, (error) => {
       
-      console.error('Error while fetching Vehicle', error);
+      console.error('Error while fetching Shedule', error);
     });
   }
 
@@ -191,17 +185,16 @@ class SheduleService extends React.Component {
     
     e.preventDefault();
     console.log(this.state.startDate);
-    const Vehicle = Parse.Object.extend('Vehicle');
-    const myNewObject = new Vehicle();
+    const Shedule = Parse.Object.extend('Shedule');
+    const myNewObject = new Shedule();
 
-    myNewObject.set('lastService', '12/07/2020');
     myNewObject.set('sheduledDate', this.state.startDate.toString());
     myNewObject.set('userId', Parse.User.current());
 
     myNewObject.save().then(
       (result) => {
         
-        console.log('Vehicle created', result);
+        console.log('Shedule created', result);
       },
       (error) => {
         
