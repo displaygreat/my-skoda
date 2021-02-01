@@ -21,3 +21,28 @@
   color: #fff;
   border: none;
 }
+.wrap-shedule-img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.shedule-img {
+  width: 100%;
+  object-fit: cover;
+}
+.title-discount {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  color: #28a745;
+}
+.modal-card {
+  position: relative;
+}
+.modal-text {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: #fff;
+  font-weight: bold;
+  direction: rtl;
+  text-align: right;
+}
