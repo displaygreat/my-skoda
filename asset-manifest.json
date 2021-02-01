@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/github.io/my-skoda/static/css/main.ea6b7407.chunk.css",
+    "main.js": "/github.io/my-skoda/static/js/main.7a268ad6.chunk.js",
+    "main.js.map": "/github.io/my-skoda/static/js/main.7a268ad6.chunk.js.map",
+    "runtime-main.js": "/github.io/my-skoda/static/js/runtime-main.21ff447d.js",
+    "runtime-main.js.map": "/github.io/my-skoda/static/js/runtime-main.21ff447d.js.map",
+    "static/css/2.9c4c78c2.chunk.css": "/github.io/my-skoda/static/css/2.9c4c78c2.chunk.css",
+    "static/js/2.4ee1f542.chunk.js": "/github.io/my-skoda/static/js/2.4ee1f542.chunk.js",
+    "static/js/2.4ee1f542.chunk.js.map": "/github.io/my-skoda/static/js/2.4ee1f542.chunk.js.map",
+    "static/js/3.da7e9b77.chunk.js": "/github.io/my-skoda/static/js/3.da7e9b77.chunk.js",
+    "static/js/3.da7e9b77.chunk.js.map": "/github.io/my-skoda/static/js/3.da7e9b77.chunk.js.map",
+    "index.html": "/github.io/my-skoda/index.html",
+    "static/css/2.9c4c78c2.chunk.css.map": "/github.io/my-skoda/static/css/2.9c4c78c2.chunk.css.map",
+    "static/css/main.ea6b7407.chunk.css.map": "/github.io/my-skoda/static/css/main.ea6b7407.chunk.css.map",
+    "static/js/2.4ee1f542.chunk.js.LICENSE.txt": "/github.io/my-skoda/static/js/2.4ee1f542.chunk.js.LICENSE.txt",
+    "static/js/main.7a268ad6.chunk.js.LICENSE.txt": "/github.io/my-skoda/static/js/main.7a268ad6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.21ff447d.js",
+    "static/css/2.9c4c78c2.chunk.css",
+    "static/js/2.4ee1f542.chunk.js",
+    "static/css/main.ea6b7407.chunk.css",
+    "static/js/main.7a268ad6.chunk.js"
+  ]
+}
