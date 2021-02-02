@@ -1,0 +1,3 @@
+//!!write if this car plate not exists in database of data.gov.il (alert) + if this car plate exists in database back4app + validation input email RegEx (alert if not valid)
+
+//!write condition if user or vehicle exist in database
