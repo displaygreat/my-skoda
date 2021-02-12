@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/my-skoda/static/css/main.ea6b7407.chunk.css",
-    "main.js": "/my-skoda/static/js/main.15dc201d.chunk.js",
-    "main.js.map": "/my-skoda/static/js/main.15dc201d.chunk.js.map",
+    "main.js": "/my-skoda/static/js/main.ba233900.chunk.js",
+    "main.js.map": "/my-skoda/static/js/main.ba233900.chunk.js.map",
     "runtime-main.js": "/my-skoda/static/js/runtime-main.1c732d5a.js",
     "runtime-main.js.map": "/my-skoda/static/js/runtime-main.1c732d5a.js.map",
     "static/css/2.9c4c78c2.chunk.css": "/my-skoda/static/css/2.9c4c78c2.chunk.css",
@@ -14,13 +14,13 @@
     "static/css/2.9c4c78c2.chunk.css.map": "/my-skoda/static/css/2.9c4c78c2.chunk.css.map",
     "static/css/main.ea6b7407.chunk.css.map": "/my-skoda/static/css/main.ea6b7407.chunk.css.map",
     "static/js/2.6eadee4b.chunk.js.LICENSE.txt": "/my-skoda/static/js/2.6eadee4b.chunk.js.LICENSE.txt",
-    "static/js/main.15dc201d.chunk.js.LICENSE.txt": "/my-skoda/static/js/main.15dc201d.chunk.js.LICENSE.txt"
+    "static/js/main.ba233900.chunk.js.LICENSE.txt": "/my-skoda/static/js/main.ba233900.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1c732d5a.js",
     "static/css/2.9c4c78c2.chunk.css",
     "static/js/2.6eadee4b.chunk.js",
     "static/css/main.ea6b7407.chunk.css",
-    "static/js/main.15dc201d.chunk.js"
+    "static/js/main.ba233900.chunk.js"
   ]
 }
