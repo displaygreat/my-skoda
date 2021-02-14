@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col, Image, Row, Button, Nav } from 'react-bootstrap';
+import { Container, Col, Image, Row, Button } from 'react-bootstrap';
 import './HomePage.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import skodaBlack from '../assets/img/skoda-black-logo.jpg';
@@ -19,28 +19,26 @@ class HomePage extends React.Component {
 
   render() {
     return(
-      <div className="wrapper">
-        <div className="main">
-        <Container >
-         <Row>
-            <Col className="column column-aside" xs={12} md={8}>
-              <span className="myskoda-home-label">my<span className="letter-green">Skoda</span></span>
-              <div className="wrap-home-img">
+      <div className="home-page">
+        <Container className="main">
+          <Row>
+            <Col className="home-column" xs={12} md={8}>
+              <span className="home-label">my<span className="letter-green">Skoda</span></span>
+              <div className="home-img-wrap">
                 <Image className="home-img" src={skodaBlack} rounded />
+                <h2 className="home-title">The<br/>digital<br/>access<br/>to<br/>your<br/>Skoda
+                </h2>
               </div>
-              <h2 className="home-title">The<br/>digital<br/>access<br/>to<br/>your<br/>Skoda
-              </h2>
             </Col>
-            <Col className="column column-aside pt-5" xs={12} md={4}>
+            <Col className="home-column" xs={12} md={4}>
               <Image className="logo" src={skodaLogo} rounded />
               <h4 className="home-subtitle">Welcome to My Skoda!</h4>
               <p className="home-text">mySkoda gives you access to all the digital services from Skoda. Access important vehicle data, manage your data, and set up services.</p>
               <Button className="home-button" variant="success" onClick={this.handleClickOnHomeButton}>Let's go<Image src={chevronRight} /></Button>
             </Col>
-            </Row>
-          </Container>
-          </div>
-          <MySkodaFooter />
+          </Row>
+        </Container>
+        <MySkodaFooter />
       </div>
     )
   }

@@ -46,7 +46,7 @@ class LoginPage extends React.Component {
   }
 
   handleClickOnBackButton() {
-    window.location = '/';
+    window.location = '#';
   }
 
   //solution with json

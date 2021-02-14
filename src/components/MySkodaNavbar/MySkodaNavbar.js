@@ -40,7 +40,7 @@ class MySkodaNavbar extends React.Component {
               <Nav.Link className="myskoda-nav-link" href="#/shedule">Schedule Service</Nav.Link>
             </Nav>
             <Nav className="align-items-center">
-              <Nav.Link className="myskoda-nav-link user-avatar-link d-flex align-items-center" href="#">
+              <Nav.Link className="myskoda-nav-link user-avatar-link d-flex align-items-center" href="#/account">
                 <span>Oxana</span>
                 <div className="wrap-user-avatar">
                   <img className="user-avatar" src="https://via.placeholder.com/150/92c952" />
