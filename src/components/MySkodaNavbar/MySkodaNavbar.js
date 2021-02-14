@@ -1,6 +1,8 @@
 import React from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import './MySkodaNavbar.css';
+import skodaLogo from '../../assets/img/skoda-logo.png';
+
 
 class MySkodaNavbar extends React.Component {
   constructor(props) {
@@ -24,18 +26,18 @@ class MySkodaNavbar extends React.Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link className="myskoda-label-link" href="/"><span className="myskoda-label">my<span className="letter-green">Skoda</span></span></Nav.Link>
+              <Nav.Link className="myskoda-label-link" href="#/"><span className="myskoda-label">my<span className="letter-green">Skoda</span></span></Nav.Link>
               <Navbar.Brand href="/">
                 <img
-                  src="img/skoda-logo-min.png"
+                  src={skodaLogo}
                   width="30"
                   height="30"
                   className="d-inline-block align-top"
-                  alt="Skoda Logo"
+                  alt="skoda logo"
                 />
               </Navbar.Brand>
-              <Nav.Link className="myskoda-nav-link" href="#features">Service Centers</Nav.Link>
-              <Nav.Link className="myskoda-nav-link" href="#pricing">Schedule Service</Nav.Link>
+              <Nav.Link className="myskoda-nav-link" href="#/dealers">Service Centers</Nav.Link>
+              <Nav.Link className="myskoda-nav-link" href="#/shedule">Schedule Service</Nav.Link>
             </Nav>
             <Nav className="align-items-center">
               <Nav.Link className="myskoda-nav-link user-avatar-link d-flex align-items-center" href="/">

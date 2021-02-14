@@ -3,6 +3,10 @@ import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupPage.css';
 import Parse from 'parse';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
+import skodaLogo from '../assets/img/skoda-logo.png';
+import skodaSignup from '../assets/img/skoda-signup.jpg';
+import eye from '../assets/img/eye.png';
+import eyeOff from '../assets/img/eye-off.png';
 
 class SignupPage extends React.Component {
   constructor(props) {
@@ -34,7 +38,7 @@ class SignupPage extends React.Component {
   }
 
   handleClickOnBackButton() {
-    window.location = '/#/signup-license';
+    window.location = '#/signup-license';
   }
 
   handleChangeInputPwd = (e) => {
@@ -55,7 +59,7 @@ class SignupPage extends React.Component {
     let newUserPwd = this.state.newUserPwd.toString();
     let confirmUserPwd = this.state.confirmUserPwd.toString();
     if(newUserPwd === confirmUserPwd) {
-       window.location = '/#/my-skoda';
+       window.location = '#/my-skoda';
       //  this.props.callbackUserPwd(this.state.newUserPwd);
        this.signupUser();
     }
@@ -107,8 +111,8 @@ class SignupPage extends React.Component {
                   <Form.Label>Password</Form.Label>
                   <div className="input-password">
                     <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeInputPwd} value={this.state.newUserPwd} />
-                    <Image className={`icon-eye-off ${this.state.offPwd}`} src="img/eye-off.png" onClick={this.showPassword} />
-                    <Image className={`icon-eye ${this.state.onPwd}`}  src="img/eye.png" onClick={this.hidePassword} />
+                    <Image className={`icon-eye-off ${this.state.offPwd}`} src={eyeOff} onClick={this.showPassword} />
+                    <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                   </div>
                   <Form.Text className="text-muted">
                     Perfect
@@ -118,8 +122,8 @@ class SignupPage extends React.Component {
                   <Form.Label>Confirm password</Form.Label>
                   <div className="input-password">
                     <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeConfirmPwd} value={this.state.confirmUserPwd} />
-                    <Image className={`icon-eye-off ${this.state.offPwd}`} src="img/eye-off.png" onClick={this.showPassword} />
-                    <Image className={`icon-eye ${this.state.onPwd}`}  src="img/eye.png" onClick={this.hidePassword} />
+                    <Image className={`icon-eye-off ${this.state.offPwd}`} src={eyeOff} onClick={this.showPassword} />
+                    <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                   </div>
                   <Form.Text className="text-muted">
                     Perfect
@@ -133,9 +137,9 @@ class SignupPage extends React.Component {
               </Form>
             </Col>
             <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src="img/skoda-logo-min.png" rounded />
+              <Image className="logo welcome-logo" src={skodaLogo} rounded />
               <div className="wrap-welcome-img">
-                <Image className="home-img" src="img/signup-kristian-valco-unsplash-min.jpg" rounded />
+                <Image className="home-img" src={skodaSignup} rounded />
               </div>
             </Col>
           </Row>

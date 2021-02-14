@@ -85,32 +85,28 @@ class App extends React.Component {
 
   render() {
     return (
-          <HashRouter>
-            {/* <Route exact path={['/my-skoda', '/service-calendar', '/appointment']}> */}
-            {/* <Route exact path="/my-skoda">
-              <MySkodaNavbar handleLogout={this.handleLogout} activeUser={this.state.activeUser}/>
-            </Route> */}
-              <Switch>
-                <Route exact path="/">
-                  <HomePage />
-                </Route>
-                <Route exact path="/shedule">
-                  <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
-                </Route>
-                <Route exact path="/my-skoda">
-                  <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
-                </Route>
-                <Route exact path="/signup-license">
-                  <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
-                </Route>
-                <Route exact path="/signup">
-                  <SignupPage callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
-                </Route>
-                <Route exact path="/login">
-                  <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserId={this.handleCallbackUserId}/>
-                </Route>
-              </Switch> 
-        </HashRouter>
+          <HashRouter basename='/'>
+            <Switch>
+              <Route exact path="/" component={HomePage}>
+                <HomePage />
+              </Route>
+              <Route path="/shedule" component={SheduleServicePage}>
+                <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+              </Route>
+              <Route path="/my-skoda" component={MySkodaPage}>
+                <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+              </Route>
+              <Route path="/signup-license" component={SignupLicensePage}>
+                <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
+              </Route>
+              <Route path="/signup" component={SignupPage}>
+                <SignupPage callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
+              </Route>
+              <Route path="/login" component={LoginPage}>
+                <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserId={this.handleCallbackUserId}/>
+              </Route>
+            </Switch> 
+          </HashRouter> 
       )
   }
 }

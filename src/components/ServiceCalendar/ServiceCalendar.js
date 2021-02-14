@@ -30,7 +30,7 @@ class ServiceCalendar extends React.Component {
           <tr>
             <th className="service-cell"><small>recommended</small><br/>{service.recommended}</th>
             <td className="service-cell">{service.service}</td>
-            <td className="service-cell"><small>shedule</small><br/><a className="shedule-link" href="/#/shedule">{service.shedule}</a></td>
+            <td className="service-cell"><small>shedule</small><br/><a className="shedule-link" href="#/shedule">{service.shedule}</a></td>
           </tr>
         )
     })

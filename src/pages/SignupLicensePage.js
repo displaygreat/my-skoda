@@ -2,6 +2,9 @@ import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
 import './SignupLicensePage.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
+import skodaLogo from '../assets/img/skoda-logo.png';
+import skodaSignup from '../assets/img/skoda-signup.jpg';
+
 
 class SignupLicensePage extends React.Component {
   constructor(props) {
@@ -13,7 +16,7 @@ class SignupLicensePage extends React.Component {
   }
 
   handleClickOnBackButton() {
-    window.location = '/#/login';
+    window.location = '#/login';
   }
 
   handleChangeInputPlate = (e) => {
@@ -42,7 +45,7 @@ class SignupLicensePage extends React.Component {
     if(receivedPlate == sentPlate) {
       this.props.callbackUserCarPlate(sentPlate);
       this.props.callbackUserEmail(sentEmail);
-      window.location = '/#/signup';
+      window.location = '#/signup';
     }
     //!!write if this car plate not exists in database of data.gov.il (alert) + if this car plate exists in database back4app + validation input email RegEx (alert if not valid)
   }
@@ -81,9 +84,9 @@ class SignupLicensePage extends React.Component {
               </Form>
             </Col>
             <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src="img/skoda-logo-min.png" rounded />
+              <Image className="logo welcome-logo" src={skodaLogo}rounded />
               <div className="wrap-welcome-img">
-                <Image className="home-img" src="img/signup-kristian-valco-unsplash-min.jpg" rounded />
+                <Image className="home-img" src={skodaSignup} rounded />
               </div>
             </Col>
           </Row>

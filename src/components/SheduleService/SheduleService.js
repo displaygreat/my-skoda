@@ -1,6 +1,6 @@
 import './SheduleService.css';
 import React from 'react';
-import { Button, Col, Image, Modal } from 'react-bootstrap';
+import { Button, Col, Image } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
@@ -11,6 +11,9 @@ import setMinutes from 'date-fns/setMinutes';
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 import Parse from 'parse';
+import superb from '../../assets/img/superb.jpg';
+import octavia from '../../assets/img/octavia.jpg';
+import karoq from '../../assets/img/karoq.jpg';
 
 const Styles = styled.div`
 .react-datepicker__input-container input,
@@ -380,29 +383,16 @@ class SheduleService extends React.Component {
         <Col className="column rounded" style={{maxWidth: "max-content"}} xs={12} md={6}>
           <h3 className="title-discount">Shedule your visit online and get 10% discount for service</h3>
           <div className="wrap-shedule-img">
-            <Image src="img/superb.jpg" className="shedule-img" />
+            <Image src={superb} className="shedule-img" />
           </div>
           <div className="wrap-shedule-img">
-            <Image src="img/octavia.jpg" className="shedule-img" />
+            <Image src={octavia} className="shedule-img" />
           </div>
           <div className="wrap-shedule-img" onClick={this.handleShow}>
-            <Image src="img/karoq.jpg" className="shedule-img" />
+            <Image src={karoq} className="shedule-img" />
           </div>
         </Col>
         </div>
-        <Modal show={this.state.setShow} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Congratulation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="wrap-shedule-img modal-card" onClick={this.handleShow}>
-            <Image src="img/congratulation.jpg" className="shedule-img" />
-            <h1 className="modal-text">תודה לירון<br/>המדריך המקסים,<br/>המוכשר והמקצועי! בהצלחה לכל החברים מהקורס!</h1>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-        </Modal.Footer>
-      </Modal>
       </div>
     )
   }
