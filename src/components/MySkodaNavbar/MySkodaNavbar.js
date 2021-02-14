@@ -26,8 +26,8 @@ class MySkodaNavbar extends React.Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link className="myskoda-label-link" href="#/"><span className="myskoda-label">my<span className="letter-green">Skoda</span></span></Nav.Link>
-              <Navbar.Brand href="/">
+              <Nav.Link className="myskoda-label-link" href="#"><span className="myskoda-label">my<span className="letter-green">Skoda</span></span></Nav.Link>
+              <Navbar.Brand href="#">
                 <img
                   src={skodaLogo}
                   width="30"
