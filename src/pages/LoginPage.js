@@ -114,12 +114,11 @@ class LoginPage extends React.Component {
 
   render() {
     return(
-      <div className="c-welcome-page">
-        <div className="main">
-        <Container>
+      <div className="p-login-page">
+        <Container className="main">
           <Row>
-            <Col className="column column-aside" xs={12} md={4}>
-              <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
+            <Col className="login-column" xs={12} md={4}>
+              <span className="myskoda-login-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Login</h4>
               <p className="text">for My Skoda</p>
               <Form>
@@ -158,15 +157,14 @@ class LoginPage extends React.Component {
                 </Button>
               </Form>
             </Col>
-            <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src={skodaLogo} rounded />
-              <div className="wrap-welcome-img">
-                <Image className="home-img" src={skodaLogin} rounded />
+            <Col className="login-column" xs={12} md={8}>
+              <Image className="logo" src={skodaLogo} rounded />
+              <div className="login-img-wrap">
+                <Image className="login-img" src={skodaLogin} rounded />
               </div>
             </Col>
           </Row>
           </Container>
-          </div>
            <MySkodaFooter />
       </div>
     )

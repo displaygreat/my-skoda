@@ -15,7 +15,7 @@ class HomePage extends React.Component {
 
   render() {
     return(
-      <div className="home-page">
+      <div className="p-home-page">
         <Container className="main">
           <Row>
             <Col className="home-column" xs={12} md={8} lg={7}>

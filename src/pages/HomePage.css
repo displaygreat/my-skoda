@@ -1,43 +1,43 @@
-.home-page .main {
+.p-home-page .main {
   display: flex;
-  padding: 20px 15px 120px;
+  padding: 20px 15px 60px;
 }
-.home-page .home-column {
+.p-home-page .home-column {
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
 }
-.home-page .home-column:nth-child(2) {
+.p-home-page .home-column:nth-child(2) {
   margin-top: 70px;
 }
-.home-page .home-label {
+.p-home-page .home-label {
   font-size: 0.8rem;
   margin: 0 0 20px 0;
   color: #000;
 }
-.home-page .letter-green {
+.p-home-page .letter-green {
   color: #28a745;
   font-weight: bold;
 }
-.home-page .home-img {
+.p-home-page .home-img {
   width: 100%;
   object-fit: cover;
 }
-.home-page .logo {
+.p-home-page .logo {
   width: 60px;
 }
-.home-page .home-subtitle {
+.p-home-page .home-subtitle {
   margin: 20px 0;
 }
-.home-page .home-text {
+.p-home-page .home-text {
   margin-bottom: 40px;
 }
-.home-page .home-button {
+.p-home-page .home-button {
   max-width: 320px;
   font-weight: bold;
 }
 @media (max-width: 992px) {
-  .home-page .home-column:nth-child(2) {
+  .p-home-page .home-column:nth-child(2) {
     margin-top: 0;
   }
 }
