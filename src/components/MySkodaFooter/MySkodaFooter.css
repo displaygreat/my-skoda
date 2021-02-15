@@ -1,0 +1,24 @@
+.my-skoda-footer {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.my-skoda-footer .footer-link {
+  color: #fff;
+  border-bottom: 1px solid #000;
+  padding: 0;
+  margin: 0 30px 5px 0;
+}
+.my-skoda-footer .footer-nav {
+  padding: 0 15px;
+}
+.my-skoda-footer .footer-link:hover {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}

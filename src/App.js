@@ -4,17 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
-
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import SignupLicensePage from './pages/SignupLicensePage';
 import MySkodaPage from './pages/MySkodaPage';
 import SheduleServicePage from './pages/SheduleServicePage';
-// import ServiceCalendarPage from './pages/ServiceCalendarPage';
-// import AppointmentPage from './pages/AppointmentPage';
-import MySkodaNavbar from './components/MySkodaNavbar/MySkodaNavbar';
-// import vehicleJSON from './data/vehicle.json';
 import Parse from 'parse';
 Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
     Parse.initialize(
@@ -26,21 +21,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeUser: null,
+      isAdmin: false,
       userId: '',
       userEmail: '',
       userPwd: '',
-      activeUser: null,
-      isAdmin: false,
       userCarPlate: '',
-      // userCarMake: '',
-      // userCarModel: '',
-      // userCarYear: '',
-      // userLastTest: '',
-      // userLastService: '',
-      // userServiceCenter: '',
-      // userServiceDate: ''
     }
-    console.log(this.state);
   }
 
   handleLogin = (userObj) => {
@@ -55,32 +42,28 @@ class App extends React.Component {
     })
   }
 
+  handleCallbackUserId = (id) => {
+    this.setState({
+      userId: id
+    });
+  }
+
   handleCallbackUserEmail = (email) => {
     this.setState({
       userEmail: email
     });
-    console.log(this.state);
-  }
-
-  handleCallbackUserCarPlate = (plate) => {
-    this.setState({
-      userCarPlate: plate
-    });
-    console.log(this.state);
   }
 
   handleCallbackUserPwd = (pwd) => {
     this.setState({
       userPwd: pwd
     });
-    console.log(this.state);
   }
 
-  handleCallbackUserId = (id) => {
+  handleCallbackUserCarPlate = (plate) => {
     this.setState({
-      userId: id
+      userCarPlate: plate
     });
-    console.log(this.state);
   }
 
   render() {

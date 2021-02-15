@@ -1,6 +1,7 @@
 // import '/MySkodaFooter.css';
 import React from 'react';
 import { Container, Nav } from 'react-bootstrap';
+import './MySkodaFooter.css';
 
 class MySkodaFooter extends React.Component {
   constructor() {
@@ -8,7 +9,7 @@ class MySkodaFooter extends React.Component {
   }
   render() {
     return(
-      <div className="footer">
+      <div className="my-skoda-footer">
             <Container>
             <Nav className="footer-nav" as="ul">
               <Nav.Item as="li">

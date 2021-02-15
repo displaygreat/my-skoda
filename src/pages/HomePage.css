@@ -1,85 +1,43 @@
 .home-page .main {
   display: flex;
-  padding: 20px 15px;
+  padding: 20px 15px 120px;
 }
 .home-page .home-column {
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
 }
-.home-page .home-img-wrap {
-  position: relative;
+.home-page .home-column:nth-child(2) {
+  margin-top: 70px;
+}
+.home-page .home-label {
+  font-size: 0.8rem;
+  margin: 0 0 20px 0;
+  color: #000;
+}
+.home-page .letter-green {
+  color: #28a745;
+  font-weight: bold;
 }
 .home-page .home-img {
   width: 100%;
   object-fit: cover;
 }
-.home-page .home-title {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #218838;
-}
-
-.home-subtitle {
-  margin: 20px 0;
-}
-
-.text {
-  margin-bottom: 20px;
-}
-
-.home-button {
-  font-weight: bold !important;
-}
-
-.letter-green {
-  color: #28a745;
-  font-weight: bold;
-}
-
-.logo {
+.home-page .logo {
   width: 60px;
 }
-
-.footer {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 60px;
+.home-page .home-subtitle {
+  margin: 20px 0;
 }
-
-.footer-nav {
-  margin-left: 100px;
-}
-
-.footer-link {
-  color: #fff;
-  border-bottom: 1px solid #000;
-  padding: 0 !important;
-  margin: 0 30px 5px 0;
-}
-
-.footer-link:hover {
-  color: #fff;
-  border-bottom: 1px solid #fff;
-}
-.home-label {
-  font-size: 0.8rem;
-  margin: 0 0 20px 0;
-  color: #000;
-}
-
-.home-text {
+.home-page .home-text {
   margin-bottom: 40px;
 }
-@media (max-with: 425px) {
-  .home-page .home-title {
-    font-size: 1.2rem;
+.home-page .home-button {
+  max-width: 320px;
+  font-weight: bold;
+}
+@media (max-width: 992px) {
+  .home-page .home-column:nth-child(2) {
+    margin-top: 0;
   }
 }

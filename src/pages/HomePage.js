@@ -8,10 +8,6 @@ import chevronRight from '../assets/img/chevron-right.png';
 
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClickOnHomeButton = () => {
     window.location = '#/login';
     console.log('hi');
@@ -22,15 +18,11 @@ class HomePage extends React.Component {
       <div className="home-page">
         <Container className="main">
           <Row>
-            <Col className="home-column" xs={12} md={8}>
+            <Col className="home-column" xs={12} md={8} lg={7}>
               <span className="home-label">my<span className="letter-green">Skoda</span></span>
-              <div className="home-img-wrap">
                 <Image className="home-img" src={skodaBlack} rounded />
-                <h2 className="home-title">The<br/>digital<br/>access<br/>to<br/>your<br/>Skoda
-                </h2>
-              </div>
             </Col>
-            <Col className="home-column" xs={12} md={4}>
+            <Col className="home-column" xs={12} md={4} lg={{ span: 4, offset: 1 }}>
               <Image className="logo" src={skodaLogo} rounded />
               <h4 className="home-subtitle">Welcome to My Skoda!</h4>
               <p className="home-text">mySkoda gives you access to all the digital services from Skoda. Access important vehicle data, manage your data, and set up services.</p>
