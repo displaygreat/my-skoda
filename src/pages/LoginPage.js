@@ -109,7 +109,7 @@ class LoginPage extends React.Component {
   }
 
   handleClickOnCreateAccount () {
-    window.location = '#/signup-license';
+    window.location = '#/signup-step-one';
   }
 
   render() {

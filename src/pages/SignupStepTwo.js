@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
-import './SignupPage.css';
+import './SignupStepTwo.css';
 import Parse from 'parse';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import skodaLogo from '../assets/img/skoda-logo.png';
@@ -8,7 +8,7 @@ import skodaSignup from '../assets/img/skoda-signup.jpg';
 import eye from '../assets/img/eye.png';
 import eyeOff from '../assets/img/eye-off.png';
 
-class SignupPage extends React.Component {
+class SignupStepTwo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class SignupPage extends React.Component {
   }
 
   handleClickOnBackButton() {
-    window.location = '#/signup-license';
+    window.location = '#/signup-step-one';
   }
 
   handleChangeInputPwd = (e) => {
@@ -150,4 +150,4 @@ class SignupPage extends React.Component {
     )
   }
 }
-export default SignupPage;
+export default SignupStepTwo;

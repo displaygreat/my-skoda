@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
-import './SignupLicensePage.css';
+import './SignupStepOne.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import skodaLogo from '../assets/img/skoda-logo.png';
 import skodaSignup from '../assets/img/skoda-signup.jpg';
 
 
-class SignupLicensePage extends React.Component {
+class SignupStepOne extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,12 +52,12 @@ class SignupLicensePage extends React.Component {
 
   render() {
     return(
-      <div className="c-welcome-page">
+      <div className="p-signup-step-one">
         <div className="main">
         <Container>
           <Row>
-            <Col className="column column-aside" xs={12} md={4}>
-              <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
+            <Col className="signup-column" xs={12} md={4}>
+              <span className="myskoda-signup-label">my<span className="letter-green">Skoda</span></span>
               <h4 className="welcome-title">Create account</h4>
               <span className="step">Step 1</span>
               <p className="text">for My Skoda</p>
@@ -69,7 +69,7 @@ class SignupLicensePage extends React.Component {
                     Perfect
                   </Form.Text>
                 </Form.Group>
-                <Form.Group className="login-input"controlId="formBasicEmail">
+                <Form.Group className="signup-input"controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" value={this.state.userEmail} onChange={this.handleChangeInputEmail}/>
                   <Form.Text className="text-muted">
@@ -77,16 +77,16 @@ class SignupLicensePage extends React.Component {
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="login-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="login-button btn-next" variant="success" onClick={this.getVehicle}>Next
+                  <Button className="signup-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="signup-button btn-next" variant="success" onClick={this.getVehicle}>Next
                   </Button>
                 </div>
               </Form>
             </Col>
-            <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src={skodaLogo}rounded />
-              <div className="wrap-welcome-img">
-                <Image className="home-img" src={skodaSignup} rounded />
+            <Col className="signup-column" xs={12} md={8}>
+              <Image className="logo" src={skodaLogo}rounded />
+              <div className="signup-img-wrap">
+                <Image className="signup-img" src={skodaSignup} rounded />
               </div>
             </Col>
           </Row>
@@ -97,4 +97,4 @@ class SignupLicensePage extends React.Component {
     )
   }
 }
-export default SignupLicensePage;
+export default SignupStepOne;

@@ -6,8 +6,8 @@ import './App.css';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import SignupLicensePage from './pages/SignupLicensePage';
+import SignupStepTwo from './pages/SignupStepTwo';
+import SignupStepOne from './pages/SignupStepOne';
 import MySkodaPage from './pages/MySkodaPage';
 import SheduleServicePage from './pages/SheduleServicePage';
 import Parse from 'parse';
@@ -79,11 +79,11 @@ class App extends React.Component {
               <Route path="/my-skoda" component={MySkodaPage}>
                 <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
               </Route>
-              <Route path="/signup-license" component={SignupLicensePage}>
-                <SignupLicensePage callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
+              <Route path="/signup-step-one" component={SignupStepOne}>
+                <SignupStepOne callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
               </Route>
-              <Route path="/signup" component={SignupPage}>
-                <SignupPage callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
+              <Route path="/signup-step-two" component={SignupStepTwo}>
+                <SignupStepTwo callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
               </Route>
               <Route path="/login" component={LoginPage}>
                 <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserId={this.handleCallbackUserId}/>

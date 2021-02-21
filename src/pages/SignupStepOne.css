@@ -1,47 +1,47 @@
-.p-login-page .main {
+.p-signup-step-one .main {
   display: flex;
   padding: 20px 15px 60px;
 }
-.p-login-page .login-column {
+.p-signup-step-one .signup-column {
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
 }
-.p-login-page .myskoda-login-label {
+.p-signup-step-one .myskoda-signup-label {
   font-size: 0.8rem;
   margin: 0 0 20px 0;
   color: #000;
 }
-.p-login-page .letter-green {
+.p-signup-step-one .letter-green {
   color: #28a745;
   font-weight: bold;
 }
-.p-login-page .login-input {
+.p-signup-step-one .signup-input {
   margin-bottom: 20px;
 }
-.p-login-page .welcome-button {
+.p-signup-step-one .signup-button {
   width: 100%;
   margin-bottom: 20px;
   margin-top: 1rem;
 }
-.prev-next-buttons {
+.p-signup-step-one .prev-next-buttons {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
-.p-login-page .login-button {
+.p-signup-step-one .signup-button {
   width: 47%;
 }
-.p-login-page .login-link {
-  color: #218838 !important;
+.p-signup-step-one .login-link {
+  color: #218838;
   border-bottom: 1px solid #218838;
 }
 .login-link:hover {
   text-decoration: none;
   background-color: yellow;
 }
-.p-login-page .button-close {
+.p-signup-step-one .button-close {
   position: absolute;
   top: 0;
   right: 10px;
@@ -49,25 +49,25 @@
   background-color: transparent;
   padding: 10px;
 }
-.p-login-page .alert-text {
+.p-signup-step-one .alert-text {
   position: relative;
   margin: 0;
 }
-.p-login-page .error-alert {
+.p-signup-step-one .error-alert {
   position: relative;
   background-color: yellow;
   border-radius: 3px;
   padding: 20px;
 }
-.p-login-page .login-img-wrap {
+.p-signup-step-one .signup-img-wrap {
   position: relative;
   margin-bottom: 40px;
 }
-.p-login-page .login-img {
+.p-signup-step-one .signup-img {
   width: 100%;
   object-fit: cover;
 }
-.p-login-page .logo {
+.p-signup-step-one .logo {
   width: 60px;
   position: absolute;
   right: 40px;
@@ -75,12 +75,12 @@
   z-index: 1;
 }
 @media (max-width: 992px) {
-  .p-login-page .logo {
+  .p-signup-step-one .logo {
     width: 40px;
   }
 }
 @media (max-width: 576px) {
-  .p-login-page .logo {
+  .p-signup-step-one .logo {
     width: 30px;
   }
 }
