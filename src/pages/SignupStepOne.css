@@ -33,14 +33,6 @@
 .p-signup-step-one .signup-button {
   width: 47%;
 }
-.p-signup-step-one .login-link {
-  color: #218838;
-  border-bottom: 1px solid #218838;
-}
-.login-link:hover {
-  text-decoration: none;
-  background-color: yellow;
-}
 .p-signup-step-one .button-close {
   position: absolute;
   top: 0;

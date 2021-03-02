@@ -130,8 +130,8 @@ class SignupStepTwo extends React.Component {
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="login-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="login-button btn-next" variant="success" onClick={this.isTheSameValue}>Next
+                  <Button className="login-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="login-button" variant="success" onClick={this.isTheSameValue}>Next
                   </Button>
                 </div>
               </Form>

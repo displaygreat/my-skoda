@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
+import { Container, Button, Col, Image, Row, Form } from 'react-bootstrap';
 import './SignupStepOne.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import skodaLogo from '../assets/img/skoda-logo.png';
@@ -77,8 +77,8 @@ class SignupStepOne extends React.Component {
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="signup-button btn-prev" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="signup-button btn-next" variant="success" onClick={this.getVehicle}>Next
+                  <Button className="signup-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="signup-button" variant="success" onClick={this.getVehicle}>Next
                   </Button>
                 </div>
               </Form>
