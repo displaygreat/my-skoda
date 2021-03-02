@@ -58,13 +58,13 @@ class MySkodaPage extends React.Component {
   render() {
     console.log(this.state.carTest, this.state.carMake);
     return(
-      <div className="c-my-skoda-page">
-         <MySkodaNavbar />
-        <Container className="myskoda-wrap">
-        <MySkodaData sendUserCarPlate={this.state.userCarPlate} callbackUserLastTest={this.handleCallbackUserLastTest}/>
-        <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>
-        <ServiceCalendar />
-      </Container>
+      <div className="p-my-skoda-page">
+        <MySkodaNavbar />
+        <Container className="main">
+          <MySkodaData sendUserCarPlate={this.state.userCarPlate} callbackUserLastTest={this.handleCallbackUserLastTest}/>
+          <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>
+          <ServiceCalendar />
+        </Container>
        <MySkodaFooter />
       </div>
     )

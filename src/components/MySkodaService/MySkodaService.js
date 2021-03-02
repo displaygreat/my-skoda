@@ -71,11 +71,11 @@ class MySkodaService extends React.Component {
   render() {
     console.log(this.state.carLastService);
     return(
-      <div class="c-myskoda-service">
-        <h1 className="display-4 myskoda-title">Vehicle Service</h1>
-        <Col className="column" xs={12} md={4}>
+      <div class="c-my-skoda-service">
+        <h1 className="display-4 my-skoda-title">Vehicle Service</h1>
+        <Col>
               <p class="text-green">Common Skoda Service</p>
-              <Card className="mb-4" style={{ width: '397px' }}>
+              <Card className="mb-4">
                 <Card.Body>
                   <p className="text-regular">Inspection Before Annual Vehicle Licensing Test</p>
                   <p className="text-regular text-bg">your last annual vehicle licensing test: <strong>{this.state.carTest}</strong></p>
@@ -83,7 +83,7 @@ class MySkodaService extends React.Component {
                     <p className="text-regular">See your service calendar</p>
                 </Card.Body>
               </Card>
-              <Card className="mb-4" style={{ width: '397px'}}>
+              <Card className="mb-4">
                 <Card.Body>
                   <p className="text-regular">Multi-Point Inspection</p>
                   <p className="text-regular text-bg">your last multi-point inspection: <strong>{this.state.carLastService}</strong></p>
@@ -95,7 +95,7 @@ class MySkodaService extends React.Component {
                   <p className="text-regular">Every 10,000 Miles or Once a Year </p>
                 </Card.Body>
               </Card>
-               <Card className="mb-4" style={{ width: '397px' }}>
+               <Card className="mb-4">
                 <Card.Body>
                   <p className="text-regular">Get your vehicle winter/summer ready</p>
                   <span className="text-small">Winter Inspection</span>
@@ -104,7 +104,7 @@ class MySkodaService extends React.Component {
                   <p className="text-regular">Every May and November of every year</p>
                 </Card.Body>
               </Card>
-              <Card className="mb-4" style={{ width: '397px' }}>
+              <Card className="mb-4">
                 <Card.Body>
                   <p className="text-regular">Full Service</p>
                   <span className="text-small">Battery Replacement Service</span>

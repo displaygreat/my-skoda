@@ -9,7 +9,7 @@ class MySkodaFooter extends React.Component {
   }
   render() {
     return(
-      <div className="my-skoda-footer">
+      <div className="c-my-skoda-footer">
             <Container>
             <Nav className="footer-nav" as="ul">
               <Nav.Item as="li">

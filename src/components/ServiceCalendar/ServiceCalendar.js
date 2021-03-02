@@ -36,12 +36,12 @@ class ServiceCalendar extends React.Component {
     })
 
     return(
-     <div class="c-myskoda-service">
-        <h1 className="display-4 myskoda-title" onClick={this.sortDates}>Service Calendar</h1>
-        <Col className="column" xs={12} md={4}>
+     <div class="c-service-calendar">
+        <h1 className="display-4 my-skoda-title" onClick={this.sortDates}>Service Calendar</h1>
+        <Col>
               <p class="text-regular">Keep Your Skoda At Its Best with Our Service</p>
               <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
-              <table class="table table-success table-striped table-bordered" style={{ width: '397px' }}>
+              <table class="table table-success table-striped table-bordered">
                 <tr className="table-secondary">
                     <th className="service-cell" scope="row">Visit</th>
                     <th className="service-cell">Service</th>

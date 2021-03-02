@@ -20,7 +20,7 @@ class MySkodaNavbar extends React.Component {
 
   render() {
     return(
-      <div class="myskoda-navbar">
+      <div class="c-my-skoda-navbar">
         <Navbar collapseOnSelect expand="lg" bg="light">
           <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

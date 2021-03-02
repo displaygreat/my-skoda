@@ -1,8 +1,24 @@
+.c-my-skoda-service {
+  width: 33.33%;
+}
+.c-my-skoda-service .my-skoda-title {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 2.5rem;
+}
 .text-regular {
-  width: max-content;
   margin-bottom: 5px;
 }
 .text-small {
-  width: max-content;
   display: block;
+}
+@media (max-width: 768px) {
+  .c-my-skoda-service {
+    width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  .c-my-skoda-service .service-cell {
+    font-size: 80%;
+  }
 }
