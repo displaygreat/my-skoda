@@ -58,7 +58,7 @@ class SignupStepOne extends React.Component {
           <Row>
             <Col className="signup-column" xs={12} md={4}>
               <span className="myskoda-signup-label">my<span className="letter-green">Skoda</span></span>
-              <h4 className="welcome-title">Create account</h4>
+              <h4>Create account</h4>
               <span className="step">Step 1</span>
               <p className="text">for My Skoda</p>
               <Form>
@@ -69,7 +69,7 @@ class SignupStepOne extends React.Component {
                     Perfect
                   </Form.Text>
                 </Form.Group>
-                <Form.Group className="signup-input"controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" value={this.state.userEmail} onChange={this.handleChangeInputEmail}/>
                   <Form.Text className="text-muted">
@@ -77,8 +77,8 @@ class SignupStepOne extends React.Component {
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="signup-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="signup-button" variant="success" onClick={this.getVehicle}>Next
+                  <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="next-button" variant="success" onClick={this.getVehicle}>Next
                   </Button>
                 </div>
               </Form>

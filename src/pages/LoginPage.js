@@ -119,7 +119,7 @@ class LoginPage extends React.Component {
           <Row>
             <Col className="login-column" xs={12} md={4}>
               <span className="myskoda-login-label">my<span className="letter-green">Skoda</span></span>
-              <h4 className="welcome-title">Login</h4>
+              <h4>Login</h4>
               <p className="text">for My Skoda</p>
               <Form>
                 <Form.Group className="login-input"controlId="formBasicEmail">
@@ -142,8 +142,8 @@ class LoginPage extends React.Component {
                 </Form.Group>
                 <a className="login-link" href="https://google.com">Forgot password?</a>
                   <div className="prev-next-buttons">
-                  <Button className="login-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="login-button" variant="success" onClick={this.validatePassword} >Next
+                  <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="next-button" variant="success" onClick={this.validatePassword} >Next
                   </Button>
                 </div>
                 <div className="error-alert" hidden={this.state.showAlert}>
@@ -153,7 +153,7 @@ class LoginPage extends React.Component {
                   </button>
                 </div>
                 <a className="login-link" href="https://google.com">Don't have an account?</a>
-                <Button className="welcome-button" variant="success" onClick={this.handleClickOnCreateAccount}>Create account
+                <Button className="signup-button" variant="success" onClick={this.handleClickOnCreateAccount}>Create account
                 </Button>
               </Form>
             </Col>

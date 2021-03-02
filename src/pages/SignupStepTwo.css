@@ -1,9 +1,27 @@
-.step {
+.p-signup-step-two .main {
+  display: flex;
+  padding: 20px 15px 60px;
+}
+.p-signup-step-two .signup-column {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+.p-signup-step-two .myskoda-signup-label {
+  font-size: 0.8rem;
+  margin: 0 0 20px 0;
+  color: #000;
+}
+.p-signup-step-two .letter-green {
+  color: #28a745;
+  font-weight: bold;
+}
+.p-signup-step-two .step {
   font-size: 0.8rem;
   font-weight: normal;
   padding-bottom: 10px;
 }
-.icon-eye {
+.p-signup-step-two .icon-eye {
   width: 18px;
   height: 18px;
   position: absolute;
@@ -12,7 +30,7 @@
   z-index: 100;
   cursor: pointer;
 }
-.icon-eye-off {
+.p-signup-step-two .icon-eye-off {
   width: 18px;
   height: 18px;
   position: absolute;
@@ -21,12 +39,41 @@
   z-index: 100;
   cursor: pointer;
 }
-.input-password {
+.p-signup-step-two .input-password {
   position: relative;
 }
-.show {
-  display: block;
+.p-signup-step-two .prev-next-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.hide {
-  display: none;
+.p-signup-step-two .prev-button,
+.p-signup-step-two .next-button {
+  width: 47%;
+}
+.p-signup-step-two .signup-img-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+.p-signup-step-two .signup-img {
+  width: 100%;
+  object-fit: cover;
+}
+.p-signup-step-two .logo {
+  width: 60px;
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  z-index: 1;
+}
+@media (max-width: 992px) {
+  .p-signup-step-two .logo {
+    width: 40px;
+  }
+}
+@media (max-width: 576px) {
+  .p-signup-step-two .logo {
+    width: 30px;
+  }
 }

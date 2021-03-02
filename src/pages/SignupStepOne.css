@@ -16,21 +16,19 @@
   color: #28a745;
   font-weight: bold;
 }
-.p-signup-step-one .signup-input {
-  margin-bottom: 20px;
-}
-.p-signup-step-one .signup-button {
-  width: 100%;
-  margin-bottom: 20px;
-  margin-top: 1rem;
+.p-signup-step-one .step {
+  font-size: 0.8rem;
+  font-weight: normal;
+  padding-bottom: 10px;
 }
 .p-signup-step-one .prev-next-buttons {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.p-signup-step-one .signup-button {
+.p-signup-step-one .prev-button,
+.p-signup-step-one .next-button {
   width: 47%;
 }
 .p-signup-step-one .button-close {

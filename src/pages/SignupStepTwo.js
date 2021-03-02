@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
+import { Container, Button, Col, Image, Row, Form } from 'react-bootstrap';
 import './SignupStepTwo.css';
 import Parse from 'parse';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
@@ -91,19 +91,19 @@ class SignupStepTwo extends React.Component {
 
   render() {
     return(
-      <div className="c-welcome-page">
+      <div className="p-signup-step-two">
         <div className="main">
         <Container>
-          <Row className="">
-            <Col className="column column-aside" xs={12} md={4}>
+          <Row>
+            <Col className="signup-column" xs={12} md={4}>
               <div className="alert alert-warning alert-wrap" role="alert" hidden={this.state.showAlert}>
                 <p className="alert-text">The fields are not the same</p>
                   <button className="button-close" onClick={() => this.setState({showAlert: true})} >
                     &#215;  
                   </button>
               </div>
-              <span className="myskoda-welcome-label">my<span className="letter-green">Skoda</span></span>
-              <h4 className="welcome-title">Create account</h4>
+              <span className="myskoda-signup-label">my<span className="letter-green">Skoda</span></span>
+              <h4>Create account</h4>
               <span className="step">Step 2</span>
               <p className="text">for My Skoda</p>
               <Form>
@@ -130,16 +130,16 @@ class SignupStepTwo extends React.Component {
                   </Form.Text>
                 </Form.Group>
                 <div className="prev-next-buttons">
-                  <Button className="login-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="login-button" variant="success" onClick={this.isTheSameValue}>Next
+                  <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
+                  <Button className="next-button" variant="success" onClick={this.isTheSameValue}>Next
                   </Button>
                 </div>
               </Form>
             </Col>
-            <Col className="column column-aside" xs={12} md={8}>
-              <Image className="logo welcome-logo" src={skodaLogo} rounded />
-              <div className="wrap-welcome-img">
-                <Image className="home-img" src={skodaSignup} rounded />
+            <Col className="signup-column" xs={12} md={8}>
+              <Image className="logo" src={skodaLogo} rounded />
+              <div className="signup-img-wrap">
+                <Image className="signup-img" src={skodaSignup} rounded />
               </div>
             </Col>
           </Row>
