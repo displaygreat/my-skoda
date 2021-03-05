@@ -1,11 +1,9 @@
 import './SheduleService.css';
 import React from 'react';
-import { Button, Col, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
-import subDays from 'date-fns/subDays';
-import getDay from 'date-fns/getDay';
 import setHours from 'date-fns/setHours';
 import setMinutes from 'date-fns/setMinutes';
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,9 +17,10 @@ const Styles = styled.div`
 .react-datepicker__input-container input,
 .react-datepicker__input-container,
 .react-datepicker-wrapper {
-  width: 290px;
+  width: 240px;
   height: 38px;
   margin-bottom: 30px;
+  display: block;
 }
  .react-datepicker__close-icon::before,
  .react-datepicker__close-icon::after {
@@ -59,6 +58,7 @@ const Styles = styled.div`
    display: flex;
    align-items: center;
    justify-content: center;
+  }
  }
 `;
 
@@ -74,8 +74,7 @@ class SheduleService extends React.Component {
         carLastService: '',
         startDate: setHours(setMinutes(new Date(), 0), 8),
         excludeTimes: [],
-        showErrorEmail: '',
-        setShow: false
+        showErrorEmail: ''
       }
   }
 
@@ -103,7 +102,6 @@ class SheduleService extends React.Component {
         email: '',
         phone: ''
       })
-      // console.log(this.state);
     })
 
     //get last inspection from databse User
@@ -217,18 +215,6 @@ class SheduleService extends React.Component {
       }
     );
   }
-
-  handleClose = () => {
-    this.setState({
-      setShow: false
-    })
-  }
-
-  handleShow = () => {
-    this.setState({
-      setShow: true
-    })
-  }
   
   //validation email
   // validationEmail = (e) => {
@@ -247,30 +233,27 @@ class SheduleService extends React.Component {
     const { startDate } = this.state;
      
     return(
-      <div>
-        <div className="d-flex">
-          <Col className="column" style={{maxWidth: "max-content"}} xs={12} md={4}>
-            <h1 className="display-4 myskoda-title ml-0">Shedule Service Appointment</h1>
-            <p className="text-regular text-bg last ml-0">your last annual vehicle licensing test: <strong>{this.state.carLastTest}</strong></p>
-        <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{this.state.carLastService}</strong></p>
+      <div className="c-shedule-service">
+        <div className="col-sm-12 col-md-5">
+          <h1 className="display-4 my-skoda-title ml-0">Shedule Service Appointment</h1>
+          <p className="text-regular text-bg last ml-0">your last annual vehicle licensing test: <strong>{this.state.carLastTest}</strong></p>
+          <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{this.state.carLastService}</strong></p>
           <form className="row g-3 shedule-form">
-          
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label for="validationServer01" className="form-label">PlateNumber</label>
               <input type="text" className="form-control is-valid" id="validationServer01" value={this.props.sendUserCarPlate} required disabled/>
               {/* <div class="valid-feedback">
                 Looks good!
               </div> */}
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
               <label for="validationServer02" className="form-label">Model</label>
               <input type="text" className="form-control is-valid" id="validationServer02" value={this.state.carModel} required />
               {/* <div class="valid-feedback">
                 Looks good!
               </div> */}
             </div>
-
-            <div class="col-md-12">
+            <div className="col-md-12">
               <label for="validationServer04" className="form-label shedule-label">Dealer</label>
               <select className={`form-select shedule-select ${this.state.showError}`} id="validationServer04" aria-describedby="validationServer04Feedback" required>
                 <option selected disabled value="">Choose dealer</option>
@@ -282,7 +265,6 @@ class SheduleService extends React.Component {
                 Please select a dealer.
               </div>
             </div>
-
             <div className="col-md-12">
               <label for="validationServer04" className="form-label shedule-label">Service</label>
               <select className={`form-select shedule-select ${this.state.showError}`} id="validationServer04" aria-describedby="validationServer04Feedback" required>
@@ -297,90 +279,84 @@ class SheduleService extends React.Component {
                 Please select a service.
               </div>
             </div>
-
             <div className="col-md-12">
               <p className="mt-2">Select Date and Time</p>
               <Styles>
                 <DatePicker
-                isClearable
-                selected={startDate}
-                onChange={this.handleChange}
-                onSelect={this.handleSelect}
-                placeholderText="Select Date and Time"
-                popperPlacement="right-start"
-                popperModifiers={{
-                  offset: {
-                    enabled: true,
-                    offset: "5px, 10px"
-                  },
-                  preventOverflow: {
-                    enabled: true,
-                    escapeWithReference: false,
-                    boundariesElement: "viewport"
-                  }
-                }}
-                dateFormat="dd/MM/yyy"
-                minDate={new Date()}
-              />
-              <DatePicker
-                isClearable
-                selected={startDate}
-                onChange={this.handleChange}
-                onSelect={this.handleSelect}
-                placeholderText="Select Date and Time"
-                popperPlacement="right-start"
-                popperModifiers={{
-                  offset: {
-                    enabled: true,
-                    offset: "0px, 10px"
-                  },
-                  preventOverflow: {
-                    enabled: true,
-                    escapeWithReference: false,
-                    boundariesElement: "viewport"
-                  }
-                }}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeFormat="HH:mm"
-                // withPortal
-                dateFormat="hh:mm aa"
-                minDate={new Date()}
-                excludeTimes={this.state.excludeTimes}
-                minTime={setHours(setMinutes(new Date(), 0), 8)}
-                maxTime={setHours(setMinutes(new Date(), 45), 14)}
-              />
+                  isClearable
+                  selected={startDate}
+                  onChange={this.handleChange}
+                  onSelect={this.handleSelect}
+                  placeholderText="Select Date and Time"
+                  popperPlacement="top-start"
+                  popperModifiers={{
+                    offset: {
+                      enabled: true,
+                      offset: "0px, 10px"
+                    },
+                    preventOverflow: {
+                      enabled: true,
+                      escapeWithReference: false,
+                      boundariesElement: "viewport"
+                    }
+                  }}
+                  dateFormat="dd/MM/yyy"
+                  minDate={new Date()}
+                />
+                <DatePicker
+                  isClearable
+                  selected={startDate}
+                  onChange={this.handleChange}
+                  onSelect={this.handleSelect}
+                  placeholderText="Select Date and Time"
+                  popperPlacement="top-start"
+                  popperModifiers={{
+                    offset: {
+                      enabled: true,
+                      offset: "0px, 10px"
+                    },
+                    preventOverflow: {
+                      enabled: true,
+                      escapeWithReference: false,
+                      boundariesElement: "viewport"
+                    }
+                  }}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeFormat="HH:mm"
+                  dateFormat="hh:mm aa"
+                  minDate={new Date()}
+                  excludeTimes={this.state.excludeTimes}
+                  minTime={setHours(setMinutes(new Date(), 0), 8)}
+                  maxTime={setHours(setMinutes(new Date(), 45), 14)}
+                />
               </Styles>
             </div>
-
-            <div class="col-md-12">
+            <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
-              <div className="col-10 pl-0">
+              <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
                 <input className={`form-control ${this.state.showErrorEmail}`} style={{backgroundImage: "none"}, {borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid email.
                 </div>
               </div>
             </div>
-
             <div className="col-md-12">
-              <label for="validationServer03" class="col-2 col-form-label pl-0">Telephone</label>
-              <div className="col-10 pl-0">
+              <label for="validationServer03" className="col-2 col-form-label pl-0">Telephone</label>
+              <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
                 <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none"}, {borderColor: "#000"}} type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid telephone.
                 </div>
               </div>
             </div>
-            
-            
             <div className="col-12">
               <button className="btn btn-primary shedule-submit my-4" type="submit" onClick={this.handleClickOnButtonSubmit}>Submit form</button>
             </div>
           </form> 
-        </Col>
-        <Col className="column rounded" style={{maxWidth: "max-content"}} xs={12} md={6}>
+        </div>
+        <div className="col-sm-12 col-md-5 rounded">
           <h3 className="title-discount">Shedule your visit online and get 10% discount for service</h3>
           <div className="wrap-shedule-img">
             <Image src={superb} className="shedule-img" />
@@ -388,10 +364,9 @@ class SheduleService extends React.Component {
           <div className="wrap-shedule-img">
             <Image src={octavia} className="shedule-img" />
           </div>
-          <div className="wrap-shedule-img" onClick={this.handleShow}>
+          <div className="wrap-shedule-img">
             <Image src={karoq} className="shedule-img" />
           </div>
-        </Col>
         </div>
       </div>
     )

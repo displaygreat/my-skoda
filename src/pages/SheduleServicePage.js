@@ -1,7 +1,6 @@
 import './SheduleServicePage.css';
 import React from 'react';
 import MySkodaNavbar from '../components/MySkodaNavbar/MySkodaNavbar';
-import ServiceCalendar from '../components/ServiceCalendar/ServiceCalendar';
 import SheduleService from '../components/SheduleService/SheduleService';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import { Container } from 'react-bootstrap';
@@ -17,17 +16,13 @@ class SheduleServicePage extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div className="p-shedule-service-page">
         <MySkodaNavbar />
-          <Container>
-            <div className="c-shedule-service-page">
-              <ServiceCalendar />
-              <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
-            </div>
+          <Container className="main">
+            <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
           </Container>
         <MySkodaFooter />
       </div>
-      
     )
   }
 }

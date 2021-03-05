@@ -1,48 +1,43 @@
-.shedule-form {
-  width: 396px;
+.c-shedule-service {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.last {
-  margin-left: 25px;
+.c-shedule-service .my-skoda-title {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 2.5rem;
 }
-.shedule-label {
+.c-shedule-service .text-bg {
+  background-color: rgb(41, 168, 71, 0.2);
+}
+.c-shedule-service .shedule-label {
   display: block;
 }
-.shedule-select {
+.c-shedule-service .shedule-select {
   width: 100%;
   height: 38px;
 }
-.shedule-submit {
+.c-shedule-service .shedule-submit {
   background-color: #28a745;
   color: #fff;
   border: none;
 }
-.shedule-submit:hover {
+.c-shedule-service .shedule-submit:hover {
   background-color: #218838;
   color: #fff;
   border: none;
 }
-.wrap-shedule-img {
+.c-shedule-service .wrap-shedule-img {
   width: 100%;
   margin-bottom: 30px;
 }
-.shedule-img {
+.c-shedule-service .shedule-img {
   width: 100%;
   object-fit: cover;
 }
-.title-discount {
+.c-shedule-service .title-discount {
   margin-top: 20px;
   margin-bottom: 50px;
   color: #28a745;
-}
-.modal-card {
-  position: relative;
-}
-.modal-text {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  color: #fff;
-  font-weight: bold;
-  direction: rtl;
-  text-align: right;
 }
