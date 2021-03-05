@@ -1,5 +1,4 @@
 .c-my-skoda-data {
-  width: 33.33%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,19 +13,19 @@
   align-items: center;
   margin: 10px 0 40px 0;
 }
-.text-green {
+.c-my-skoda-data .text-green {
   color: #28a745;
   font-size: 1.2rem;
   text-transform: uppercase;
   margin-bottom: 5px;
   width: max-content;
 }
-.text-black {
+.c-my-skoda-data .text-black {
   font-size: 0.8rem;
   text-transform: uppercase;
   margin-bottom: 5px;
 }
-.plate-number {
+.c-my-skoda-data .plate-number {
   position: relative;
   display: block;
   width: max-content;
@@ -34,31 +33,26 @@
   background-color: #f8f9fa;
   margin-bottom: 5px;
 }
-.wrap-vehicle-img {
+.c-my-skoda-data .wrap-vehicle-img {
   width: 200px;
 }
-.vehicle-img {
+.c-my-skoda-data .vehicle-img {
   width: 100%;
   object-fit: cover;
 }
-.text-small {
+.c-my-skoda-data .text-small {
   color: #6c757d;
   font-weight: normal;
   font-size: 80%;
   margin-bottom: 5px;
 }
-.year {
+.c-my-skoda-data .year {
   margin-bottom: 10px;
 }
-code {
+.c-my-skoda-data code {
   color: #6c757d;
   margin: 10px 0 40px;
 }
-.text-bg {
+.c-my-skoda-data .text-bg {
   background-color: rgb(41, 168, 71, 0.2);
-}
-@media (max-width: 768px) {
-  .c-my-skoda-data {
-    width: 100%;
-  }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import './MySkodaData.css';
 import axios from 'axios';
 import moment from 'moment';
-import { Col, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import skodaThen from '../../assets/img/skoda-then.svg';
 
 class MySkodaData extends React.Component {
@@ -55,23 +55,21 @@ class MySkodaData extends React.Component {
 
   render() {
     return(
-      <div className="c-my-skoda-data">
+      <div className="c-my-skoda-data col-md-6 col-lg-4">
         <h1 className="display-4 my-skoda-title">My Vehicle</h1>
-        <Col>
-          <div className="wrap-vehicle-info">
-            <span className="text-black">{this.state.carMake}</span>
-            <span className="text-green">{this.state.carModel}</span>
-            <span className="text-small">plate number</span>
-            <span className="rounded-pill border border-2 shadow-sm plate-number" bg="light">{this.state.carPlate}</span>
-            <span className="text-small">year</span>
-            <span className="year">{this.state.carYear}</span>
-            <div className="wrap-vehicle-img">
-              <Image src={skodaThen} alt="skoda icon" />
-            </div>
-            <p className="text-center">valid car license: <span className="text-bg">{this.state.carLicense}</span></p>
-            <code>VIN:{this.state.carVIN}</code>
+        <div className="wrap-vehicle-info">
+          <span className="text-black">{this.state.carMake}</span>
+          <span className="text-green">{this.state.carModel}</span>
+          <span className="text-small">plate number</span>
+          <span className="rounded-pill border border-2 shadow-sm plate-number" bg="light">{this.state.carPlate}</span>
+          <span className="text-small">year</span>
+          <span className="year">{this.state.carYear}</span>
+          <div className="wrap-vehicle-img">
+            <Image src={skodaThen} alt="skoda icon" />
           </div>
-        </Col>
+          <p className="text-center">valid car license: <span className="text-bg">{this.state.carLicense}</span></p>
+          <code>VIN:{this.state.carVIN}</code>
+        </div>
       </div>
     )
   }

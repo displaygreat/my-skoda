@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Col, Image, Nav, Row, Form } from 'react-bootstrap';
+import { Container, Button, Col, Image, Row, Form } from 'react-bootstrap';
 import './LoginPage.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import eye from '../assets/img/eye.png';

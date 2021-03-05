@@ -1,6 +1,6 @@
 import './MySkodaPage.css';
 import React from 'react';
-import { Container, Nav } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import ServiceCalendar from '../components/ServiceCalendar/ServiceCalendar';
 import MySkodaService from '../components/MySkodaService/MySkodaService';
 import MySkodaData from '../components/MySkodaData/MySkodaData';
@@ -65,7 +65,7 @@ class MySkodaPage extends React.Component {
           <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>
           <ServiceCalendar />
         </Container>
-       <MySkodaFooter />
+        <MySkodaFooter />
       </div>
     )
   }

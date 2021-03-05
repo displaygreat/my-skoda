@@ -2,9 +2,6 @@ import './ServiceCalendar.css';
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import servicesJSON from '../../data/services.json';
-import moment from 'moment';
-// import 'animate.css/animate.css';
-// import Animate from 'animate.css-react';
 
 
 class ServiceCalendar extends React.Component {
@@ -36,20 +33,18 @@ class ServiceCalendar extends React.Component {
     })
 
     return(
-     <div class="c-service-calendar">
+     <div class="c-service-calendar col-md-12 col-lg-4">
         <h1 className="display-4 my-skoda-title" onClick={this.sortDates}>Service Calendar</h1>
-        <Col>
-              <p class="text-regular">Keep Your Skoda At Its Best with Our Service</p>
-              <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
-              <table class="table table-success table-striped table-bordered">
-                <tr className="table-secondary">
-                    <th className="service-cell" scope="row">Visit</th>
-                    <th className="service-cell">Service</th>
-                    <th className="service-cell">Shedule</th>
-                  </tr>
-                {newTable}
-              </table>
-        </Col>
+        <p class="text-regular">Keep Your Skoda At Its Best with Our Service</p>
+        <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
+        <table class="table table-success table-striped table-bordered">
+          <tr className="table-secondary">
+            <th className="service-cell" scope="row">Visit</th>
+            <th className="service-cell">Service</th>
+            <th className="service-cell">Shedule</th>
+          </tr>
+          {newTable}
+        </table>
       </div>
     )
   }

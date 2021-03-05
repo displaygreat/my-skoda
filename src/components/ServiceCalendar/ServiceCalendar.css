@@ -1,26 +1,33 @@
-.c-service-calendar {
-  width: 33.33%;
-}
 .c-service-calendar .my-skoda-title {
   margin-top: 10px;
   margin-left: 15px;
   font-size: 2.5rem;
 }
-.service-cell {
+.c-service-calendar .service-cell {
   width: 33.33%;
 }
-.shedule-link {
-  color: #218838 !important;
+.c-service-calendar .text-small {
+  display: block;
+  color: #6c757d;
+  font-weight: normal;
+  font-size: 80%;
+  margin-bottom: 5px;
+}
+.c-service-calendar .text-regular {
+  margin-bottom: 5px;
+}
+.c-service-calendar .shedule-link {
+  color: #218838;
   border-bottom: 1px solid #218838;
   text-decoration: none;
 }
-.shedule-link:hover {
+.c-service-calendar .shedule-link:hover {
   text-decoration: none;
   background-color: yellow;
 }
-@media (max-width: 768px) {
-  .c-service-calendar {
-    width: 100%;
+@media (max-width: 425px) {
+  .c-service-calendar .service-cell {
+    padding: 0.5rem;
   }
 }
 @media (max-width: 375px) {
