@@ -4,7 +4,6 @@ import { Container } from 'react-bootstrap';
 import ServiceCalendar from '../components/ServiceCalendar/ServiceCalendar';
 import MySkodaService from '../components/MySkodaService/MySkodaService';
 import MySkodaData from '../components/MySkodaData/MySkodaData';
-import MySkodaNavbar from '../components/MySkodaNavbar/MySkodaNavbar';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 
 class MySkodaPage extends React.Component {
@@ -59,7 +58,6 @@ class MySkodaPage extends React.Component {
     console.log(this.state.carTest, this.state.carMake);
     return(
       <div className="p-my-skoda-page">
-        <MySkodaNavbar />
         <Container className="main">
           <MySkodaData sendUserCarPlate={this.state.userCarPlate} callbackUserLastTest={this.handleCallbackUserLastTest}/>
           <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>

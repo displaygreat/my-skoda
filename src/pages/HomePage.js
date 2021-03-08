@@ -10,7 +10,6 @@ import chevronRight from '../assets/img/chevron-right.png';
 class HomePage extends React.Component {
   handleClickOnHomeButton = () => {
     window.location = '#/login';
-    console.log('hi');
   }
 
   render() {

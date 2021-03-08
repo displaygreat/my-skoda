@@ -59,7 +59,7 @@ class SignupStepTwo extends React.Component {
     let newUserPwd = this.state.newUserPwd.toString();
     let confirmUserPwd = this.state.confirmUserPwd.toString();
     if(newUserPwd === confirmUserPwd) {
-       window.location = '#/my-skoda';
+       window.location = '#/login';
       //  this.props.callbackUserPwd(this.state.newUserPwd);
        this.signupUser();
     }

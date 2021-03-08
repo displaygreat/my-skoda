@@ -68,6 +68,7 @@ class LoginPage extends React.Component {
     Parse.User.logIn(userEmail, userPwd).then((user) => {
     // Do stuff after successful login
     let carPlate = user.attributes.plateNumber;
+    let userEmail = user.attributes.email;
     let userId = user.id;
     console.log(userId);
     this.setState({
@@ -77,7 +78,7 @@ class LoginPage extends React.Component {
     this.props.callbackUserCarPlate(carPlate);
     console.log(carPlate);
     console.log('Logged in user', user);
-    this.props.handleLogin(new UserModel(user));
+    this.props.handleLogin(userEmail);
     window.location = '#/my-skoda';
     }).catch(error => {
       console.error('Error while logging in user', error);
@@ -118,7 +119,7 @@ class LoginPage extends React.Component {
         <Container className="main">
           <Row>
             <Col className="login-column" xs={12} md={4}>
-              <span className="myskoda-login-label">my<span className="letter-green">Skoda</span></span>
+              <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
               <h4>Login</h4>
               <p className="text">for My Skoda</p>
               <Form>
