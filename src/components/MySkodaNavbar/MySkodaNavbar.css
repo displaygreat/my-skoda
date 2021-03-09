@@ -1,42 +1,28 @@
-.c-my-skoda-navbar {
-  height: 100px;
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-}
-.c-my-skoda-navbar .navbar-brand {
-  flex-direction: row;
-}
 .c-my-skoda-navbar .my-skoda-label {
   font-size: 0.8rem;
   color: #000;
   margin-right: 10px;
 }
-.c-my-skoda-navbar .my-skoda-nav-link {
-  color: #000 !important;
-}
-.c-my-skoda-navbar .my-skoda-login-label {
-  font-size: 0.8rem;
-  margin: 0 0 20px 0;
-  color: #000;
-}
 .c-my-skoda-navbar .letter-green {
   color: #28a745;
   font-weight: bold;
 }
-@media (max-width: 991.5px) {
-  .c-my-skoda-navbar .nav-links-wrap {
+.c-my-skoda-navbar .navbar-light .navbar-nav .nav-link {
+  color: #000;
+}
+@media (max-width: 767.5px) {
+  .c-my-skoda-navbar .navbar-nav {
     align-items: center;
   }
   .c-my-skoda-navbar .navbar-brand {
-    flex-direction: column;
     margin-right: 0;
   }
-  .c-my-skoda-navbar .my-skoda-logo {
-    margin-top: 10px;
+  .c-my-skoda-navbar .my-skoda-label {
+    display: none;
   }
   .c-my-skoda-navbar .user {
     display: flex;
     flex-direction: column;
+    margin-bottom: 6rem;
   }
 }

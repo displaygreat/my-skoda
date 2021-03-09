@@ -16,12 +16,12 @@ class MySkodaNavbar extends React.Component {
   render() {
     return(
       <div class="c-my-skoda-navbar">
-        <Navbar collapseOnSelect expand="lg" bg="light">
+        <Navbar fixed="top" collapseOnSelect expand="md" bg="light">
           <Container>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="nav-links-wrap mr-auto">
-                  <Navbar.Brand className="d-flex align-items-center" href="#"><span className="my-skoda-label">my<span className="letter-green">Skoda</span></span>
+                <Nav className="mr-auto align-items-center">
+                  <Navbar.Brand href="#"><span className="my-skoda-label">my<span className="letter-green">Skoda</span></span>
                     <img
                       src={skodaLogo}
                       width="30"
@@ -30,12 +30,12 @@ class MySkodaNavbar extends React.Component {
                       alt="skoda logo"
                     />
                   </Navbar.Brand>
-                  <Nav.Link className="my-skoda-nav-link" href="#/my-skoda">My Skoda Services</Nav.Link>
-                  <Nav.Link className="my-skoda-nav-link" href="#/shedule">Schedule Service</Nav.Link>
+                  <Nav.Link href="#/my-skoda">My Skoda Services</Nav.Link>
+                  <Nav.Link href="#/shedule">Schedule Service</Nav.Link>
                 </Nav>
                 <Nav className="user align-items-center">
                   <span className="letter-green">{this.props.activeUser}</span>
-                  <Nav.Link className="my-skoda-nav-link" href="#" onClick={this.handleLogOut}>
+                  <Nav.Link href="#" onClick={this.handleLogOut}>
                     LogOut
                   </Nav.Link>
                 </Nav>
