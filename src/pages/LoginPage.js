@@ -1,19 +1,12 @@
 import React from 'react';
-import { Container, Button, Col, Image, Row, Form } from 'react-bootstrap';
+import { Container, Button, Alert, Col, Image, Row, Form } from 'react-bootstrap';
 import './LoginPage.css';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import eye from '../assets/img/eye.png';
 import eyeOff from '../assets/img/eye-off.png';
 import skodaLogo from '../assets/img/skoda-logo.png';
 import skodaLogin from '../assets/img/skoda-login.jpg';
-
-
-//solution with json
-// import usersJSON from '../data/users.json';
-
-//solution with back4you
 import Parse from 'parse';
-import UserModel from '../models/UserModel';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -27,6 +20,20 @@ class LoginPage extends React.Component {
       onPwd: 'hide',
       showAlert: true
     }
+  }
+
+  handleChangeInputEmail = (e) => {
+    e.preventDefault();
+    this.setState({
+      userEmail: e.target.value
+    });
+  }
+
+  handleChangeInputPwd = (e) => {
+    e.preventDefault();
+    this.setState({
+      userPwd: e.target.value
+    });
   }
 
   showPassword = () => {
@@ -44,69 +51,36 @@ class LoginPage extends React.Component {
       onPwd: 'hide'
     })
   }
-
-  handleClickOnBackButton() {
-    window.location = '#';
-  }
-
-  //solution with json
-  // validateEmail = () => {
-  //     for(let i=0; i<usersJSON.length; i++) {
-  //       if(usersJSON[i].email === this.state.inputEmail) {
-  //         window.location = '/#/login';
-  //         return;
-  //     }
-  //     this.props.callbackUserEmail(this.state.inputEmail);
-  //   } 
-  //     window.location = '/#/signup-license';
-  // }
   
-  validatePassword = () => {
+  handleSubmit = () => {
     let userEmail = this.state.userEmail;
     let userPwd = this.state.userPwd;
     // Pass the username and password to logIn function
     Parse.User.logIn(userEmail, userPwd).then((user) => {
     // Do stuff after successful login
+    console.log('Logged in user', user);
     let carPlate = user.attributes.plateNumber;
     let userEmail = user.attributes.email;
     let userId = user.id;
-    console.log(userId);
     this.setState({
       userCarPlate: carPlate
     })
-    this.props.callbackUserId(userId);
     this.props.callbackUserCarPlate(carPlate);
-    console.log(carPlate);
-    console.log('Logged in user', user);
     this.props.handleLogin(userEmail);
+    this.props.callbackUserId(userId);
     window.location = '#/my-skoda';
     }).catch(error => {
       console.error('Error while logging in user', error);
-
-    // !!!write if user not exists(alert)
-
-    this.setState({
-        showAlert: false,
-        userEmail: '',
-        userPwd: ''
+      this.setState({
+          showAlert: false,
+          userEmail: '',
+          userPwd: ''
+      })
     })
-
-    //!!!write validation RegEx for input email and imput password
-})
   }
 
-  handleChangeInputPwd = (e) => {
-    e.preventDefault();
-    this.setState({
-      userPwd: e.target.value
-    });
-  }
-
-  handleChangeInputEmail = (e) => {
-    e.preventDefault();
-    this.setState({
-      userEmail: e.target.value
-    });
+  handleClickOnBackButton() {
+    window.location = '#';
   }
 
   handleClickOnCreateAccount () {
@@ -122,38 +96,40 @@ class LoginPage extends React.Component {
               <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
               <h4>Login</h4>
               <p className="text">for My Skoda</p>
-              <Form>
+              <Form noValidate onSubmit={this.handleSubmit}>
                 <Form.Group className="login-input"controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" value={this.state.userEmail} onChange={this.handleChangeInputEmail}/>
-                  <Form.Text className="text-muted">
-                    Perfect
-                  </Form.Text>
+                  <Form.Control 
+                    type="email" 
+                    placeholder="Enter email"
+                    required
+                    value={this.state.userEmail} 
+                    onChange={this.handleChangeInputEmail}/>
                 </Form.Group>
                 <Form.Group className="login-input" controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <div className="input-password">
-                    <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeInputPwd} value={this.state.userPwd} />
+                    <Form.Control 
+                      type={this.state.type} 
+                      placeholder="Password"
+                      required
+                      value={this.state.userPwd}
+                      onChange={this.handleChangeInputPwd} 
+                    />
                     <Image className={`icon-eye-off ${this.state.offPwd}`} src={eyeOff} onClick={this.showPassword} />
                     <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                   </div>
-                  <Form.Text className="text-muted">
-                    Perfect
-                  </Form.Text>
                 </Form.Group>
                 <a className="login-link" href="https://google.com">Forgot password?</a>
-                  <div className="prev-next-buttons">
+                <div className="prev-next-buttons">
                   <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                  <Button className="next-button" variant="success" onClick={this.validatePassword} >Next
+                  <Button className="next-button" variant="success" onClick={this.handleSubmit} >Next
                   </Button>
                 </div>
-                <div className="error-alert" hidden={this.state.showAlert}>
-                <p className="alert-text">Check email and password<br/><em>or</em><br/> <a href="/#/signup-license">Create account</a></p>
-                  <button className="button-close" onClick={() => this.setState({showAlert: true})} >
-                    &#215;  
-                  </button>
-                </div>
-                <a className="login-link" href="https://google.com">Don't have an account?</a>
+                <Alert className="error-alert" hidden={this.state.showAlert} onClose={() => this.setState({showAlert: true})} dismissible>
+                  <p className="m-0">Check email<br/>and password<br/>or <a className="login-link" href="/#/signup-step-one">Create account</a></p>
+                </Alert>
+                <a className="login-link" href="/#/signup-step-one">Don't have an account?</a>
                 <Button className="signup-button" variant="success" onClick={this.handleClickOnCreateAccount}>Create account
                 </Button>
               </Form>
@@ -165,8 +141,8 @@ class LoginPage extends React.Component {
               </div>
             </Col>
           </Row>
-          </Container>
-           <MySkodaFooter />
+        </Container>
+        <MySkodaFooter />
       </div>
     )
   }

@@ -53,27 +53,14 @@
   margin-bottom: 20px;
 }
 .p-login-page .login-link {
-  color: #218838 !important;
+  color: #218838;
   border-bottom: 1px solid #218838;
 }
 .p-login-page .login-link:hover {
   text-decoration: none;
   background-color: yellow;
 }
-.p-login-page .button-close {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  border: none;
-  background-color: transparent;
-  padding: 10px;
-}
-.p-login-page .alert-text {
-  position: relative;
-  margin: 0;
-}
 .p-login-page .error-alert {
-  position: relative;
   background-color: yellow;
   border-radius: 3px;
   padding: 20px;
