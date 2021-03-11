@@ -1,5 +1,6 @@
 .p-signup-step-one .main {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px 15px 60px;
 }
 .p-signup-step-one .signup-column {

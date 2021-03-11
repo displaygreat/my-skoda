@@ -1,5 +1,6 @@
 .p-login-page .main {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px 15px 60px;
 }
 .p-login-page .login-column {
