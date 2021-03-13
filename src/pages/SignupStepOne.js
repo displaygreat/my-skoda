@@ -13,7 +13,8 @@ class SignupStepOne extends React.Component {
       userCarPlate: '',
       userEmail: '',
       hideAlert: true,
-      hideError: true
+      hideErrorCarPlate: true,
+      hideErrorEmail: true
     }
   }
 
@@ -30,6 +31,7 @@ class SignupStepOne extends React.Component {
     this.setState({
       userEmail: e.target.value
     });
+    this.validateEmail(e.target.value);
   }
 
   validateCarPlate = (carPlate) => {
@@ -37,19 +39,29 @@ class SignupStepOne extends React.Component {
     let result = carPlateRegex.test(carPlate);
     if(!result) {
       this.setState({
-        hideError: false
+        hideErrorCarPlate: false
       })
     }
     if(result) {
       this.setState({
-        hideError: true
+        hideErrorCarPlate: true
       })
     }
   }
 
   validateEmail = (email) => {
     let emailRegex = /^[a-zA-Z0-9.!#$%&'*+\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    email.test(emailRegex);
+    let result = emailRegex.test(email);
+    if(!result) {
+      this.setState({
+        hideErrorEmail: false
+      })
+    }
+    if(result) {
+      this.setState({
+        hideErrorEmail: true
+      })
+    }
   }
   
   getVehicle = async (e) => {
@@ -97,15 +109,15 @@ class SignupStepOne extends React.Component {
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>License plate number</Form.Label>
                 <Form.Control type="text" placeholder="License plate number" value={this.state.userCarPlate} onChange={this.handleChangeInputPlate} />
-                <Form.Text className="text-muted" hidden={this.state.hideError}>
+                <Form.Text className="text-muted" hidden={this.state.hideErrorCarPlate}>
                   License plate number should contain 7 or 8 digits
                 </Form.Text>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" value={this.state.userEmail} onChange={this.handleChangeInputEmail}/>
-                <Form.Text className="text-muted">
-                  Perfect
+                <Form.Text className="text-muted" hidden={this.state.hideErrorEmail}>
+                  Email should include '@' and '.' Email could contain english letters, numbers and symbols 
                 </Form.Text>
               </Form.Group>
               <Alert className="error-alert" hidden={this.state.hideAlert} onClose={() => this.setState({hideAlert: true})} dismissible>
