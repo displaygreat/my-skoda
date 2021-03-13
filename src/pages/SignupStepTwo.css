@@ -1,5 +1,6 @@
 .p-signup-step-two .main {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px 15px 60px;
 }
 .p-signup-step-two .signup-column {
@@ -42,11 +43,25 @@
 .p-signup-step-two .input-password {
   position: relative;
 }
+.p-signup-step-two .alert-dismissible .close {
+  top: -10px;
+  right: -10px;
+}
+.p-signup-step-two .error-alert {
+  position: relative;
+  background-color: yellow;
+  border-radius: 3px;
+  padding: 20px;
+}
 .p-signup-step-two .prev-next-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.p-signup-step-two .signup-link {
+  color: #218838;
+  border-bottom: 1px solid #218838;
 }
 .p-signup-step-two .prev-button,
 .p-signup-step-two .next-button {

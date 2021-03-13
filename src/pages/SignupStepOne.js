@@ -14,14 +14,19 @@ class SignupStepOne extends React.Component {
       userEmail: '',
       hideAlert: true,
       hideErrorCarPlate: true,
-      hideErrorEmail: true
+      hideErrorEmail: true,
+      hideAlertIsExist: true
     }
   }
 
   handleChangeInputPlate = (e) => {
      e.preventDefault();
      this.setState({
-       userCarPlate: e.target.value
+      userCarPlate: e.target.value,
+      hideAlert: true,
+      hideErrorCarPlate: true,
+      hideErrorEmail: true,
+      hideAlertIsExist: true
      })
      this.validateCarPlate(e.target.value);
   }
@@ -29,7 +34,11 @@ class SignupStepOne extends React.Component {
    handleChangeInputEmail = (e) => {
     e.preventDefault();
     this.setState({
-      userEmail: e.target.value
+      userEmail: e.target.value,
+      hideAlert: true,
+      hideErrorCarPlate: true,
+      hideErrorEmail: true,
+      hideAlertIsExist: true
     });
     this.validateEmail(e.target.value);
   }
@@ -85,11 +94,10 @@ class SignupStepOne extends React.Component {
       this.setState({
         hideAlert: false,
         userCarPlate: '',
-        userEmail: ''
+        userEmail: '',
+        hideAlertIsExist: false
       })
     }
-    
-    //!!write if this car plate not exists in database of data.gov.il (alert) + if this car plate exists in database back4app + validation input email RegEx (alert if not valid)
   }
 
   handleClickOnBackButton() {
@@ -122,6 +130,9 @@ class SignupStepOne extends React.Component {
               </Form.Group>
               <Alert className="error-alert" hidden={this.state.hideAlert} onClose={() => this.setState({hideAlert: true})} dismissible>
                 <p className="m-0">Check license plate number<br/>and email</p>
+              </Alert>
+              <Alert className="error-alert" hidden={this.state.hideAlertIsExist} onClose={() => this.setState({hideAlertIsExist: true})} dismissible>
+                <p className="m-0">This license plate number<br/>doesn't exist in database.</p>
               </Alert>
               <div className="prev-next-buttons">
                 <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
