@@ -22,7 +22,6 @@ class SignupStepOne extends React.Component {
      this.setState({
        userCarPlate: e.target.value
      })
-     console.log(e.target.value);
      this.validateCarPlate(e.target.value);
   }
 
@@ -36,28 +35,21 @@ class SignupStepOne extends React.Component {
   validateCarPlate = (carPlate) => {
     let carPlateRegex = /^\d{7,8}$/;
     let result = carPlateRegex.test(carPlate);
-    if(!result && carPlate !== '') {
+    if(!result) {
       this.setState({
         hideError: false
       })
     }
-    if(result && carPlate === '') {
+    if(result) {
       this.setState({
         hideError: true
       })
     }
-    console.log(result);
   }
 
   validateEmail = (email) => {
     let emailRegex = /^[a-zA-Z0-9.!#$%&'*+\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     email.test(emailRegex);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.hideError !== prevState.hideError) {
-      this.validateCarPlate(this.state.userCarPlate);
-    }
   }
   
   getVehicle = async (e) => {
@@ -93,7 +85,6 @@ class SignupStepOne extends React.Component {
   }
 
   render() {
-    console.log(this.state.hideError);
     return(
       <div className="p-signup-step-one">
         <Container className="main">
@@ -117,7 +108,7 @@ class SignupStepOne extends React.Component {
                   Perfect
                 </Form.Text>
               </Form.Group>
-              <Alert className="error-alert" hidden={this.state.hideAlert} onClose={() => this.setState({showAlert: true})} dismissible>
+              <Alert className="error-alert" hidden={this.state.hideAlert} onClose={() => this.setState({hideAlert: true})} dismissible>
                 <p className="m-0">Check license plate number<br/>and email</p>
               </Alert>
               <div className="prev-next-buttons">
