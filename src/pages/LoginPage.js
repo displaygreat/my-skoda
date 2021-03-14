@@ -26,6 +26,8 @@ class LoginPage extends React.Component {
   handleChangeInputEmail = (e) => {
     e.preventDefault();
     this.setState({
+      hideAlertIsLogin: true,
+      hideAlertRequired: true,
       userEmail: e.target.value
     });
   }
@@ -33,6 +35,8 @@ class LoginPage extends React.Component {
   handleChangeInputPwd = (e) => {
     e.preventDefault();
     this.setState({
+      hideAlertIsLogin: true,
+      hideAlertRequired: true,
       userPwd: e.target.value
     });
   }

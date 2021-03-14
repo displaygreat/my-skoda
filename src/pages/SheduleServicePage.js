@@ -11,8 +11,11 @@ class SheduleServicePage extends React.Component {
       userCarPlate: this.props.sendUserCarPlate,
       userId: this.props.sendUserId
     }
-    console.log(this.state);
   }
+  componentDidMount = () => {
+    window.history.forward();
+  }
+  
   render() {
     return(
       <div className="p-shedule-service-page">

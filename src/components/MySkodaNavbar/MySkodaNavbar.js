@@ -3,7 +3,6 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 import './MySkodaNavbar.css';
 import skodaLogo from '../../assets/img/skoda-logo.png';
 
-
 class MySkodaNavbar extends React.Component {
   constructor(props) {
     super(props);
