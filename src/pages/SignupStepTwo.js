@@ -95,6 +95,9 @@ class SignupStepTwo extends React.Component {
       })
       return;
     }
+    if (this.state.buttonNext === "LogIn") {
+      window.location = "#/login";
+    }
     const user = new Parse.User()
     user.set('username', this.props.sendUserEmail);
     user.set('email', this.props.sendUserEmail);

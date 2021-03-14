@@ -1,6 +1,5 @@
 import './ServiceCalendar.css';
 import React from 'react';
-import { Col } from 'react-bootstrap';
 import servicesJSON from '../../data/services.json';
 
 

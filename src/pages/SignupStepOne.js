@@ -92,7 +92,7 @@ class SignupStepOne extends React.Component {
       }
       const data = await apiUrl.json();
       let receivedPlate = data.result.records[0].mispar_rechev;
-      if(receivedPlate == sentPlate) {
+      if(receivedPlate === +sentPlate) {
         this.props.callbackUserCarPlate(sentPlate);
         this.props.callbackUserEmail(sentEmail);
         window.location = '#/signup-step-two';

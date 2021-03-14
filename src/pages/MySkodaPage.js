@@ -27,11 +27,9 @@ class MySkodaPage extends React.Component {
     this.setState({
       userLastTest: test
     });
-    console.log(this.state);
   }
 
   render() {
-    console.log(this.state.carTest, this.state.carMake);
     return(
       <div className="p-my-skoda-page">
         <Container className="main">
