@@ -18,7 +18,8 @@ class LoginPage extends React.Component {
       type: "password",
       offPwd: 'show',
       onPwd: 'hide',
-      showAlert: true
+      hideAlertIsLogin: true,
+      hideAlertRequired: true
     }
   }
 
@@ -55,6 +56,12 @@ class LoginPage extends React.Component {
   handleSubmit = () => {
     let userEmail = this.state.userEmail;
     let userPwd = this.state.userPwd;
+    if (userEmail === '' || userPwd === '') {
+      this.setState({
+        hideAlertRequired: false
+      })
+      return;
+    }
     // Pass the username and password to logIn function
     Parse.User.logIn(userEmail, userPwd).then((user) => {
     // Do stuff after successful login
@@ -72,7 +79,7 @@ class LoginPage extends React.Component {
     }).catch(error => {
       console.error('Error while logging in user', error);
       this.setState({
-          showAlert: false,
+          hideAlertIsLogin: false,
           userEmail: '',
           userPwd: ''
       })
@@ -125,7 +132,10 @@ class LoginPage extends React.Component {
                 <Button className="next-button" variant="success" onClick={this.handleSubmit} >Next
                 </Button>
               </div>
-              <Alert className="error-alert" hidden={this.state.showAlert} onClose={() => this.setState({showAlert: true})} dismissible>
+              <Alert className="error-alert" hidden={this.state.hideAlertRequired} onClose={() => this.setState({hideAlertRequired: true})} dismissible>
+                <p className="m-0">All fields are required</p>
+              </Alert>
+              <Alert className="error-alert" hidden={this.state.hideAlertIsLogin} onClose={() => this.setState({hideAlertIsLogin: true})} dismissible>
                 <p className="m-0">Check email<br/>and password<br/>or <a className="login-link" href="/#/signup-step-one">Create account</a></p>
               </Alert>
               <a className="login-link" href="/#/signup-step-one">Don't have an account?</a>

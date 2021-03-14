@@ -12,9 +12,9 @@ class SignupStepOne extends React.Component {
     this.state = {
       userCarPlate: '',
       userEmail: '',
-      hideAlert: true,
       hideErrorCarPlate: true,
       hideErrorEmail: true,
+      hideAlertRequired: true,
       hideAlertIsExist: true
     }
   }
@@ -23,7 +23,7 @@ class SignupStepOne extends React.Component {
      e.preventDefault();
      this.setState({
       userCarPlate: e.target.value,
-      hideAlert: true,
+      hideAlertRequired: true,
       hideErrorCarPlate: true,
       hideErrorEmail: true,
       hideAlertIsExist: true
@@ -35,7 +35,7 @@ class SignupStepOne extends React.Component {
     e.preventDefault();
     this.setState({
       userEmail: e.target.value,
-      hideAlert: true,
+      hideAlertRequired: true,
       hideErrorCarPlate: true,
       hideErrorEmail: true,
       hideAlertIsExist: true
@@ -59,7 +59,7 @@ class SignupStepOne extends React.Component {
   }
 
   validateEmail = (email) => {
-    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+\=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     let result = emailRegex.test(email);
     if(!result) {
       this.setState({
@@ -77,6 +77,14 @@ class SignupStepOne extends React.Component {
     e.preventDefault();
     let sentPlate = this.state.userCarPlate;
     let sentEmail = this.state.userEmail;
+    
+    if (sentPlate === '' || sentEmail === '') {
+      this.setState({
+        hideAlertRequired: false
+      })
+      return;
+    }
+
     try {
       const apiUrl = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${sentPlate}%22]}`);
       if(!apiUrl.ok) {
@@ -92,7 +100,6 @@ class SignupStepOne extends React.Component {
     } catch (error) {
       console.log(error);
       this.setState({
-        hideAlert: false,
         userCarPlate: '',
         userEmail: '',
         hideAlertIsExist: false
@@ -128,15 +135,15 @@ class SignupStepOne extends React.Component {
                   Email should include '@' and '.' Email could contain english letters, numbers and symbols 
                 </Form.Text>
               </Form.Group>
-              <Alert className="error-alert" hidden={this.state.hideAlert} onClose={() => this.setState({hideAlert: true})} dismissible>
-                <p className="m-0">Check license plate number<br/>and email</p>
+              <Alert className="error-alert" hidden={this.state.hideAlertRequired} onClose={() => this.setState({hideAlertRequired: true})} dismissible>
+                <p className="m-0">All fields are required</p>
               </Alert>
               <Alert className="error-alert" hidden={this.state.hideAlertIsExist} onClose={() => this.setState({hideAlertIsExist: true})} dismissible>
-                <p className="m-0">This license plate number<br/>doesn't exist in database.</p>
+                <p className="m-0">Check license plate number<br/>and email</p>
               </Alert>
               <div className="prev-next-buttons">
                 <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                <Button className="next-button" variant="success" onClick={this.getVehicle}>Next
+                <Button className="next-button" type="submit" variant="success" onClick={this.getVehicle}>Next
                 </Button>
               </div>
             </Form>

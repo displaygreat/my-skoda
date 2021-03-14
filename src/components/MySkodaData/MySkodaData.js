@@ -35,9 +35,9 @@ class MySkodaData extends React.Component {
       }
       let model = data.kinuy_mishari;
       let year = data.shnat_yitzur;
-      let test = moment(data.mivchan_acharon_dt).format('L');
+      let test = moment(data.mivchan_acharon_dt).format('DD/MM/YYYY');
       // let test = data.mivchan_acharon_dt;
-      let license = moment(data.tokef_dt).format('L');
+      let license = moment(data.tokef_dt).format('DD/MM/YYYY');
       let vin = data.misgeret;
       console.log(make, model, year, test, license, vin);
       // this.props.callbackUserLastTest(test);

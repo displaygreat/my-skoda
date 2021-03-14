@@ -4,7 +4,7 @@ import './SignupStepTwo.css';
 import Parse from 'parse';
 import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 import skodaLogo from '../assets/img/skoda-logo.png';
-import skodaSignup from '../assets/img/skoda-signup.jpg';
+import skodaSignupTwo from '../assets/img/skoda-signup-2.jpg';
 import eye from '../assets/img/eye.png';
 import eyeOff from '../assets/img/eye-off.png';
 
@@ -17,8 +17,12 @@ class SignupStepTwo extends React.Component {
       onPwd: 'hide',
       newUserPwd: '',
       confirmUserPwd: '',
+      hideErrorPwd: true,
       hideAlertIsSameValue: true,
-      hideAlertIsExist: true
+      hideAlertIsExist: true,
+      hideAlertRequired: true,
+      hideAlertSuccess: true,
+      buttonNext: 'SignUp'
     }
   }
 
@@ -43,6 +47,7 @@ class SignupStepTwo extends React.Component {
     this.setState({
       newUserPwd: e.target.value
     });
+    this.validatePassword(e.target.value);
   }
 
   handleChangeConfirmPwd = (e) => {
@@ -50,35 +55,61 @@ class SignupStepTwo extends React.Component {
     this.setState({
       confirmUserPwd: e.target.value
     });
+    this.isSameValue(e.target.value);
   }
 
-  isSameValue = () => {
-    let newUserPwd = this.state.newUserPwd.toString();
-    let confirmUserPwd = this.state.confirmUserPwd.toString();
-    if(newUserPwd !== confirmUserPwd) {
+  validatePassword = (pwd) => {
+    let pwdRegex = /(?=.*\d)(?=.*[a-z]).{8,}/;
+    let result = pwdRegex.test(pwd);
+    if(!result) {
       this.setState({
-        hideAlertIsSameValue: false,
-        newUserPwd: '',
-        confirmUserPwd: ''
+        hideErrorPwd: false
       })
     }
-    this.signupUser();
+    if(result) {
+      this.setState({
+        hideErrorPwd: true
+      })
+    }
+  }
+
+  isSameValue = (confirmUserPwd) => {
+    let newUserPwd = this.state.newUserPwd;
+    if(newUserPwd !== confirmUserPwd) {
+      this.setState({
+        hideAlertIsSameValue: false
+      })
+    }
+    if(newUserPwd === confirmUserPwd) {
+      this.setState({
+        hideAlertIsSameValue: true
+      })
+    }
   }
 
   signupUser = () => {
+    if (this.state.newUserPwd === '' 
+        || this.state.confirmUserPwd === '') {
+      this.setState({
+        hideAlertRequired: false
+      })
+      return;
+    }
     const user = new Parse.User()
     user.set('username', this.props.sendUserEmail);
     user.set('email', this.props.sendUserEmail);
     user.set('password', this.state.newUserPwd);
-    user.set('plateNumber', this.props.sendUserCarPlate)
-
+    user.set('plateNumber', this.props.sendUserCarPlate);
+    
     user.signUp().then((user) => {
       console.log('User signed up', user);
-      window.location = '#/login';
+      this.setState({
+        hideAlertSuccess: false,
+        buttonNext: 'LogIn'
+      })
     }).catch(error => {
       console.error('Error while signing up user', error);
       this.setState({
-        hideAlertIsSameValue: true,
         hideAlertIsExist: false,
         newUserPwd: '',
         confirmUserPwd: ''
@@ -100,37 +131,40 @@ class SignupStepTwo extends React.Component {
             <span className="step">Step 2</span>
             <p className="text">for My Skoda</p>
             <Form>
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group>
                 <Form.Label>Password</Form.Label>
                 <div className="input-password">
                   <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeInputPwd} value={this.state.newUserPwd} />
                   <Image className={`icon-eye-off ${this.state.offPwd}`} src={eyeOff} onClick={this.showPassword} />
                   <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                 </div>
-                <Form.Text className="text-muted">
-                  Perfect
+                <Form.Text className="text-muted" hidden={this.state.hideErrorPwd}>
+                  Password should contain at least one number and one lowercase letter, and at least 8 or more characters
                 </Form.Text>
               </Form.Group>
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group>
                 <Form.Label>Confirm password</Form.Label>
                 <div className="input-password">
                   <Form.Control type={this.state.type} placeholder="Password" onChange={this.handleChangeConfirmPwd} value={this.state.confirmUserPwd} />
                   <Image className={`icon-eye-off ${this.state.offPwd}`} src={eyeOff} onClick={this.showPassword} />
                   <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                 </div>
-                <Form.Text className="text-muted">
-                  Perfect
+                <Form.Text className="text-muted" hidden={this.state.hideAlertIsSameValue}>
+                  The fields are not the same
                 </Form.Text>
               </Form.Group>
-                <Alert className="error-alert" hidden={this.state.hideAlertIsSameValue} onClose={() => this.setState({hideAlertIsSameValue: true})} dismissible>
-                  <p className="m-0">The fields are not the same</p>
+                <Alert className="error-alert" hidden={this.state.hideAlertRequired} onClose={() => this.setState({hideAlertRequired: true})} dismissible>
+                  <p className="m-0">All fields are requered</p>
+                </Alert>
+                <Alert variant="success" hidden={this.state.hideAlertSuccess} onClose={() => this.setState({hideAlertSuccess: true})} dismissible>
+                  <p className="m-0">Success!<br/>You are signed up.<br/>Please <a className="signup-link" href="#/login">Login</a></p>
                 </Alert>
                 <Alert className="error-alert" hidden={this.state.hideAlertIsExist} onClose={() => this.setState({hideAlertIsExist: true})} dismissible>
                   <p className="m-0">Account already exists.<br/>Please <a className="signup-link" href="#/login">Login</a></p>
-              </Alert>
+                </Alert>
               <div className="prev-next-buttons">
                 <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
-                <Button className="next-button" variant="success" onClick={this.isSameValue}>Next
+                <Button className="next-button" variant="success" onClick={this.signupUser}>{this.state.buttonNext}
                 </Button>
               </div>
             </Form>
@@ -138,7 +172,7 @@ class SignupStepTwo extends React.Component {
           <Col className="signup-column" xs={12} md={8}>
             <Image className="logo" src={skodaLogo} rounded />
             <div className="signup-img-wrap">
-              <Image className="signup-img" src={skodaSignup} rounded />
+              <Image className="signup-img" src={skodaSignupTwo} rounded />
             </div>
           </Col>
         </Container>

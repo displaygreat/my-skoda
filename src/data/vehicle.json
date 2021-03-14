@@ -27,5 +27,16 @@
     "last annual vehicle licensing test": "2021-01-01",
     "valid car licence": "2021-12-31",
     "VIN": "TMBAP7NX3MY027070"
+  },
+  {
+    "user-id": "4",
+    "license-plate-number": "8423726",
+    "make": "Skoda",
+    "model": "Octavia",
+    "year": "2017",
+    "last annual vehicle licensing test": "08/12/2020",
+    "valid car licence": "02/12/20121",
+    "VIN": "TMBAJ7NE0J0154045",
+    "email": "as@as.as"
   }
 ]

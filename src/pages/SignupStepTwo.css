@@ -62,6 +62,11 @@
 .p-signup-step-two .signup-link {
   color: #218838;
   border-bottom: 1px solid #218838;
+  text-decoration: none;
+}
+.p-signup-step-two .signup-link:hover {
+  text-decoration: none;
+  background-color: yellow;
 }
 .p-signup-step-two .prev-button,
 .p-signup-step-two .next-button {
