@@ -81,10 +81,10 @@ class App extends React.Component {
             <HomePage />
           </Route>
           <Route path="/shedule" component={SheduleServicePage}>
-            <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+            <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} activeUser={this.state.activeUser} />
           </Route>
           <Route path="/my-skoda" component={MySkodaPage}>
-            <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+            <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} activeUser={this.state.activeUser} />
           </Route>
           <Route path="/signup-step-one" component={SignupStepOne}>
             <SignupStepOne callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>

@@ -12,12 +12,15 @@ class MySkodaPage extends React.Component {
     this.state = {
       userId: this.props.sendUserId,
       userCarPlate: this.props.sendUserCarPlate,
-      userLastTest: ''
+      userLastTest: '',
+      activeUser: this.props.activeUser
     }
   }
 
   componentDidMount () {
-    window.history.forward();
+    if (this.state.activeUser === null) {
+      window.history.forward();
+    }
   }
 
   handleCallbackUserLastTest = (test) => {
