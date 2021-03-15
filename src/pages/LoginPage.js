@@ -14,7 +14,6 @@ class LoginPage extends React.Component {
     this.state = {
       userEmail: '',
       userPwd: '',
-      userCarPlate: '',
       type: "password",
       offPwd: 'show',
       onPwd: 'hide',
@@ -104,15 +103,15 @@ class LoginPage extends React.Component {
     Parse.User.logIn(userEmail, userPwd).then((user) => {
     // Do stuff after successful login
     console.log('Logged in user', user);
-    let carPlate = user.attributes.plateNumber;
-    let userEmail = user.attributes.email;
     let userId = user.id;
-    this.setState({
-      userCarPlate: carPlate
-    })
-    this.props.callbackUserCarPlate(carPlate);
-    this.props.handleLogin(userEmail);
+    let userEmail = user.attributes.email;
+    let carPlate = user.attributes.plateNumber;
+    let lastIncpection = user.attributes.lastIncpection;
+    
     this.props.callbackUserId(userId);
+    this.props.handleLogin(userEmail);
+    this.props.callbackUserCarPlate(carPlate);
+    this.props.callbackLastInspection(lastIncpection);
     window.location = '#/my-skoda';
     }).catch(error => {
       console.error('Error while logging in user', error);

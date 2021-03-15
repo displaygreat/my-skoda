@@ -22,9 +22,9 @@ class SheduleServicePage extends React.Component {
   render() {
     return(
       <div className="p-shedule-service-page">
-          <Container className="main">
-            <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
-          </Container>
+        <Container className="main">
+          <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+        </Container>
         <MySkodaFooter />
       </div>
     )

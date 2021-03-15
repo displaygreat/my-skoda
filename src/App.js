@@ -25,8 +25,8 @@ class App extends React.Component {
       activeUser: null,
       userId: '',
       userEmail: '',
-      userPwd: '',
       userCarPlate: '',
+      userLastInspection: ''
     }
   }
 
@@ -41,8 +41,8 @@ class App extends React.Component {
       activeUser: null,
       userId: '',
       userEmail: '',
-      userPwd: '',
-      userCarPlate: ''
+      userCarPlate: '',
+      userLastInspection: ''
     })
   }
 
@@ -58,42 +58,43 @@ class App extends React.Component {
     });
   }
 
-  handleCallbackUserPwd = (pwd) => {
-    this.setState({
-      userPwd: pwd
-    });
-  }
-
   handleCallbackUserCarPlate = (plate) => {
     this.setState({
       userCarPlate: plate
     });
   }
 
+  handleCallbackLastInspection = (lastInspection) => {
+    this.setState({
+      userLastInspection: lastInspection
+    });
+  }
+
   render() {
+    const { activeUser, userId, userEmail, userCarPlate, userLastInspection } = this.state;
     return (
       <HashRouter basename='/'>
         <Route exact path={['/shedule', '/my-skoda']} >
-          <MySkodaNavbar handleLogOut={this.handleLogOut} activeUser={this.state.activeUser}/>
+          <MySkodaNavbar handleLogOut={this.handleLogOut} activeUser={activeUser}/>
         </Route>
         <Switch>
           <Route exact path="/" component={HomePage}>
             <HomePage />
           </Route>
           <Route path="/shedule" component={SheduleServicePage}>
-            <SheduleServicePage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} activeUser={this.state.activeUser} />
+            <SheduleServicePage activeUser={activeUser} sendUserId={userId} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/my-skoda" component={MySkodaPage}>
-            <MySkodaPage sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} activeUser={this.state.activeUser} />
+            <MySkodaPage activeUser={activeUser} sendUserId={userId} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/signup-step-one" component={SignupStepOne}>
-            <SignupStepOne callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserEmail={this.handleCallbackUserEmail}/>
+            <SignupStepOne callbackUserEmail={this.handleCallbackUserEmail} callbackUserCarPlate={this.handleCallbackUserCarPlate} />
           </Route>
           <Route path="/signup-step-two" component={SignupStepTwo}>
-            <SignupStepTwo callbackUserPwd={this.handleCallbackUserPwd} sendUserEmail={this.state.userEmail} sendUserCarPlate={this.state.userCarPlate}/>
+            <SignupStepTwo sendUserEmail={userEmail} sendUserCarPlate={userCarPlate}/>
           </Route>
           <Route path="/login" component={LoginPage}>
-            <LoginPage callbackUserEmail={this.handleCallbackUserEmail} sendUserEmail={this.state.userEmail} handleLogin={this.handleLogin} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackUserId={this.handleCallbackUserId}/>
+            <LoginPage handleLogin={this.handleLogin} callbackUserId={this.handleCallbackUserId} callbackUserCarPlate={this.handleCallbackUserCarPlate} callbackLastInspection={this.handleCallbackLastInspection}/>
           </Route>
         </Switch> 
       </HashRouter> 
