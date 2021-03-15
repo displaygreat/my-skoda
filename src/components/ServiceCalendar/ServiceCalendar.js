@@ -11,7 +11,6 @@ class ServiceCalendar extends React.Component {
       inspectionBeforeTest: '',
       multiPointInspection: '',
     }
-    console.log(this.props);
   }
 
   componentDidMount () {
@@ -32,14 +31,21 @@ class ServiceCalendar extends React.Component {
     let momentObjLastTest = moment(lastTest, "DD/MM/YYYY");
     let fullDateLastTest = momentObjLastTest.toDate();
     console.log(carYear, lastTest);
-    if (carAge<=2) {
-      let momentObjNextTest = moment(fullDateLastTest).add(3, 'years');
-      let momentObjNextInspectionBeforeTest = moment(momentObjNextTest).subtract(14, 'days');
-      let recInspectionBeforeTest = moment(momentObjNextInspectionBeforeTest).format('DD/MM/YYYY');
-      this.setState({
-        inspectionBeforeTest: recInspectionBeforeTest
-      })
+    let momentObjNextTest = {};
+    if (carAge <= 2) {
+      momentObjNextTest = moment(fullDateLastTest).add(3, 'years');
     }
+    if (carAge >= 3 && carAge < 20) {
+      momentObjNextTest = moment(fullDateLastTest).add(1, 'years');
+    }
+    if (carAge >= 20 ) {
+      momentObjNextTest = moment(fullDateLastTest).add(6, 'months');
+    }
+    let momentObjInspectionBeforeTest = moment(momentObjNextTest).subtract(14, 'days');
+    let dateInspectionBeforeTest = moment(momentObjInspectionBeforeTest).format('DD/MM/YYYY');
+    this.setState({
+      inspectionBeforeTest: dateInspectionBeforeTest
+    })
   }
 
   render() {
