@@ -11,10 +11,10 @@ class MySkodaFooter extends React.Component {
         <Container>
           <Nav className="footer-nav" as="ul">
             <Nav.Item as="li">
-              <Nav.Link className="footer-link" href="/">Terms of use</Nav.Link>
+              <Nav.Link className="footer-link" href="/#">Terms of use</Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link className="footer-link" href="/">Contacts</Nav.Link>
+              <Nav.Link className="footer-link" href="/#">Contacts</Nav.Link>
             </Nav.Item>
           </Nav>
         </Container>

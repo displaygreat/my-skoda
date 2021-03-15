@@ -18,6 +18,9 @@ class LoginPage extends React.Component {
       type: "password",
       offPwd: 'show',
       onPwd: 'hide',
+      hideAlertReset: true,
+      hideAlertSuccess: true,
+      resetPwd: '',
       hideAlertIsLogin: true,
       hideAlertRequired: true
     }
@@ -28,6 +31,7 @@ class LoginPage extends React.Component {
     this.setState({
       hideAlertIsLogin: true,
       hideAlertRequired: true,
+      hideAlertSuccess: true,
       userEmail: e.target.value
     });
   }
@@ -37,6 +41,7 @@ class LoginPage extends React.Component {
     this.setState({
       hideAlertIsLogin: true,
       hideAlertRequired: true,
+      hideAlertSuccess: true,
       userPwd: e.target.value
     });
   }
@@ -54,6 +59,35 @@ class LoginPage extends React.Component {
       type: "password",
       offPwd: 'show',
       onPwd: 'hide'
+    })
+  }
+
+  forgotPassword = () => {
+    this.setState({
+      hideAlertReset: false
+    })
+  }
+
+  handleChangeInputReset = (e) => {
+    e.preventDefault();
+    this.setState({
+      resetPwd: e.target.value
+    })
+  }
+
+  resetPassword = () => {
+    let emailResetPwd = this.state.resetPwd;
+    // Pass the username and password to logIn function
+    Parse.User.requestPasswordReset(emailResetPwd).then(() => {
+      // Password reset request was sent successfully
+      console.log('Reset password email sent successfully');
+      this.setState({
+        hideAlertReset: true,
+        resetPwd: '',
+        hideAlertSuccess: false
+      })
+    }).catch((error) => {
+      console.error('Error while creating request to reset user password', error);
     })
   }
   
@@ -102,12 +136,12 @@ class LoginPage extends React.Component {
     return(
       <div className="p-login-page">
         <Container className="main">
-          <Col className="login-column" xs={12} md={4}>
+          <Col className="login-column" xs={12} lg={4}>
             <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
             <h4>Login</h4>
             <p className="text">for My Skoda</p>
             <Form noValidate onSubmit={this.handleSubmit}>
-              <Form.Group className="login-input"controlId="formBasicEmail">
+              <Form.Group className="login-input">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control 
                   type="email" 
@@ -116,7 +150,7 @@ class LoginPage extends React.Component {
                   value={this.state.userEmail} 
                   onChange={this.handleChangeInputEmail}/>
               </Form.Group>
-              <Form.Group className="login-input" controlId="formBasicPassword">
+              <Form.Group className="login-input">
                 <Form.Label>Password</Form.Label>
                 <div className="input-password">
                   <Form.Control 
@@ -130,7 +164,23 @@ class LoginPage extends React.Component {
                   <Image className={`icon-eye ${this.state.onPwd}`}  src={eye} onClick={this.hidePassword} />
                 </div>
               </Form.Group>
-              <a className="login-link" href="/#/login">Forgot password?</a>
+              <a className="login-link" href="/#/login" onClick={this.forgotPassword}>Forgot password?</a>
+              <Alert className="error-alert mt-2" hidden={this.state.hideAlertReset} onClose={() => this.setState({hideAlertReset: true})} dismissible>
+                <p className="m-0 mb-2">To get reset password link, please enter your email</p>
+                <Form.Group className="login-input">
+                <Form.Control 
+                  type="email" 
+                  placeholder="Enter email"
+                  required
+                  value={this.state.resetPwd} 
+                  onChange={this.handleChangeInputReset}/>
+                </Form.Group>
+                <Button className="next-button" variant="success" onClick={this.resetPassword} >Next
+                </Button>
+              </Alert>
+              <Alert className="mt-2" variant="success" hidden={this.state.hideAlertSuccess} onClose={() => this.setState({hideAlertSuccess: true})} dismissible>
+                <p className="m-0">Reset password email sent successfully. Check your email to reset password</p>
+              </Alert>
               <div className="prev-next-buttons">
                 <Button className="prev-button" variant="outline-success" onClick={this.handleClickOnBackButton}>Back</Button>
                 <Button className="next-button" variant="success" onClick={this.handleSubmit} >Next
@@ -147,7 +197,7 @@ class LoginPage extends React.Component {
               </Button>
             </Form>
           </Col>
-          <Col className="login-column" xs={12} md={8}>
+          <Col className="login-column" xs={12} lg={8}>
             <Image className="logo" src={skodaLogo} rounded />
             <div className="login-img-wrap">
               <Image className="login-img" src={skodaLogin} rounded />
