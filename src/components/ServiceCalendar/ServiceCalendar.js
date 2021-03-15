@@ -34,9 +34,10 @@ class ServiceCalendar extends React.Component {
     console.log(carYear, lastTest);
     if (carAge<=2) {
       let momentObjNextTest = moment(fullDateLastTest).add(3, 'years');
-      let nextTest = moment(momentObjNextTest).format('DD/MM/YYYY');
+      let momentObjNextInspectionBeforeTest = moment(momentObjNextTest).subtract(14, 'days');
+      let recInspectionBeforeTest = moment(momentObjNextInspectionBeforeTest).format('DD/MM/YYYY');
       this.setState({
-        inspectionBeforeTest: nextTest
+        inspectionBeforeTest: recInspectionBeforeTest
       })
     }
   }
