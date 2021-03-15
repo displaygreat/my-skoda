@@ -137,7 +137,9 @@ class LoginPage extends React.Component {
       <div className="p-login-page">
         <Container className="main">
           <Col className="login-column" xs={12} lg={4}>
-            <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
+            <a className="mb-2" href="#">
+              <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
+            </a>
             <h4>Login</h4>
             <p className="text">for My Skoda</p>
             <Form noValidate onSubmit={this.handleSubmit}>

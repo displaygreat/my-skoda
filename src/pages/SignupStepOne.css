@@ -8,9 +8,8 @@
   flex-direction: column;
   padding: 20px 30px;
 }
-.p-signup-step-one .myskoda-signup-label {
+.p-signup-step-one .my-skoda-signup-label {
   font-size: 0.8rem;
-  margin: 0 0 20px 0;
   color: #000;
 }
 .p-signup-step-one .letter-green {

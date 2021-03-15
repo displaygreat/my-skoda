@@ -19,8 +19,10 @@ class HomePage extends React.Component {
         <Container className="main">
           <Row>
             <Col className="home-column" xs={12} md={8} lg={7}>
-              <span className="home-label">my<span className="letter-green">Skoda</span></span>
-                <Image className="home-img" src={skodaBlack} rounded />
+              <a className="mb-2" href="#">
+                <span className="home-label">my<span className="letter-green">Skoda</span></span>
+              </a>
+              <Image className="home-img" src={skodaBlack} rounded />
             </Col>
             <Col className="home-column" xs={12} md={4} lg={{ span: 4, offset: 1 }}>
               <Image className="logo" src={skodaLogo} rounded />
