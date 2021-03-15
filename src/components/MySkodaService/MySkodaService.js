@@ -21,7 +21,8 @@ class MySkodaService extends React.Component {
         <Card className="mb-4">
           <Card.Body>
             <p className="text-regular">Multi-Point Inspection</p>
-            <p className="text-regular text-bg">your last multi-point inspection: <strong>{lastInspection}</strong></p>
+            <p className="text-regular text-bg">your last multi-point inspection: {lastInspection ? <strong>{lastInspection}</strong> 
+            : <span className="text-small">Unfortunately, you haven't been serviced in our dealer centers yet</span>}</p>
             <span className="text-small">Full Synthetic Oil Change</span>
             <span className="text-small">Tire Rotation</span>
             <span className="text-small">Windshield Wiper Replacement</span>

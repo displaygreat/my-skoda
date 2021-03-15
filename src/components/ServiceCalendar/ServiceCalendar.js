@@ -1,26 +1,54 @@
 import './ServiceCalendar.css';
 import React from 'react';
 import servicesJSON from '../../data/services.json';
+import moment from 'moment';
 
 
 class ServiceCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.sendUserId,
-      userCarPlate: this.props.sendUserCarPlate,
+      inspectionBeforeTest: '',
+      multiPointInspection: '',
+    }
+    console.log(this.props);
+  }
+
+  componentDidMount () {
+    this.getInspectionBeforeTest();
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if(this.props !== prevProps) {
+      this.getInspectionBeforeTest();
+    }
+  }
+
+  getInspectionBeforeTest = () => {
+    let yearNow = new Date().getFullYear();
+    let carYear = this.props.carYear;
+    let carAge = yearNow - carYear;
+    let lastTest = this.props.carTest;
+    let momentObjLastTest = moment(lastTest, "DD/MM/YYYY");
+    let fullDateLastTest = momentObjLastTest.toDate();
+    console.log(carYear, lastTest);
+    if (carAge<=2) {
+      let momentObjNextTest = moment(fullDateLastTest).add(3, 'years');
+      let nextTest = moment(momentObjNextTest).format('DD/MM/YYYY');
+      this.setState({
+        inspectionBeforeTest: nextTest
+      })
     }
   }
 
   render() {
+    console.log(this.state.inspectionBeforeTest);
     const table = servicesJSON;
-    console.log(table);
     
     const sortedTable = table.sort((a, b) => {
       let dateA=new Date(a.recommended.split("/").reverse().join("-")), dateB=new Date(b.recommended.split("/").reverse().join("-"))
       return dateA-dateB
     });
-    console.log(sortedTable);
     const newTable = sortedTable.map((service) => {
         return (
           <tr>
@@ -33,7 +61,7 @@ class ServiceCalendar extends React.Component {
 
     return(
      <div class="c-service-calendar col-md-12 col-lg-4">
-        <h1 className="display-4 my-skoda-title" onClick={this.sortDates}>Service Calendar</h1>
+        <h1 className="display-4 my-skoda-title">Service Calendar</h1>
         <p class="text-regular">Keep Your Skoda At Its Best with Our Service</p>
         <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
         <table class="table table-success table-striped table-bordered">

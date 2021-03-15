@@ -29,11 +29,9 @@ class MySkodaPage extends React.Component {
       window.history.forward();
     }
     let plate = this.state.userCarPlate;
-    console.log(plate);
     axios.get(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${plate}%22]}`)
     .then((result) => {
       let data = result.data.result.records[0];
-      console.log(data);
       let make = data.tozeret_nm;
       if(make === `סקודה צ'כיה`) {
         make = "Skoda"
@@ -68,7 +66,7 @@ class MySkodaPage extends React.Component {
         <Container className="main">
           <MySkodaData userCarPlate={userCarPlate} carMake={carMake} carModel={carModel} carYear={carYear} carLicense={carLicense} carVIN={carVIN} />
           <MySkodaService carTest={carTest} lastInspection={lastInspection} />
-          <ServiceCalendar />
+          <ServiceCalendar carYear={carYear} carTest={carTest} lastInspection={lastInspection} />
         </Container>
         <MySkodaFooter />
       </div>

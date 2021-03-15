@@ -336,7 +336,7 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showErrorEmail}`} style={{backgroundImage: "none"}, {borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showErrorEmail}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid email.
                 </div>
@@ -345,7 +345,7 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0">Telephone</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none"}, {borderColor: "#000"}} type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid telephone.
                 </div>
