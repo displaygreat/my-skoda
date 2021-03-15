@@ -116,7 +116,7 @@ class SignupStepOne extends React.Component {
       <div className="p-signup-step-one">
         <Container className="main">
           <Col className="signup-column" xs={12} md={4}>
-            <a className="mb-2" href="#">
+            <a className="mb-2" href="/#">
               <span className="my-skoda-signup-label">my<span className="letter-green">Skoda</span></span>
             </a>
             <h4>Create account</h4>

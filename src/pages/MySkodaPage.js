@@ -11,13 +11,10 @@ import MySkodaFooter from '../components/MySkodaFooter/MySkodaFooter';
 class MySkodaPage extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   userLastTest: ''
-    // }
     this.state = {
       activeUser: this.props.activeUser,
-      userId: this.props.sendUserId,
       userCarPlate: this.props.sendUserCarPlate,
+      lastInspection: this.props.lastInspection,
       carMake: '',
       carModel: '',
       carYear: '',
@@ -65,12 +62,12 @@ class MySkodaPage extends React.Component {
   }
 
   render() {
-    const { userId, userCarPlate, carMake, carModel, carYear, carTest, carLicense, carVIN } = this.state;
+    const { userCarPlate, carMake, carModel, carYear, carTest, carLicense, carVIN, lastInspection } = this.state;
     return(
       <div className="p-my-skoda-page">
         <Container className="main">
           <MySkodaData userCarPlate={userCarPlate} carMake={carMake} carModel={carModel} carYear={carYear} carLicense={carLicense} carVIN={carVIN} />
-          <MySkodaService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId}/>
+          <MySkodaService carTest={carTest} lastInspection={lastInspection} />
           <ServiceCalendar />
         </Container>
         <MySkodaFooter />

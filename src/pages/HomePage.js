@@ -19,7 +19,7 @@ class HomePage extends React.Component {
         <Container className="main">
           <Row>
             <Col className="home-column" xs={12} md={8} lg={7}>
-              <a className="mb-2" href="#">
+              <a className="mb-2" href="/#">
                 <span className="home-label">my<span className="letter-green">Skoda</span></span>
               </a>
               <Image className="home-img" src={skodaBlack} rounded />

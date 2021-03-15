@@ -85,7 +85,7 @@ class App extends React.Component {
             <SheduleServicePage activeUser={activeUser} sendUserId={userId} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/my-skoda" component={MySkodaPage}>
-            <MySkodaPage activeUser={activeUser} sendUserId={userId} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
+            <MySkodaPage activeUser={activeUser} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/signup-step-one" component={SignupStepOne}>
             <SignupStepOne callbackUserEmail={this.handleCallbackUserEmail} callbackUserCarPlate={this.handleCallbackUserCarPlate} />

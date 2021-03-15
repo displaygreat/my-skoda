@@ -106,12 +106,12 @@ class LoginPage extends React.Component {
     let userId = user.id;
     let userEmail = user.attributes.email;
     let carPlate = user.attributes.plateNumber;
-    let lastIncpection = user.attributes.lastIncpection;
+    let lastInspection = user.attributes.lastInspection;
     
     this.props.callbackUserId(userId);
     this.props.handleLogin(userEmail);
     this.props.callbackUserCarPlate(carPlate);
-    this.props.callbackLastInspection(lastIncpection);
+    this.props.callbackLastInspection(lastInspection);
     window.location = '#/my-skoda';
     }).catch(error => {
       console.error('Error while logging in user', error);
@@ -136,7 +136,7 @@ class LoginPage extends React.Component {
       <div className="p-login-page">
         <Container className="main">
           <Col className="login-column" xs={12} lg={4}>
-            <a className="mb-2" href="#">
+            <a className="mb-2" href="/#">
               <span className="my-skoda-login-label">my<span className="letter-green">Skoda</span></span>
             </a>
             <h4>Login</h4>
@@ -176,7 +176,7 @@ class LoginPage extends React.Component {
                   value={this.state.resetPwd} 
                   onChange={this.handleChangeInputReset}/>
                 </Form.Group>
-                <Button className="next-button" variant="success" onClick={this.resetPassword} >Next
+                <Button className="next-button" variant="success" onClick={this.resetPassword} >Send
                 </Button>
               </Alert>
               <Alert className="mt-2" variant="success" hidden={this.state.hideAlertSuccess} onClose={() => this.setState({hideAlertSuccess: true})} dismissible>
