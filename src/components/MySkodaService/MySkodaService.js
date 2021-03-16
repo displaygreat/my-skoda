@@ -40,16 +40,6 @@ class MySkodaService extends React.Component {
             <p className="text-regular">Every May and November of every year</p>
           </Card.Body>
         </Card>
-        <Card className="mb-4">
-          <Card.Body>
-            <p className="text-regular">Full Service</p>
-            <span className="text-small">Battery Replacement Service</span>
-            <span className="text-small">Brake Pad Replacement Service</span>
-            <span className="text-small">Transmission Fluid Exchange Service</span>
-            <strong>Recommended</strong>
-            <p className="text-regular">Every three years or 30,000 Miles </p>
-          </Card.Body>
-        </Card>
       </div>
     )
   }
