@@ -50,30 +50,29 @@ class ServiceCalendar extends React.Component {
     if (carAge >= 20 ) {
       momentObjNextTest = moment(fullDateLastTest).add(6, 'months');
     }
-    let momentObjInspectionBeforeTest = moment(momentObjNextTest).subtract(14, 'days');
-    let dateInspectionBeforeTest = moment(momentObjInspectionBeforeTest).format('DD/MM/YYYY');
+    let momentObjDate = moment(momentObjNextTest).subtract(14, 'days');
+    let date = moment(momentObjDate).format('DD/MM/YYYY');
     this.setState({
-      inspectionBeforeTest: dateInspectionBeforeTest
+      inspectionBeforeTest: date
     })
   }
 
   getMultiPointInspection = () => {
     let lastInspection = this.props.lastInspection;
-    console.log(lastInspection);
     if (lastInspection === '' || lastInspection === undefined) {
       let dateNow = new Date();
-      let momentObjDateToInspection = moment(dateNow).add(7, 'days');
-      let dateToInspection = moment(momentObjDateToInspection).format('DD/MM/YYYY');
+      let momentObjDate = moment(dateNow).add(7, 'days');
+      let date = moment(momentObjDate).format('DD/MM/YYYY');
       this.setState({
-        multiPointInspection: dateToInspection
+        multiPointInspection: date
       })
       return;
     }
-    let fullDateLastInspection = this.getFullDate(lastInspection);
-    let momentObjMultiPointInspection = moment(fullDateLastInspection).add(1, 'year');
-    let dateMultiPointInspection = moment(momentObjMultiPointInspection).format('DD/MM/YYYY');
+    let fullDate = this.getFullDate(lastInspection);
+    let momentObjDate = moment(fullDate).add(1, 'year');
+    let date = moment(momentObjDate).format('DD/MM/YYYY');
     this.setState({
-      multiPointInspection: dateMultiPointInspection
+      multiPointInspection: date
     })
   }
 
@@ -131,16 +130,15 @@ class ServiceCalendar extends React.Component {
       }
     ];
     const sortedData = services.sort((a, b) => {
-      let dateA=new Date(a.recommended.split("/").reverse().join("-"));
-      let dateB=new Date(b.recommended.split("/").reverse().join("-"));
-      return dateA-dateB
+      let dateA = new Date(a.recommended.split("/").reverse().join("-"));
+      let dateB = new Date(b.recommended.split("/").reverse().join("-"));
+      return dateA - dateB
     });
     return sortedData;
   }
 
   render() {
     const sortedData = this.getSortedData();
-    console.log(sortedData);
     const servicesTable = sortedData.map((service) => {
       return (
         <tr>
