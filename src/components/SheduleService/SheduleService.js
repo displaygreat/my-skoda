@@ -34,21 +34,14 @@ const Styles = styled.div`
  .react-datepicker__day--selected {
     background-color: #218838;
  }
- .react-datepicker__day--keyboard-selected:hover,
- .react-datepicker__day--selected:hover {
-    background-color: #218838;
- }
  .react-datepicker__day--keyboard-selected:focus,
  .react-datepicker__day--selected:focus {
     outline: none;
  }
  .react-datepicker__header {
-    background-color: rgb(41, 168, 71, 0.2);
+    background-color:#29a84633;
  }
  .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
-   background-color: #218838;
- }
- .react-datepicker__time-container:hover .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
    background-color: #218838;
  }
  .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected,
@@ -66,71 +59,46 @@ class SheduleService extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        userId: this.props.sendUserId,
-        carMake: '',
         carModel: '',
-        carYear: '',
         carLastTest: '',
-        carLastService: '',
-        startDate: setHours(setMinutes(new Date(), 0), 8),
+        dealer: '',
+        service: '',
+        selectedDate: setHours(setMinutes(new Date(), 0), 8),
         excludeTimes: [],
-        showErrorEmail: ''
+        showErrorEmail: 'is-valid'
       }
   }
 
   componentDidMount () {
-    let plate = this.props.sendUserCarPlate;
-    // console.log(plate);
+    this.getVehicle();
+  }
+
+  getVehicle = () => {
+    let plate = this.props.userCarPlate;
     axios.get(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${plate}%22]}`)
     .then((result) => {
       let data = result.data.result.records[0];
-      // console.log(data);
-      let make = data.tozeret_nm;
-      if(make === `סקודה צ'כיה`) {
-        make = "Skoda"
-      }
       let model = data.kinuy_mishari;
-      let year = data.shnat_yitzur;
       let test = moment(data.mivchan_acharon_dt).format('DD/MM/YYYY');
-      // console.log(make, model, year, test);
       this.setState({
-        carPlate: plate,
-        carMake: make,
         carModel: model,
-        carYear: year,
         carLastTest: test,
-        email: '',
-        phone: ''
       })
     })
+  }
 
-    //get last inspection from databse User
-    const User = new Parse.User();
-    const query = new Parse.Query(User);
-    query.get(this.state.userId).then((user) => {
-      console.log(user);
-      const lastInspection = user.attributes.lastInspection;
-      this.setState({
-        carLastService: lastInspection
-      })
+  handleChangeSelectDealer = (e) => {
+    this.setState({
+      dealer: e.target.value
+    })
+    console.log(e.target.value);
+  }
 
-    }, (error) => {
-      
-      console.error('Error while fetching Vehicle', error);
-    });
-
-    //get sheduled dates and times from database Shedule
-    const Shedule = Parse.Object.extend('Shedule');
-    const queryDate = new Parse.Query(Shedule);
-
-    queryDate.find().then((results) => {
-      
-      console.log('Shedule found', results);
-    }, (error) => {
-      
-      console.error('Error while fetching Shedule', error);
-    });
-    
+  handleChangeSelectService = (e) => {
+    this.setState({
+      service: e.target.value
+    })
+    console.log(e.target.value);
   }
 
   handleChangeInputEmail = (e) => {
@@ -144,76 +112,67 @@ class SheduleService extends React.Component {
     })
   }
 
-  handleChange = date => {
+  handleChangeDate = date => {
     this.setState({
-      startDate: date
+      selectedDate: date
     });
-    console.log(this.state.startDate);
   }
 
-  handleSelect = (date, event) => {
-    console.log('onSelect', date, event);
-    const selectedDate = moment(date).format('YYYY/MM/DD');
-    console.log(selectedDate);
-    const transDate = moment(selectedDate).toObject();
-    console.log(transDate);
-
+  handleSelect = (date) => {
     const Shedule = Parse.Object.extend('Shedule');
     const query = new Parse.Query(Shedule);
   
     query.find().then((results) => {
-      console.log(results);
       let arrDates = [];
       for (let i=0; i<results.length; i++) {
          arrDates.push(results[i].attributes.sheduledDate);
-       }
-       console.log(arrDates);
+      }
 
       let arrExcludeDates = [];
       for (let i=0; i<arrDates.length; i++) {
         if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
           arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
-          console.log(arrExcludeDates);
         }
       }
       
       let arrExcludeTimes = [];
         for (let j=0; j<arrExcludeDates.length; j++) {
           arrExcludeTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
-          console.log(arrExcludeTimes);
-
           this.setState({
             excludeTimes: arrExcludeTimes
           })
-          console.log(this.state);
         }
 
     }, (error) => {
-      
       console.error('Error while fetching Shedule', error);
     });
   }
 
-  handleClickOnButtonSubmit = (e) => {
-    
-    e.preventDefault();
-    console.log(this.state.startDate);
+  sheduleDate = () => {
     const Shedule = Parse.Object.extend('Shedule');
     const myNewObject = new Shedule();
 
-    myNewObject.set('sheduledDate', this.state.startDate.toString());
+    myNewObject.set('sheduledDate', this.state.selectedDate.toString());
     myNewObject.set('userId', Parse.User.current());
 
     myNewObject.save().then(
       (result) => {
-        
         console.log('Shedule created', result);
       },
       (error) => {
-        
         console.error('Error while creating Vehicle: ', error);
       }
     );
+  }
+
+  handleClickOnButtonSubmit = (e) => {
+    e.preventDefault();
+    // this.sheduleDate();
+    if (this.state.dealer === '' || this.state.service === '') {
+      this.setState({
+        showError: 'is-invalid'
+      })
+    }
   }
   
   //validation email
@@ -230,44 +189,40 @@ class SheduleService extends React.Component {
   // }
 
   render() {
-    const { startDate } = this.state;
-     
+    const { carLastTest, selectedDate } = this.state;
+    const { userCarPlate, lastInspection } = this.props; 
     return(
       <div className="c-shedule-service">
         <div className="col-sm-12 col-md-5">
           <h1 className="display-4 my-skoda-title ml-0">Shedule Service Appointment</h1>
-          <p className="text-regular text-bg last ml-0">your last annual vehicle licensing test: <strong>{this.state.carLastTest}</strong></p>
-          <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{this.state.carLastService}</strong></p>
+          <p className="text-regular text-bg last ml-0">your last annual vehicle licensing test: <strong>{carLastTest}</strong></p>
+          {lastInspection === "" || lastInspection === undefined 
+          ? <p className="text-regular text-bg last ml-0">your last multi-point inspection:<br/> <small>Choose date for your first inspection in our dealer centers</small></p> 
+          : <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{lastInspection}</strong></p>}
           <form className="row g-3 shedule-form">
             <div className="col-md-6">
               <label for="validationServer01" className="form-label">PlateNumber</label>
-              <input type="text" className="form-control is-valid" id="validationServer01" value={this.props.sendUserCarPlate} required disabled/>
-              {/* <div class="valid-feedback">
-                Looks good!
-              </div> */}
+              <input type="text" className="form-control is-valid" id="validationServer01" value={userCarPlate} required disabled/>
             </div>
             <div className="col-md-6">
               <label for="validationServer02" className="form-label">Model</label>
-              <input type="text" className="form-control is-valid" id="validationServer02" value={this.state.carModel} required />
-              {/* <div class="valid-feedback">
-                Looks good!
-              </div> */}
+              <input type="text" className="form-control is-valid" id="validationServer02" value={this.state.carModel} required disabled/>
             </div>
             <div className="col-md-12">
-              <label for="validationServer04" className="form-label shedule-label">Dealer</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <label for="validationServer01" className="form-label shedule-label">Dealer</label>
+              <select className={`form-select shedule-select ${this.state.showError}`} onChange={this.handleChangeSelectDealer} id="validationServer01" aria-describedby="validationServer01Feedback" required>
                 <option selected disabled value="">Choose dealer</option>
                 <option>Felix Oficial Dealer Tel-Aviv</option>
                 <option>HaGoren Oficial Dealer Nataniya</option>
                 <option>MotorUp Oficial Dealer Petach-Tikva</option>
               </select>
-              <div id="validationServer04Feedback" className="invalid-feedback">
+              <div id="validationServer01Feedback" className="invalid-feedback">
                 Please select a dealer.
               </div>
             </div>
             <div className="col-md-12">
               <label for="validationServer04" className="form-label shedule-label">Service</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <select className={`form-select shedule-select ${this.state.showError}`} onChange={this.handleChangeSelectService} id="validationServer04" aria-describedby="validationServer04Feedback" required>
                 <option selected disabled value="">Choose services</option>
                 <option>Inspection Before Annual Vehicle Licensing Test</option>
                 <option>Multi-Point Inspection</option>
@@ -284,8 +239,8 @@ class SheduleService extends React.Component {
               <Styles>
                 <DatePicker
                   isClearable
-                  selected={startDate}
-                  onChange={this.handleChange}
+                  selected={selectedDate}
+                  onChange={this.handleChangeDate}
                   onSelect={this.handleSelect}
                   placeholderText="Select Date and Time"
                   popperPlacement="top-start"
@@ -305,8 +260,8 @@ class SheduleService extends React.Component {
                 />
                 <DatePicker
                   isClearable
-                  selected={startDate}
-                  onChange={this.handleChange}
+                  selected={selectedDate}
+                  onChange={this.handleChangeDate}
                   onSelect={this.handleSelect}
                   placeholderText="Select Date and Time"
                   popperPlacement="top-start"
@@ -336,7 +291,7 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showErrorEmail}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid email.
                 </div>

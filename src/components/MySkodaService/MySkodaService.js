@@ -7,9 +7,9 @@ class MySkodaService extends React.Component {
   render() {
     const { carTest, lastInspection } = this.props;
     return(
-      <div class="c-my-skoda-service col-md-6 col-lg-4">
+      <div className="c-my-skoda-service col-md-6 col-lg-4">
         <h1 className="display-4 my-skoda-title">Vehicle Service</h1>
-        <p class="text-green">Common Skoda Service</p>
+        <p className="text-green">Common Skoda Service</p>
         <Card className="mb-4">
           <Card.Body>
             <p className="text-regular">Inspection Before Annual Vehicle Licensing Test</p>

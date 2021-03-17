@@ -7,14 +7,15 @@ import { Container } from 'react-bootstrap';
 class SheduleServicePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userCarPlate: this.props.sendUserCarPlate,
-      userId: this.props.sendUserId,
-      activeUser: this.props.activeUser
-    }
+    // this.state = {
+    //   userCarPlate: this.props.sendUserCarPlate,
+    //   userId: this.props.sendUserId,
+    //   activeUser: this.props.activeUser
+    // }
+    console.log(this.props);
   }
   componentDidMount = () => {
-    if (this.state.activeUser === null) {
+    if (this.props.activeUser === null) {
       window.history.forward();
     }
   }
@@ -23,7 +24,7 @@ class SheduleServicePage extends React.Component {
     return(
       <div className="p-shedule-service-page">
         <Container className="main">
-          <SheduleService sendUserCarPlate={this.state.userCarPlate} sendUserId={this.state.userId} />
+          <SheduleService userCarPlate={this.props.userCarPlate} userId={this.props.userId} lastInspection={this.props.lastInspection} />
         </Container>
         <MySkodaFooter />
       </div>

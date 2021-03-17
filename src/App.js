@@ -82,7 +82,7 @@ class App extends React.Component {
             <HomePage />
           </Route>
           <Route path="/shedule" component={SheduleServicePage}>
-            <SheduleServicePage activeUser={activeUser} sendUserId={userId} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>
+            <SheduleServicePage activeUser={activeUser} userId={userId} userCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/my-skoda" component={MySkodaPage}>
             <MySkodaPage activeUser={activeUser} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>

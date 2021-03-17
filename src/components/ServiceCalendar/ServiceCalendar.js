@@ -84,10 +84,10 @@ class ServiceCalendar extends React.Component {
     let firstOfMay;
     let firstOfNovember;
     while (dateAfterYear > dateNow) {
-      if(dateNow.format('DD/MM/YYYY') === "01/05/2021") {
+      if(dateNow.format('DD/MM') === "01/05") {
         firstOfMay = dateNow.format('DD/MM/YYYY');
       }
-      if(dateNow.format('DD/MM/YYYY') === "01/11/2021") {
+      if(dateNow.format('DD/MM') === "01/11") {
         firstOfNovember = dateNow.format('DD/MM/YYYY');
       }
       dateNow.add(1, 'day'); 
@@ -150,11 +150,11 @@ class ServiceCalendar extends React.Component {
     })
 
     return(
-     <div class="c-service-calendar col-md-12 col-lg-4">
+     <div className="c-service-calendar col-md-12 col-lg-4">
         <h1 className="display-4 my-skoda-title">Service Calendar</h1>
-        <p class="text-regular">Keep Your Skoda At Its Best with Our Service</p>
+        <p className="text-regular">Keep Your Skoda At Its Best with Our Service</p>
         <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
-        <table class="table table-success table-striped table-bordered">
+        <table className="table table-success table-striped table-bordered">
           <tr className="table-secondary">
             <th className="service-cell" scope="row">Visit</th>
             <th className="service-cell">Service</th>
