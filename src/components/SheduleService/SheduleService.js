@@ -67,7 +67,7 @@ class SheduleService extends React.Component {
         phone: '',
         selectedDate: setHours(setMinutes(new Date(), 0), 8),
         excludeTimes: [],
-        showErrorEmail: 'is-valid'
+        hideError: 'is-valid'
       }
   }
 
@@ -94,6 +94,8 @@ class SheduleService extends React.Component {
       [e.target.name]: e.target.value
     })
     console.log(e.target.value);
+    console.log(e);
+    this.validateInput(e.target.value, e.target.name);
   }
 
   handleChangeDate = date => {
@@ -102,10 +104,14 @@ class SheduleService extends React.Component {
     });
   }
 
-  handleSelect = (date) => {
+  getExcludeTimes = (date) => {
+    this.setState({
+      excludeTimes: []
+    })
+
     const Shedule = Parse.Object.extend('Shedule');
     const query = new Parse.Query(Shedule);
-  
+    
     query.find().then((results) => {
       let arrDates = [];
       for (let i=0; i<results.length; i++) {
@@ -126,7 +132,7 @@ class SheduleService extends React.Component {
             excludeTimes: arrExcludeTimes
           })
         }
-
+        
     }, (error) => {
       console.error('Error while fetching Shedule', error);
     });
@@ -151,26 +157,37 @@ class SheduleService extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.sheduleDate();
-    if (this.state.dealer === '' || this.state.service === '') {
-      this.setState({
-        showError: 'is-invalid'
-      })
-    }
+    this.sheduleDate();
+    // if (this.state.dealer === '' || this.state.service === '') {
+    //   this.setState({
+    //     showError: 'is-invalid'
+    //   })
+    // }
   }
-  
-  //validation email
-  // validationEmail = (e) => {
-  //    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-  //   if (!pattern.test(e.target.value)) {
-  //           this.setState({
-  //             showErrorEmail: 'is-invalid'
-  //           })
-  //           this.setState({
-  //             showErrorEmail: 'is-valid'
-  //           })
-  //       }
-  // }
+
+  validateInput = (value, name) => {
+    console.log(value, name);
+  }
+
+  emailValidation = email => {
+    if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+      return null;
+    }
+    if (email.trim() === '') {
+      return 'Email is required';
+    }
+    return 'Please enter a valid email';
+  }
+
+  phoneValidation = phone => {
+    if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
+      return null;
+    }
+    if (phone.trim() === '') {
+      return 'Phone is required';
+    }
+    return 'Please enter a valid phone';
+  }
 
   render() {
     const { carLastTest, selectedDate, dealer, service, email, phone } = this.state;
@@ -226,7 +243,7 @@ class SheduleService extends React.Component {
                   isClearable
                   selected={selectedDate}
                   onChange={this.handleChangeDate}
-                  onSelect={this.handleSelect}
+                  onSelect={this.getExcludeTimes}
                   placeholderText="Select Date and Time"
                   popperPlacement="top-start"
                   popperModifiers={{
@@ -247,7 +264,7 @@ class SheduleService extends React.Component {
                   isClearable
                   selected={selectedDate}
                   onChange={this.handleChangeDate}
-                  onSelect={this.handleSelect}
+                  onSelect={this.getExcludeTimes}
                   placeholderText="Select Date and Time"
                   popperPlacement="top-start"
                   popperModifiers={{
@@ -285,7 +302,7 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0">Telephone</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="000-000-0000" name="phone" onChange={this.handleChangeInput} value={phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="050-5005050" name="phone" onChange={this.handleChangeInput} value={phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid telephone.
                 </div>
