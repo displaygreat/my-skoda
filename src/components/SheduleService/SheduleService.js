@@ -63,6 +63,8 @@ class SheduleService extends React.Component {
         carLastTest: '',
         dealer: '',
         service: '',
+        email: '',
+        phone: '',
         selectedDate: setHours(setMinutes(new Date(), 0), 8),
         excludeTimes: [],
         showErrorEmail: 'is-valid'
@@ -87,30 +89,35 @@ class SheduleService extends React.Component {
     })
   }
 
-  handleChangeSelectDealer = (e) => {
+  handleChangeInput = (e) => {
     this.setState({
-      dealer: e.target.value
+      [e.target.name]: e.target.value
     })
     console.log(e.target.value);
   }
 
-  handleChangeSelectService = (e) => {
-    this.setState({
-      service: e.target.value
-    })
-    console.log(e.target.value);
-  }
+  // handleChangeSelectDealer = (e) => {
+  //   this.setState({
+  //     dealer: e.target.value
+  //   })
+  // }
 
-  handleChangeInputEmail = (e) => {
-    this.setState({
-      email: e.target.value
-    })
-  } 
-  handleChangeInputPhone = (e) => {
-    this.setState({
-      phone: e.target.value
-    })
-  }
+  // handleChangeSelectService = (e) => {
+  //   this.setState({
+  //     service: e.target.value
+  //   })
+  // }
+
+  // handleChangeInputEmail = (e) => {
+  //   this.setState({
+  //     email: e.target.value
+  //   })
+  // } 
+  // handleChangeInputPhone = (e) => {
+  //   this.setState({
+  //     phone: e.target.value
+  //   })
+  // }
 
   handleChangeDate = date => {
     this.setState({
@@ -165,7 +172,7 @@ class SheduleService extends React.Component {
     );
   }
 
-  handleClickOnButtonSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     // this.sheduleDate();
     if (this.state.dealer === '' || this.state.service === '') {
@@ -189,8 +196,9 @@ class SheduleService extends React.Component {
   // }
 
   render() {
-    const { carLastTest, selectedDate } = this.state;
-    const { userCarPlate, lastInspection } = this.props; 
+    const { carLastTest, selectedDate, dealer, service, email, phone } = this.state;
+    const { userCarPlate, lastInspection } = this.props;
+    console.log(dealer, service, email, phone);
     return(
       <div className="c-shedule-service">
         <div className="col-sm-12 col-md-5">
@@ -210,7 +218,7 @@ class SheduleService extends React.Component {
             </div>
             <div className="col-md-12">
               <label for="validationServer01" className="form-label shedule-label">Dealer</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} onChange={this.handleChangeSelectDealer} id="validationServer01" aria-describedby="validationServer01Feedback" required>
+              <select className={`form-select shedule-select ${this.state.showError}`} name="dealer" onChange={this.handleChangeInput} id="validationServer01" aria-describedby="validationServer01Feedback" required>
                 <option selected disabled value="">Choose dealer</option>
                 <option>Felix Oficial Dealer Tel-Aviv</option>
                 <option>HaGoren Oficial Dealer Nataniya</option>
@@ -222,7 +230,7 @@ class SheduleService extends React.Component {
             </div>
             <div className="col-md-12">
               <label for="validationServer04" className="form-label shedule-label">Service</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} onChange={this.handleChangeSelectService} id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <select className={`form-select shedule-select ${this.state.showError}`} name="service" onChange={this.handleChangeInput} id="validationServer04" aria-describedby="validationServer04Feedback" required>
                 <option selected disabled value="">Choose services</option>
                 <option>Inspection Before Annual Vehicle Licensing Test</option>
                 <option>Multi-Point Inspection</option>
@@ -291,7 +299,7 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" onChange={this.handleChangeInputEmail} value={this.state.email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" name="email" onChange={this.handleChangeInput} value={email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid email.
                 </div>
@@ -300,14 +308,14 @@ class SheduleService extends React.Component {
             <div className="col-md-12">
               <label for="validationServer03" className="col-2 col-form-label pl-0">Telephone</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
-                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="000-000-0000" onChange={this.handleChangeInputPhone} value={this.state.phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
+                <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="000-000-0000" name="phone" onChange={this.handleChangeInput} value={phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
                 Please provide a valid telephone.
                 </div>
               </div>
             </div>
             <div className="col-12">
-              <button className="btn btn-primary shedule-submit my-4" type="submit" onClick={this.handleClickOnButtonSubmit}>Submit form</button>
+              <button className="btn btn-primary shedule-submit my-4" type="submit" onClick={this.handleSubmit}>Submit form</button>
             </div>
           </form> 
         </div>
