@@ -96,29 +96,6 @@ class SheduleService extends React.Component {
     console.log(e.target.value);
   }
 
-  // handleChangeSelectDealer = (e) => {
-  //   this.setState({
-  //     dealer: e.target.value
-  //   })
-  // }
-
-  // handleChangeSelectService = (e) => {
-  //   this.setState({
-  //     service: e.target.value
-  //   })
-  // }
-
-  // handleChangeInputEmail = (e) => {
-  //   this.setState({
-  //     email: e.target.value
-  //   })
-  // } 
-  // handleChangeInputPhone = (e) => {
-  //   this.setState({
-  //     phone: e.target.value
-  //   })
-  // }
-
   handleChangeDate = date => {
     this.setState({
       selectedDate: date
