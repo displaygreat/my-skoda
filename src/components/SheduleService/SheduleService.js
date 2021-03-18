@@ -8,38 +8,45 @@ import octavia from '../../assets/img/octavia.jpg';
 import karoq from '../../assets/img/karoq.jpg';
 import SheduleForm from '../SheduleForm/SheduleForm';
 
-const emailValidation = email => {
-  if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-    return null;
-  }
-  if (email.trim() === '') {
-    return 'Email is required';
-  }
-  return 'Please enter a valid email';
-}
+// const emailValidation = email => {
+//   if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+//     return null;
+//   }
+//   if (email.trim() === '') {
+//     return 'Email is required';
+//   }
+//   return 'Please enter a valid email';
+// }
 
-const phoneValidation = phone => {
-  if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
-    return null;
-  }
-  if (phone.trim() === '') {
-    return 'Phone is required';
-  }
-  return 'Please enter a valid phone';
-}
+// const phoneValidation = phone => {
+//   if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
+//     return null;
+//   }
+//   if (phone.trim() === '') {
+//     return 'Phone is required';
+//   }
+//   return 'Please enter a valid phone';
+// }
 
-const selectValidation = (select) => {
-  if (select === '') {
-    return 'Please choose an option';
-  }
-}
+// const selectValidation = (select) => {
+//   if (select === '') {
+//     return 'Please choose an option';
+//   }
+// }
 
-const validate = {
-  dealer: name => selectValidation(name),
-  service: name => selectValidation(name),
-  email: emailValidation(),
-  phone: phoneValidation()
-}
+// const validate = {
+//   dealer: name => selectValidation(name),
+//   service: name => selectValidation(name),
+//   email: emailValidation(),
+//   phone: phoneValidation()
+// }
+
+// const initialValues = {
+//   dealer: 'Choose dealer',
+//   service: 'Choose service',
+//   email: 'example@example.com',
+//   phone: '050-5005050',
+// };
 
 class SheduleService extends React.Component {
   constructor(props) {
@@ -81,7 +88,7 @@ class SheduleService extends React.Component {
           {lastInspection === "" || lastInspection === undefined 
           ? <p className="text-regular text-bg last ml-0">your last multi-point inspection:<br/> <small>Choose date for your first inspection in our dealer centers</small></p> 
           : <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{lastInspection}</strong></p>}
-          <SheduleForm carModel={carModel} userCarPlate={userCarPlate} validate={validate} />
+          <SheduleForm carModel={carModel} userCarPlate={userCarPlate} />
         </div>
         <div className="col-sm-12 col-md-5 rounded">
           <h3 className="title-discount">Shedule your visit online and get 10% discount for service</h3>

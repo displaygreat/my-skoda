@@ -7,16 +7,42 @@ class SheduleForm extends React.Component {
     super(props);
     this.state = {
       selectedDate: {},
-      dealer: '',
+      dealer:'',
       service: '',
       email: '',
-      phone: ''
+      phone: '',
+      values: {
+        dealer: '',
+        service: '',
+        email: '',
+        phone: ''
+      },
+      touched: {
+        dealer: '',
+        service: '',
+        email: '',
+        phone: ''
+      },
+      errors: {
+        dealer: '',
+        service: '',
+        email: '',
+        phone: ''
+      }
     }
+    console.log(this.state);
+    console.log(this.props);
   }
 
   handleChangeInput = (e) => {
+    const { name, value } = e.target;
     this.setState({
-      [e.target.name]: e.target.value
+      values: {
+        [name]: value
+      },
+      touched: {
+        [name]: value
+      }
     })
   }
 
@@ -49,10 +75,12 @@ class SheduleForm extends React.Component {
   }
 
   render () {
-    const { userCarPlate, carModel } = this.props;
-    const { email, phone } = this.state;
+    console.log(this.state.values, this.state.touched);
+    const { userCarPlate, carModel, initialValues } = this.props;
+    const { dealer, service, email, phone } = this.state.values;
     return (
-      <form className="row g-3 shedule-form">
+      <form 
+        className="row g-3 shedule-form">
         <div className="col-md-6">
           <label htmlFor="validationServer01" className="form-label">PlateNumber</label>
           <input 
@@ -84,6 +112,7 @@ class SheduleForm extends React.Component {
             id="validationServer01" 
             aria-describedby="validationServer01Feedback" 
             defaultValue="Choose dealer" 
+            value={dealer}
             required>
             <option disabled>Choose dealer</option>
             <option>Felix Oficial Dealer Tel-Aviv</option>
@@ -102,7 +131,8 @@ class SheduleForm extends React.Component {
             onChange={this.handleChangeInput} 
             id="validationServer04" 
             aria-describedby="validationServer04Feedback" 
-            defaultValue="Choose services" 
+            defaultValue="Choose services"
+            value={service} 
             required>
             <option disabled>Choose services</option>
             <option>Inspection Before Annual Vehicle Licensing Test</option>
@@ -127,8 +157,10 @@ class SheduleForm extends React.Component {
               style={{backgroundImage: "none", borderColor: "#000"}} 
               type="email" 
               placeholder="example@example.com" 
-              name="email" onChange={this.handleChangeInput} 
-              value={email} id="validationServer03" 
+              name="email" 
+              onChange={this.handleChangeInput} 
+              value={email} 
+              id="validationServer03" 
               aria-describedby="validationServer03Feedback" 
               required/>
             <div id="validationServer03Feedback" className="invalid-feedback">
