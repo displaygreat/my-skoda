@@ -3,57 +3,44 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
-import DatePicker from "react-datepicker";
-import setHours from 'date-fns/setHours';
-import setMinutes from 'date-fns/setMinutes';
-import "react-datepicker/dist/react-datepicker.css";
-import styled from "styled-components";
 import Parse from 'parse';
 import superb from '../../assets/img/superb.jpg';
 import octavia from '../../assets/img/octavia.jpg';
 import karoq from '../../assets/img/karoq.jpg';
+import DatePickerComp from '../DatePickerComp/DatePickerComp';
 
-const Styles = styled.div`
-.react-datepicker__input-container input,
-.react-datepicker__input-container,
-.react-datepicker-wrapper {
-  width: 240px;
-  height: 38px;
-  margin-bottom: 30px;
-  display: block;
-}
- .react-datepicker__close-icon::before,
- .react-datepicker__close-icon::after {
-    background-color: #28a745;
- }
- .react-datepicker__time-container,
- .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
-   width: 240px;
- }
- .react-datepicker__day--keyboard-selected,
- .react-datepicker__day--selected {
-    background-color: #218838;
- }
- .react-datepicker__day--keyboard-selected:focus,
- .react-datepicker__day--selected:focus {
-    outline: none;
- }
- .react-datepicker__header {
-    background-color:#29a84633;
- }
- .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
-   background-color: #218838;
- }
- .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected,
- .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item
- {
-   height: 50px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-  }
- }
-`;
+// const emailValidation = email => {
+//   if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+//     return null;
+//   }
+//   if (email.trim() === '') {
+//     return 'Email is required';
+//   }
+//   return 'Please enter a valid email';
+// }
+
+// const phoneValidation = phone => {
+//   if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
+//     return null;
+//   }
+//   if (phone.trim() === '') {
+//     return 'Phone is required';
+//   }
+//   return 'Please enter a valid phone';
+// }
+
+// const selectValidation = (select) => {
+//   if (select === '') {
+//     return 'Please choose an option';
+//   }
+// }
+
+// const validate = {
+//   dealer: name => selectValidation(name),
+//   service: name => selectValidation(name),
+//   email: emailValidation(),
+//   phone: phoneValidation()
+// }
 
 class SheduleService extends React.Component {
   constructor(props) {
@@ -65,7 +52,7 @@ class SheduleService extends React.Component {
         service: '',
         email: '',
         phone: '',
-        selectedDate: setHours(setMinutes(new Date(), 0), 8),
+        selectedDate: {},
         excludeTimes: [],
         hideError: 'is-valid'
       }
@@ -73,7 +60,9 @@ class SheduleService extends React.Component {
 
   componentDidMount () {
     this.getVehicle();
-  }
+    this.getSelectedDate();
+    this.getExcludeTimes();
+  } 
 
   getVehicle = () => {
     let plate = this.props.userCarPlate;
@@ -86,6 +75,12 @@ class SheduleService extends React.Component {
         carModel: model,
         carLastTest: test,
       })
+    })
+  }
+
+  getSelectedDate = (date) => {
+    this.setState({
+      selectedDate: date
     })
   }
 
@@ -104,44 +99,10 @@ class SheduleService extends React.Component {
     });
   }
 
-  getExcludeTimes = (date) => {
-    this.setState({
-      excludeTimes: []
-    })
-
-    const Shedule = Parse.Object.extend('Shedule');
-    const query = new Parse.Query(Shedule);
-    
-    query.find().then((results) => {
-      let arrDates = [];
-      for (let i=0; i<results.length; i++) {
-         arrDates.push(results[i].attributes.sheduledDate);
-      }
-
-      let arrExcludeDates = [];
-      for (let i=0; i<arrDates.length; i++) {
-        if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
-          arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
-        }
-      }
-      
-      let arrExcludeTimes = [];
-        for (let j=0; j<arrExcludeDates.length; j++) {
-          arrExcludeTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
-          this.setState({
-            excludeTimes: arrExcludeTimes
-          })
-        }
-        
-    }, (error) => {
-      console.error('Error while fetching Shedule', error);
-    });
-  }
-
   sheduleDate = () => {
     const Shedule = Parse.Object.extend('Shedule');
     const myNewObject = new Shedule();
-
+    
     myNewObject.set('sheduledDate', this.state.selectedDate.toString());
     myNewObject.set('userId', Parse.User.current());
 
@@ -158,39 +119,14 @@ class SheduleService extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.sheduleDate();
-    // if (this.state.dealer === '' || this.state.service === '') {
-    //   this.setState({
-    //     showError: 'is-invalid'
-    //   })
-    // }
   }
 
   validateInput = (value, name) => {
     console.log(value, name);
   }
 
-  emailValidation = email => {
-    if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-      return null;
-    }
-    if (email.trim() === '') {
-      return 'Email is required';
-    }
-    return 'Please enter a valid email';
-  }
-
-  phoneValidation = phone => {
-    if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
-      return null;
-    }
-    if (phone.trim() === '') {
-      return 'Phone is required';
-    }
-    return 'Please enter a valid phone';
-  }
-
   render() {
-    const { carLastTest, selectedDate, dealer, service, email, phone } = this.state;
+    const { carLastTest, dealer, service, email, phone } = this.state;
     const { userCarPlate, lastInspection } = this.props;
     console.log(dealer, service, email, phone);
     return(
@@ -203,17 +139,17 @@ class SheduleService extends React.Component {
           : <p className="text-regular text-bg last ml-0">your last multi-point inspection: <strong>{lastInspection}</strong></p>}
           <form className="row g-3 shedule-form">
             <div className="col-md-6">
-              <label for="validationServer01" className="form-label">PlateNumber</label>
+              <label htmlFor="validationServer01" className="form-label">PlateNumber</label>
               <input type="text" className="form-control is-valid" id="validationServer01" value={userCarPlate} required disabled/>
             </div>
             <div className="col-md-6">
-              <label for="validationServer02" className="form-label">Model</label>
+              <label htmlFor="validationServer02" className="form-label">Model</label>
               <input type="text" className="form-control is-valid" id="validationServer02" value={this.state.carModel} required disabled/>
             </div>
             <div className="col-md-12">
-              <label for="validationServer01" className="form-label shedule-label">Dealer</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} name="dealer" onChange={this.handleChangeInput} id="validationServer01" aria-describedby="validationServer01Feedback" required>
-                <option selected disabled value="">Choose dealer</option>
+              <label htmlFor="validationServer01" className="form-label shedule-label">Dealer</label>
+              <select className={`form-select shedule-select ${this.state.showError}`} name="dealer" onChange={this.handleChangeInput} id="validationServer01" aria-describedby="validationServer01Feedback" defaultValue="Choose dealer" required>
+                <option disabled>Choose dealer</option>
                 <option>Felix Oficial Dealer Tel-Aviv</option>
                 <option>HaGoren Oficial Dealer Nataniya</option>
                 <option>MotorUp Oficial Dealer Petach-Tikva</option>
@@ -223,9 +159,9 @@ class SheduleService extends React.Component {
               </div>
             </div>
             <div className="col-md-12">
-              <label for="validationServer04" className="form-label shedule-label">Service</label>
-              <select className={`form-select shedule-select ${this.state.showError}`} name="service" onChange={this.handleChangeInput} id="validationServer04" aria-describedby="validationServer04Feedback" required>
-                <option selected disabled value="">Choose services</option>
+              <label htmlFor="validationServer04" className="form-label shedule-label">Service</label>
+              <select className={`form-select shedule-select ${this.state.showError}`} name="service" onChange={this.handleChangeInput} id="validationServer04" aria-describedby="validationServer04Feedback" defaultValue="Choose services" required>
+                <option disabled>Choose services</option>
                 <option>Inspection Before Annual Vehicle Licensing Test</option>
                 <option>Multi-Point Inspection</option>
                 <option>Full service</option>
@@ -238,60 +174,10 @@ class SheduleService extends React.Component {
             </div>
             <div className="col-md-12">
               <p className="mt-2">Select Date and Time</p>
-              <Styles>
-                <DatePicker
-                  isClearable
-                  selected={selectedDate}
-                  onChange={this.handleChangeDate}
-                  onSelect={this.getExcludeTimes}
-                  placeholderText="Select Date and Time"
-                  popperPlacement="top-start"
-                  popperModifiers={{
-                    offset: {
-                      enabled: true,
-                      offset: "0px, 10px"
-                    },
-                    preventOverflow: {
-                      enabled: true,
-                      escapeWithReference: false,
-                      boundariesElement: "viewport"
-                    }
-                  }}
-                  dateFormat="dd/MM/yyy"
-                  minDate={new Date()}
-                />
-                <DatePicker
-                  isClearable
-                  selected={selectedDate}
-                  onChange={this.handleChangeDate}
-                  onSelect={this.getExcludeTimes}
-                  placeholderText="Select Date and Time"
-                  popperPlacement="top-start"
-                  popperModifiers={{
-                    offset: {
-                      enabled: true,
-                      offset: "0px, 10px"
-                    },
-                    preventOverflow: {
-                      enabled: true,
-                      escapeWithReference: false,
-                      boundariesElement: "viewport"
-                    }
-                  }}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={15}
-                  timeFormat="HH:mm"
-                  dateFormat="hh:mm aa"
-                  minDate={new Date()}
-                  excludeTimes={this.state.excludeTimes}
-                  minTime={setHours(setMinutes(new Date(), 0), 8)}
-                  maxTime={setHours(setMinutes(new Date(), 45), 14)}
-                />
-              </Styles>
+              <DatePickerComp getSelectedDate={this.getSelectedDate} getExcludeTimes={this.getExcludeTimes} />
             </div>
             <div className="col-md-12">
-              <label for="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
+              <label htmlFor="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
                 <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="email" placeholder="example@example.com" name="email" onChange={this.handleChangeInput} value={email} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">
@@ -300,7 +186,7 @@ class SheduleService extends React.Component {
               </div>
             </div>
             <div className="col-md-12">
-              <label for="validationServer03" className="col-2 col-form-label pl-0">Telephone</label>
+              <label htmlFor="validationServer03" className="col-2 col-form-label pl-0">Phone</label>
               <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
                 <input className={`form-control ${this.state.showError}`} style={{backgroundImage: "none", borderColor: "#000"}} type="tel" placeholder="050-5005050" name="phone" onChange={this.handleChangeInput} value={phone} id="validationServer03" aria-describedby="validationServer03Feedback" required/>
                 <div id="validationServer03Feedback" className="invalid-feedback">

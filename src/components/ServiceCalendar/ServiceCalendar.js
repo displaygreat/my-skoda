@@ -139,13 +139,15 @@ class ServiceCalendar extends React.Component {
 
   render() {
     const sortedData = this.getSortedData();
-    const servicesTable = sortedData.map((service) => {
+    const servicesTable = sortedData.map((service, index) => {
       return (
-        <tr>
-          <th className="service-cell"><small>recommended</small><br/>{service.recommended}</th>
-          <td className="service-cell">{service.service}</td>
-          <td className="service-cell"><small>shedule</small><br/><a className="shedule-link" href="#/shedule">{service.shedule}</a></td>
-        </tr>
+        <tbody key={index}>
+          <tr>
+            <th className="service-cell"><small>recommended</small><br/>{service.recommended}</th>
+            <td className="service-cell">{service.service}</td>
+            <td className="service-cell"><small>shedule</small><br/><a className="shedule-link" href="#/shedule">{service.shedule}</a></td>
+          </tr>
+        </tbody>
       )
     })
 
@@ -155,11 +157,13 @@ class ServiceCalendar extends React.Component {
         <p className="text-regular">Keep Your Skoda At Its Best with Our Service</p>
         <span className="text-small">Scheduled maintenance can saving you lots in the long run</span>
         <table className="table table-success table-striped table-bordered">
-          <tr className="table-secondary">
-            <th className="service-cell" scope="row">Visit</th>
-            <th className="service-cell">Service</th>
-            <th className="service-cell">Shedule</th>
-          </tr>
+          <thead>
+            <tr className="table-secondary">
+              <th className="service-cell" scope="row">Visit</th>
+              <th className="service-cell">Service</th>
+              <th className="service-cell">Shedule</th>
+            </tr>
+          </thead>
           {servicesTable}
         </table>
       </div>
