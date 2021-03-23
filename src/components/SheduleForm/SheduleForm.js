@@ -80,7 +80,7 @@ class SheduleForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.sheduleDate();
+    // this.sheduleDate();
     let errors = this.state.errors;
     let touched = this.state.touched;
     let values = this.state.values;
@@ -120,9 +120,10 @@ class SheduleForm extends React.Component {
   }
 
   render () {
-    console.log(this.state.errors);
+    console.log(this.state.errors.dealer);
     const { userCarPlate, carModel } = this.props;
     const { dealer, service, email, phone } = this.state.values;
+    
     return (
       <form 
         className="row g-3 shedule-form">
@@ -151,7 +152,7 @@ class SheduleForm extends React.Component {
         <div className="col-md-12">
           <label htmlFor="validationServer01" className="form-label shedule-label">Choose Dealer</label>
           <select 
-            className={`form-select shedule-select ${this.state.showError}`} 
+            className={`form-select shedule-select ${this.state.errors.dealer}`} 
             name="dealer" 
             onChange={this.handleChangeInput} 
             onBlur={this.handleBlur}
@@ -171,7 +172,7 @@ class SheduleForm extends React.Component {
         <div className="col-md-12">
           <label htmlFor="validationServer04" className="form-label shedule-label">Choose services</label>
           <select 
-            className={`form-select shedule-select ${this.state.showError}`} 
+            className={`form-select shedule-select ${this.state.errors.service}`} 
             name="service" 
             onChange={this.handleChangeInput}
             onBlur={this.handleBlur} 
@@ -198,7 +199,7 @@ class SheduleForm extends React.Component {
           <label htmlFor="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
           <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
             <input 
-              className={`form-control ${this.state.showError}`} 
+              className={`form-control ${this.state.errors.email}`} 
               style={{backgroundImage: "none", borderColor: "#000"}} 
               type="email" 
               placeholder="example@example.com" 
@@ -218,7 +219,7 @@ class SheduleForm extends React.Component {
           <label htmlFor="validationServer03" className="col-2 col-form-label pl-0">Phone</label>
           <div className="col-lg-10 col-md-12 col-sm-10 col-xs-12 pl-0">
             <input 
-              className={`form-control ${this.state.showError}`} 
+              className={`form-control ${this.state.errors.phone}`} 
               style={{backgroundImage: "none", borderColor: "#000"}} 
               type="tel" 
               placeholder="050-5005050" 

@@ -10,30 +10,30 @@ import SheduleForm from '../SheduleForm/SheduleForm';
 
 const emailValidation = email => {
   console.log(email);
-  if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+  if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email) && email.trim() !== '') {
     return null;
   }
-  if (email.trim() === '') {
-    return 'Email is required';
-  }
-  return 'Please enter a valid email';
+  // if (email.trim() === '') {
+  //   return 'Email is required';
+  // }
+  return 'is-invalid';
 }
 
 const phoneValidation = phone => {
   console.log(phone);
-  if (/[0-9]{2,3}-?[0-9]{7}/.test(phone)) {
+  if (/[0-9]{2,3}-?[0-9]{7}/.test(phone) && phone.trim() !== '') {
     return null;
   }
-  if (phone.trim() === '') {
-    return 'Phone is required';
-  }
-  return 'Please enter a valid phone';
+  // if (phone.trim() === '') {
+  //   return 'Phone is required';
+  // }
+  return 'is-invalid';
 }
 
 const selectValidation = (select) => {
   console.log(select);
   if (select === '') {
-    return 'Please choose an option';
+    return 'is-invalid';
   }
   return null;
 }
@@ -50,9 +50,9 @@ class SheduleService extends React.Component {
     super(props);
     this.state = {
         carModel: '',
-        carLastTest: '',
-        hideError: 'is-valid'
+        carLastTest: ''
       }
+      console.log(this.props);
   }
 
   componentDidMount () {
