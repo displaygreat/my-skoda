@@ -5,12 +5,9 @@ import Parse from 'parse';
 class SheduleForm extends React.Component {
   constructor (props) {
     super(props);
+    
     this.state = {
       selectedDate: {},
-      dealer:'',
-      service: '',
-      email: '',
-      phone: '',
       values: {
         dealer: '',
         service: '',
@@ -30,20 +27,32 @@ class SheduleForm extends React.Component {
         phone: ''
       }
     }
-    console.log(this.state);
-    console.log(this.props);
   }
 
   handleChangeInput = (e) => {
     const { name, value } = e.target;
     this.setState({
       values: {
+        ...this.state.values,
         [name]: value
       },
       touched: {
-        [name]: value
+        ...this.state.touched,
+        [name]: true
       }
     })
+  }
+
+  handleBlur = (e) => {
+    const {name, value} = e.target;
+    const { [name]: removedError, ...rest } = this.state.errors;
+    const error = this.props.validate[name](value);
+    this.setState({
+      errors: {
+        ...rest,
+        [name]: (error && { [name]: this.state.touched[name] && error })
+      }
+    });
   }
 
   getSelectedDate = (date) => {
@@ -72,11 +81,47 @@ class SheduleForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.sheduleDate();
+    let errors = this.state.errors;
+    let touched = this.state.touched;
+    let values = this.state.values;
+    const formValidation = Object.keys(values).reduce(
+      (acc, key) => {
+        const newError = this.props.validate[key](values[key]);
+        const newTouched = { [key]: true };
+        return {
+          errors: {
+            ...acc.errors,
+            ...(newError && { [key]: newError }),
+          },
+          touched: {
+            ...acc.touched,
+            ...newTouched,
+          },
+        };
+      },
+      {
+        errors: { ...errors },
+        touched: { ...touched },
+      },
+    );
+    this.setState({
+      errors: formValidation.errors,
+      touched: formValidation.touched
+    })
+
+    if (
+      !Object.values(formValidation.errors).length && // errors object is empty
+      Object.values(formValidation.touched).length ===
+        Object.values(this.state.values).length && // all fields were touched
+      Object.values(formValidation.touched).every(t => t === true) // every touched field is true
+    ) {
+      alert(JSON.stringify(this.state.values, null, 2));
+    }
   }
 
   render () {
-    console.log(this.state.values, this.state.touched);
-    const { userCarPlate, carModel, initialValues } = this.props;
+    console.log(this.state.errors);
+    const { userCarPlate, carModel } = this.props;
     const { dealer, service, email, phone } = this.state.values;
     return (
       <form 
@@ -104,17 +149,17 @@ class SheduleForm extends React.Component {
             disabled/>
         </div>
         <div className="col-md-12">
-          <label htmlFor="validationServer01" className="form-label shedule-label">Dealer</label>
+          <label htmlFor="validationServer01" className="form-label shedule-label">Choose Dealer</label>
           <select 
             className={`form-select shedule-select ${this.state.showError}`} 
             name="dealer" 
             onChange={this.handleChangeInput} 
+            onBlur={this.handleBlur}
             id="validationServer01" 
             aria-describedby="validationServer01Feedback" 
-            defaultValue="Choose dealer" 
             value={dealer}
             required>
-            <option disabled>Choose dealer</option>
+            <option></option>
             <option>Felix Oficial Dealer Tel-Aviv</option>
             <option>HaGoren Oficial Dealer Nataniya</option>
             <option>MotorUp Oficial Dealer Petach-Tikva</option>
@@ -124,17 +169,17 @@ class SheduleForm extends React.Component {
           </div>
         </div>
         <div className="col-md-12">
-          <label htmlFor="validationServer04" className="form-label shedule-label">Service</label>
+          <label htmlFor="validationServer04" className="form-label shedule-label">Choose services</label>
           <select 
             className={`form-select shedule-select ${this.state.showError}`} 
             name="service" 
-            onChange={this.handleChangeInput} 
+            onChange={this.handleChangeInput}
+            onBlur={this.handleBlur} 
             id="validationServer04" 
-            aria-describedby="validationServer04Feedback" 
-            defaultValue="Choose services"
+            aria-describedby="validationServer04Feedback"
             value={service} 
             required>
-            <option disabled>Choose services</option>
+            <option></option>
             <option>Inspection Before Annual Vehicle Licensing Test</option>
             <option>Multi-Point Inspection</option>
             <option>Full service</option>
@@ -158,7 +203,8 @@ class SheduleForm extends React.Component {
               type="email" 
               placeholder="example@example.com" 
               name="email" 
-              onChange={this.handleChangeInput} 
+              onChange={this.handleChangeInput}
+              onBlur={this.handleBlur} 
               value={email} 
               id="validationServer03" 
               aria-describedby="validationServer03Feedback" 
@@ -177,7 +223,8 @@ class SheduleForm extends React.Component {
               type="tel" 
               placeholder="050-5005050" 
               name="phone" 
-              onChange={this.handleChangeInput} 
+              onChange={this.handleChangeInput}
+              onBlur={this.handleBlur} 
               value={phone} 
               id="validationServer03" 
               aria-describedby="validationServer03Feedback" 
