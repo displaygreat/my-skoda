@@ -3,6 +3,8 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
+import setHours from 'date-fns/setHours';
+import setMinutes from 'date-fns/setMinutes';
 import superb from '../../assets/img/superb.jpg';
 import octavia from '../../assets/img/octavia.jpg';
 import karoq from '../../assets/img/karoq.jpg';
@@ -38,11 +40,20 @@ const selectValidation = (select) => {
   return null;
 }
 
+const dateValidation = (date) => {
+  console.log(date);
+  if (date === '' || date === null) {
+    return 'is-invalid';
+  }
+  return null;
+}
+
 const validate = {
   dealer: selectValidation,
   service: selectValidation,
   email: emailValidation,
-  phone: phoneValidation
+  phone: phoneValidation,
+  date: dateValidation
 }
 
 class SheduleService extends React.Component {
@@ -52,7 +63,6 @@ class SheduleService extends React.Component {
         carModel: '',
         carLastTest: ''
       }
-      console.log(this.props);
   }
 
   componentDidMount () {

@@ -81,7 +81,7 @@ class DatePickerComp extends React.Component {
 
       let arrExcludeDates = [];
       for (let i=0; i<arrDates.length; i++) {
-        if (moment(date).format('YYYY/MM/DD') === moment(arrDates[i]).format('YYYY/MM/DD')) {
+        if (moment(date, moment.ISO_8601).format('YYYY/MM/DD') === moment(arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')) {
           arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
         }
       }
@@ -97,6 +97,9 @@ class DatePickerComp extends React.Component {
     }, (error) => {
       console.error('Error while fetching Shedule', error);
     });
+    this.setState({
+      selectedDate: date
+    })
   }
 
   render () {

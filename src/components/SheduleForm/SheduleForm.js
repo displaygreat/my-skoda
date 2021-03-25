@@ -12,19 +12,22 @@ class SheduleForm extends React.Component {
         dealer: '',
         service: '',
         email: '',
-        phone: ''
+        phone: '',
+        date: ''
       },
       touched: {
         dealer: '',
         service: '',
         email: '',
-        phone: ''
+        phone: '',
+        date: ''
       },
       errors: {
         dealer: '',
         service: '',
         email: '',
-        phone: ''
+        phone: '',
+        date: ''
       }
     }
   }
@@ -56,8 +59,21 @@ class SheduleForm extends React.Component {
   }
 
   getSelectedDate = (date) => {
+    const error = this.props.validate.date(date);
     this.setState({
-      selectedDate: date
+      selectedDate: date,
+      values: {
+        ...this.state.values,
+        date: date 
+      },
+      touched: {
+        ...this.state.touched,
+        date: true
+      },
+      errors: {
+        ...this.state.errors,
+        date: (error && { date: this.state.touched.date && error })
+      }
     })
   }
 
@@ -120,10 +136,8 @@ class SheduleForm extends React.Component {
   }
 
   render () {
-    console.log(this.state.errors.dealer);
     const { userCarPlate, carModel } = this.props;
     const { dealer, service, email, phone } = this.state.values;
-    
     return (
       <form 
         className="row g-3 shedule-form">
@@ -150,7 +164,7 @@ class SheduleForm extends React.Component {
             disabled/>
         </div>
         <div className="col-md-12">
-          <label htmlFor="validationServer01" className="form-label shedule-label">Choose Dealer</label>
+          <label htmlFor="validationServer01" className="form-label shedule-label mt-2">Choose Dealer</label>
           <select 
             className={`form-select shedule-select ${this.state.errors.dealer}`} 
             name="dealer" 
@@ -170,7 +184,7 @@ class SheduleForm extends React.Component {
           </div>
         </div>
         <div className="col-md-12">
-          <label htmlFor="validationServer04" className="form-label shedule-label">Choose services</label>
+          <label htmlFor="validationServer04" className="form-label shedule-label mt-2">Choose services</label>
           <select 
             className={`form-select shedule-select ${this.state.errors.service}`} 
             name="service" 
@@ -192,8 +206,14 @@ class SheduleForm extends React.Component {
           </div>
         </div>
         <div className="col-md-12">
-          <p className="mt-2">Select Date and Time</p>
-          <DatePickerComp getSelectedDate={this.getSelectedDate} />
+          {/* <p className="mt-2">Select Date and Time</p> */}
+          <label htmlFor="validationServer03" className="mt-2">Select Date and Time</label>
+          <div id="validationServer03" className={this.state.errors.date}>
+            <DatePickerComp getSelectedDate={this.getSelectedDate} />
+          </div>
+          <div id="validationServer03Feedback" className="invalid-feedback">
+            Please select date and time.
+            </div>
         </div>
         <div className="col-md-12">
           <label htmlFor="validationServer03" className="col-2 col-form-label pl-0 pt-0">Email</label>
