@@ -3,8 +3,6 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
-import setHours from 'date-fns/setHours';
-import setMinutes from 'date-fns/setMinutes';
 import superb from '../../assets/img/superb.jpg';
 import octavia from '../../assets/img/octavia.jpg';
 import karoq from '../../assets/img/karoq.jpg';

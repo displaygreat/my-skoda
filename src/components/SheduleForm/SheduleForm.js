@@ -9,25 +9,25 @@ class SheduleForm extends React.Component {
     this.state = {
       selectedDate: {},
       values: {
-        dealer: '',
-        service: '',
-        email: '',
-        phone: '',
-        date: ''
+        // dealer: '',
+        // service: '',
+        // email: '',
+        // phone: '',
+        // date: ''
       },
       touched: {
-        dealer: '',
-        service: '',
-        email: '',
-        phone: '',
-        date: ''
+        // dealer: '',
+        // service: '',
+        // email: '',
+        // phone: '',
+        // date: ''
       },
       errors: {
-        dealer: '',
-        service: '',
-        email: '',
-        phone: '',
-        date: ''
+        // dealer: '',
+        // service: '',
+        // email: '',
+        // phone: '',
+        // date: ''
       }
     }
   }
@@ -53,7 +53,7 @@ class SheduleForm extends React.Component {
     this.setState({
       errors: {
         ...rest,
-        [name]: (error && { [name]: this.state.touched[name] && error })
+        ...(error && { [name]: this.state.touched[name] && error })
       }
     });
   }
@@ -72,7 +72,7 @@ class SheduleForm extends React.Component {
       },
       errors: {
         ...this.state.errors,
-        date: (error && { date: this.state.touched.date && error })
+        ...(error && { date: this.state.touched.date && error })
       }
     })
   }
@@ -124,6 +124,11 @@ class SheduleForm extends React.Component {
       errors: formValidation.errors,
       touched: formValidation.touched
     })
+
+    console.log(Object.values(formValidation.errors));
+    console.log(Object.values(formValidation.touched));
+    console.log(Object.values(this.state.values));
+    
 
     if (
       !Object.values(formValidation.errors).length && // errors object is empty
