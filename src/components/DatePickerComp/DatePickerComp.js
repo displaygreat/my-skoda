@@ -54,7 +54,7 @@ class DatePickerComp extends React.Component {
     super(props);
     this.state = {
       selectedDate: setHours(setMinutes(new Date(), 0), 8),
-      excludeTimes: []
+      excludedTimes: []
     }
   }
 
@@ -65,11 +65,11 @@ class DatePickerComp extends React.Component {
     this.props.getSelectedDate(date);
   }
 
-  getExcludeTimes = (date) => {
+  getExcludedTimes = (date) => {
     this.setState({
-      excludeTimes: []
+      excludedTimes: []
     })
-
+    console.log(typeof date);
     const Shedule = Parse.Object.extend('Shedule');
     const query = new Parse.Query(Shedule);
     
@@ -78,39 +78,36 @@ class DatePickerComp extends React.Component {
       for (let i=0; i<results.length; i++) {
          arrDates.push(results[i].attributes.sheduledDate);
       }
-
+      console.log(arrDates);
       let arrExcludeDates = [];
       for (let i=0; i<arrDates.length; i++) {
-        if (moment(date, moment.ISO_8601).format('YYYY/MM/DD') === moment(arrDates[i], moment.ISO_8601).format('YYYY/MM/DD')) {
-          arrExcludeDates.push(moment(Date.parse(arrDates[i])).toObject());
+        if (moment(date, moment.ISO_8601).format('YYYY/MM/DD') === moment(new Date(arrDates[i]), moment.ISO_8601).format('YYYY/MM/DD')) {
+          arrExcludeDates.push(moment(new Date(arrDates[i]), moment.ISO_8601).toObject());
         }
       }
-      
-      let arrExcludeTimes = [];
+      console.log(arrExcludeDates);
+      let arrExcludedTimes = [];
         for (let j=0; j<arrExcludeDates.length; j++) {
-          arrExcludeTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
+          arrExcludedTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
           this.setState({
-            excludeTimes: arrExcludeTimes
+            excludedTimes: arrExcludedTimes
           })
         }
         
     }, (error) => {
       console.error('Error while fetching Shedule', error);
     });
-    this.setState({
-      selectedDate: date
-    })
   }
 
   render () {
-    const { selectedDate, excludeTimes } = this.state;
+    const { selectedDate, excludedTimes } = this.state;
       return (
         <Styles>
           <DatePicker
             isClearable
             selected={selectedDate}
             onChange={this.handleSelectedDate}
-            onSelect={this.getExcludeTimes}
+            onSelect={this.getExcludedTimes}
             placeholderText="Select Date and Time"
             popperPlacement="top-start"
             popperModifiers={{
@@ -130,8 +127,9 @@ class DatePickerComp extends React.Component {
           <DatePicker
             isClearable
             selected={selectedDate}
+            excludeTimes={excludedTimes}
             onChange={this.handleSelectedDate}
-            onSelect={this.getExcludeTimes}
+            onSelect={this.getExcludedTimes}
             placeholderText="Select Date and Time"
             popperPlacement="top-start"
             popperModifiers={{
@@ -151,7 +149,6 @@ class DatePickerComp extends React.Component {
             timeFormat="HH:mm"
             dateFormat="hh:mm aa"
             minDate={new Date()}
-            excludeTimes={excludeTimes}
             minTime={setHours(setMinutes(new Date(), 0), 8)}
             maxTime={setHours(setMinutes(new Date(), 45), 14)}
           />

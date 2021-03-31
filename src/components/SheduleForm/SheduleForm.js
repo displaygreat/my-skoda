@@ -96,7 +96,7 @@ class SheduleForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.sheduleDate();
+    this.sheduleDate();
     let errors = this.state.errors;
     let touched = this.state.touched;
     let values = this.state.values;
