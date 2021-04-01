@@ -69,7 +69,7 @@ class DatePickerComp extends React.Component {
     this.setState({
       excludedTimes: []
     })
-    console.log(typeof date);
+    
     const Shedule = Parse.Object.extend('Shedule');
     const query = new Parse.Query(Shedule);
     
@@ -78,14 +78,14 @@ class DatePickerComp extends React.Component {
       for (let i=0; i<results.length; i++) {
          arrDates.push(results[i].attributes.sheduledDate);
       }
-      console.log(arrDates);
+      
       let arrExcludeDates = [];
       for (let i=0; i<arrDates.length; i++) {
         if (moment(date, moment.ISO_8601).format('YYYY/MM/DD') === moment(new Date(arrDates[i]), moment.ISO_8601).format('YYYY/MM/DD')) {
           arrExcludeDates.push(moment(new Date(arrDates[i]), moment.ISO_8601).toObject());
         }
       }
-      console.log(arrExcludeDates);
+      
       let arrExcludedTimes = [];
         for (let j=0; j<arrExcludeDates.length; j++) {
           arrExcludedTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))

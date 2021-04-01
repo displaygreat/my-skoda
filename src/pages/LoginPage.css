@@ -84,6 +84,24 @@
   top: 30px;
   z-index: 1;
 }
+.p-login-page .alert-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.p-login-page .alert-success p {
+  text-align: center;
+}
+.p-login-page .alert-success ul {
+  padding: 0;
+  list-style-type: none;
+}
+.p-login-page .accounts-list {
+  display: flex;
+}
+.p-login-page .accounts-list ul:first-child {
+  margin-right: 60px;
+}
 @media (max-width: 992px) {
   .p-login-page .logo {
     width: 40px;
@@ -92,5 +110,18 @@
 @media (max-width: 576px) {
   .p-login-page .logo {
     width: 30px;
+  }
+  .p-login-page .alert-success {
+    align-items: flex-start;
+  }
+  .p-login-page .alert-success p {
+    text-align: left;
+  }
+  .p-login-page .accounts-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .p-login-page .accounts-list ul:first-child {
+    margin-right: 0;
   }
 }
