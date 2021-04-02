@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage';
 import SignupStepTwo from './pages/SignupStepTwo';
 import SignupStepOne from './pages/SignupStepOne';
 import MySkodaPage from './pages/MySkodaPage';
-import SheduleServicePage from './pages/SheduleServicePage';
+import ScheduleServicePage from './pages/ScheduleServicePage';
 import Parse from 'parse';
 Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
     Parse.initialize(
@@ -74,15 +74,15 @@ class App extends React.Component {
     const { activeUser, userId, userEmail, userCarPlate, userLastInspection } = this.state;
     return (
       <HashRouter basename='/'>
-        <Route exact path={['/shedule', '/my-skoda']} >
+        <Route exact path={['/schedule', '/my-skoda']} >
           <MySkodaNavbar handleLogOut={this.handleLogOut} activeUser={activeUser}/>
         </Route>
         <Switch>
           <Route exact path="/" component={HomePage}>
             <HomePage />
           </Route>
-          <Route path="/shedule" component={SheduleServicePage}>
-            <SheduleServicePage activeUser={activeUser} userId={userId} userCarPlate={userCarPlate} lastInspection={userLastInspection}/>
+          <Route path="/schedule" component={ScheduleServicePage}>
+            <ScheduleServicePage activeUser={activeUser} userId={userId} userCarPlate={userCarPlate} lastInspection={userLastInspection}/>
           </Route>
           <Route path="/my-skoda" component={MySkodaPage}>
             <MySkodaPage activeUser={activeUser} sendUserCarPlate={userCarPlate} lastInspection={userLastInspection}/>

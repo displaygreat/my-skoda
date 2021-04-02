@@ -98,7 +98,7 @@ class ServiceCalendar extends React.Component {
     })
   }
 
-  sheduleServices = (date) => {
+  ScheduleServices = (date) => {
     let fullRecommendedDate = this.getFullDate(date);
     let momentObjDateToShedule = moment(fullRecommendedDate).subtract(7, 'days');
     let dateToShedule = moment(momentObjDateToShedule).format('DD/MM/YYYY');
@@ -111,22 +111,22 @@ class ServiceCalendar extends React.Component {
       {
         "recommended": inspectionBeforeTest,
         "service": "Inspection Before Annual Vehicle Licensing Test",
-        "shedule": this.sheduleServices(inspectionBeforeTest)
+        "shedule": this.ScheduleServices(inspectionBeforeTest)
       },
       {
         "recommended": multiPointInspection,
         "service": "Multi-Point Inspection",
-        "shedule": this.sheduleServices(multiPointInspection)
+        "shedule": this.ScheduleServices(multiPointInspection)
       },
       {
         "recommended": winterInspection,
         "service": "Inspection before winter",
-        "shedule": this.sheduleServices(winterInspection)
+        "shedule": this.ScheduleServices(winterInspection)
       },
       {
         "recommended": summerInspection,
         "service": "Inspection before summer",
-        "shedule": this.sheduleServices(summerInspection)
+        "shedule": this.ScheduleServices(summerInspection)
       }
     ];
     const sortedData = services.sort((a, b) => {
@@ -145,7 +145,7 @@ class ServiceCalendar extends React.Component {
           <tr>
             <th className="service-cell"><small>recommended</small><br/>{service.recommended}</th>
             <td className="service-cell">{service.service}</td>
-            <td className="service-cell"><small>shedule</small><br/><a className="shedule-link" href="#/shedule">{service.shedule}</a></td>
+            <td className="service-cell"><small>schedule</small><br/><a className="schedule-link" href="#/schedule">{service.shedule}</a></td>
           </tr>
         </tbody>
       )
@@ -161,7 +161,7 @@ class ServiceCalendar extends React.Component {
             <tr className="table-secondary">
               <th className="service-cell" scope="row">Visit</th>
               <th className="service-cell">Service</th>
-              <th className="service-cell">Shedule</th>
+              <th className="service-cell">Schedule</th>
             </tr>
           </thead>
           {servicesTable}

@@ -15,12 +15,12 @@
 .c-service-calendar .text-regular {
   margin-bottom: 5px;
 }
-.c-service-calendar .shedule-link {
+.c-service-calendar .schedule-link {
   color: #218838;
   border-bottom: 1px solid #218838;
   text-decoration: none;
 }
-.c-service-calendar .shedule-link:hover {
+.c-service-calendar .schedule-link:hover {
   text-decoration: none;
   background-color: yellow;
 }

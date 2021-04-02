@@ -2,7 +2,7 @@ import React from 'react';
 import DatePickerComp from '../DatePickerComp/DatePickerComp';
 import Parse from 'parse';
 
-class SheduleForm extends React.Component {
+class ScheduleForm extends React.Component {
   constructor (props) {
     super(props);
     
@@ -180,9 +180,9 @@ class SheduleForm extends React.Component {
             value={dealer}
             required>
             <option></option>
-            <option>Felix Oficial Dealer Tel-Aviv</option>
-            <option>HaGoren Oficial Dealer Nataniya</option>
-            <option>MotorUp Oficial Dealer Petach-Tikva</option>
+            <option>Felix Official Dealer Tel-Aviv</option>
+            <option>HaGoren Official Dealer Nataniya</option>
+            <option>MotorUp Official Dealer Petach-Tikva</option>
           </select>
           <div id="validationServer01Feedback" className="invalid-feedback">
             Please select a dealer.
@@ -267,4 +267,4 @@ class SheduleForm extends React.Component {
     )
   }
 }
-export default SheduleForm;
+export default ScheduleForm;
