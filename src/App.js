@@ -13,13 +13,10 @@ import MySkodaPage from "./pages/MySkodaPage";
 import ScheduleServicePage from "./pages/ScheduleServicePage";
 import Parse from "parse";
 
-const APP_ID = `${process.env.REACT_APP_APP_ID}`;
-const JS_KEY = `${process.env.REACT_APP_JS_KEY}`;
-
 Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
 Parse.initialize(
-  APP_ID, // This is your Application ID
-  JS_KEY // This is your Javascript key
+  "Iwo7VyOadOaF4eiiOJjWPPRpYkypMvslH1TxL1Jq", // This is your Application ID
+  "eRJ2OisGhdgtimmV0E815KDSnEcmogdtUZqxFnc1" // This is your Javascript key
 );
 
 class App extends React.Component {
