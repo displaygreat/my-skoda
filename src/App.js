@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -11,6 +11,7 @@ import SignupStepTwo from "./pages/SignupStepTwo";
 import SignupStepOne from "./pages/SignupStepOne";
 import MySkodaPage from "./pages/MySkodaPage";
 import ScheduleServicePage from "./pages/ScheduleServicePage";
+import UserContext from "./shared/userContext";
 import Parse from "parse";
 
 Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
@@ -19,112 +20,50 @@ Parse.initialize(
   "eRJ2OisGhdgtimmV0E815KDSnEcmogdtUZqxFnc1" // This is your Javascript key
 );
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeUser: null,
-      userId: "",
-      userEmail: "",
-      userCarPlate: "",
-      userLastInspection: "",
-    };
-  }
+const App = () => {
+  const [activeUser, setActiveUser] = useState(
+    localStorage.activeUser ? JSON.parse(localStorage.activeUser) : null
+  );
 
-  handleLogin = (email) => {
-    this.setState({
-      activeUser: email,
-    });
+  const handleLogIn = (activeUser) => {
+    setActiveUser(activeUser);
+    localStorage.activeUser = JSON.stringify(activeUser);
   };
 
-  handleLogOut = () => {
-    this.setState({
-      activeUser: null,
-      userId: "",
-      userEmail: "",
-      userCarPlate: "",
-      userLastInspection: "",
-    });
+  const handleLogOut = () => {
+    setActiveUser(null);
+    localStorage.removeItem("activeUser");
   };
 
-  handleCallbackUserId = (id) => {
-    this.setState({
-      userId: id,
-    });
-  };
-
-  handleCallbackUserEmail = (email) => {
-    this.setState({
-      userEmail: email,
-    });
-  };
-
-  handleCallbackUserCarPlate = (plate) => {
-    this.setState({
-      userCarPlate: plate,
-    });
-  };
-
-  handleCallbackLastInspection = (lastInspection) => {
-    this.setState({
-      userLastInspection: lastInspection,
-    });
-  };
-
-  render() {
-    const { activeUser, userId, userEmail, userCarPlate, userLastInspection } =
-      this.state;
-    return (
+  return (
+    <UserContext.Provider value={activeUser}>
       <HashRouter basename="/">
         <Route exact path={["/schedule", "/my-skoda"]}>
-          <MySkodaNavbar
-            handleLogOut={this.handleLogOut}
-            activeUser={activeUser}
-          />
+          <MySkodaNavbar handleLogOut={handleLogOut} />
         </Route>
         <Switch>
-          <Route exact path="/" component={HomePage}>
+          <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/schedule" component={ScheduleServicePage}>
-            <ScheduleServicePage
-              activeUser={activeUser}
-              userId={userId}
-              userCarPlate={userCarPlate}
-              lastInspection={userLastInspection}
-            />
+          <Route path="/schedule">
+            <ScheduleServicePage handleLogOut={handleLogOut} />
           </Route>
-          <Route path="/my-skoda" component={MySkodaPage}>
-            <MySkodaPage
-              activeUser={activeUser}
-              sendUserCarPlate={userCarPlate}
-              lastInspection={userLastInspection}
-            />
+          <Route path="/my-skoda">
+            <MySkodaPage handleLogOut={handleLogOut} />
           </Route>
-          <Route path="/signup-step-one" component={SignupStepOne}>
-            <SignupStepOne
-              callbackUserEmail={this.handleCallbackUserEmail}
-              callbackUserCarPlate={this.handleCallbackUserCarPlate}
-            />
+          <Route path="/signup-step-one">
+            <SignupStepOne />
           </Route>
-          <Route path="/signup-step-two" component={SignupStepTwo}>
-            <SignupStepTwo
-              sendUserEmail={userEmail}
-              sendUserCarPlate={userCarPlate}
-            />
+          <Route path="/signup-step-two">
+            <SignupStepTwo />
           </Route>
-          <Route path="/login" component={LoginPage}>
-            <LoginPage
-              handleLogin={this.handleLogin}
-              callbackUserId={this.handleCallbackUserId}
-              callbackUserCarPlate={this.handleCallbackUserCarPlate}
-              callbackLastInspection={this.handleCallbackLastInspection}
-            />
+          <Route path="/login">
+            <LoginPage handleLogOut={handleLogIn} />
           </Route>
         </Switch>
       </HashRouter>
-    );
-  }
-}
+    </UserContext.Provider>
+  );
+};
 
 export default App;

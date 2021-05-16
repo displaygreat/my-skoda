@@ -1,0 +1,33 @@
+.c-app-info.alert-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.c-app-info.alert-success p {
+  text-align: center;
+}
+.c-app-info.alert-success ul {
+  padding: 0;
+  list-style-type: none;
+}
+.c-app-info .accounts-list {
+  display: flex;
+}
+.c-app-info .accounts-list ul:first-child {
+  margin-right: 60px;
+}
+@media (max-width: 576px) {
+  .c-app-info.alert-success {
+    align-items: flex-start;
+  }
+  .c-app-info.alert-success p {
+    text-align: left;
+  }
+  .c-app-info .accounts-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .c-app-info .accounts-list ul:first-child {
+    margin-right: 0;
+  }
+}
