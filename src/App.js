@@ -26,6 +26,7 @@ const App = () => {
   );
 
   const handleLogIn = (activeUser) => {
+    console.log(activeUser);
     setActiveUser(activeUser);
     localStorage.activeUser = JSON.stringify(activeUser);
   };
@@ -58,7 +59,7 @@ const App = () => {
             <SignupStepTwo />
           </Route>
           <Route path="/login">
-            <LoginPage handleLogOut={handleLogIn} />
+            <LoginPage handleLogIn={handleLogIn} />
           </Route>
         </Switch>
       </HashRouter>
