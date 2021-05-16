@@ -5,7 +5,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import MySkodaNavbar from "./components/MySkodaNavbar/MySkodaNavbar";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupStepTwo from "./pages/SignupStepTwo";
 import SignupStepOne from "./pages/SignupStepOne";
@@ -72,13 +72,8 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      activeUser,
-      userId,
-      userEmail,
-      userCarPlate,
-      userLastInspection,
-    } = this.state;
+    const { activeUser, userId, userEmail, userCarPlate, userLastInspection } =
+      this.state;
     return (
       <HashRouter basename="/">
         <Route exact path={["/schedule", "/my-skoda"]}>
