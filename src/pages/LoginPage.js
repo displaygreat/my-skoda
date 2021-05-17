@@ -10,9 +10,10 @@ import skodaLogin from "../assets/img/skoda-login.jpg";
 import UserContext from "../shared/userContext";
 import Parse from "parse";
 import server from "../shared/server";
+import data from "../shared/data";
 
 const LoginPage = (props) => {
-  const { handleLogIn } = props;
+  const { handleLogIn, getVehicle } = props;
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
 
@@ -26,6 +27,7 @@ const LoginPage = (props) => {
   const [hideAlertRequired, setHideAlertRequired] = useState(true);
 
   const activeUser = useContext(UserContext);
+  console.log(activeUser);
 
   const handleChangeInputEmail = (e) => {
     e.preventDefault();
@@ -83,7 +85,7 @@ const LoginPage = (props) => {
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (plate) => {
     let email = userEmail;
     let pwd = userPwd;
     if (email === "" || pwd === "") {
@@ -101,7 +103,7 @@ const LoginPage = (props) => {
           handleLogIn(res);
         }
       },
-      (err) => console.log(err, "error in login")
+      (err) => console.log(err, "error in login: no such user exists")
     );
   };
 

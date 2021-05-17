@@ -12,6 +12,7 @@ import SignupStepOne from "./pages/SignupStepOne";
 import MySkodaPage from "./pages/MySkodaPage";
 import ScheduleServicePage from "./pages/ScheduleServicePage";
 import UserContext from "./shared/userContext";
+import VehicleContext from "./shared/vehicleContext";
 import Parse from "parse";
 
 Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
@@ -25,6 +26,10 @@ const App = () => {
     localStorage.activeUser ? JSON.parse(localStorage.activeUser) : null
   );
 
+  const [vehicle, setVehicle] = useState(
+    localStorage.vehicle ? JSON.parse(localStorage.vehicle) : null
+  );
+
   const handleLogIn = (activeUser) => {
     console.log(activeUser);
     setActiveUser(activeUser);
@@ -36,33 +41,54 @@ const App = () => {
     localStorage.removeItem("activeUser");
   };
 
+  const getVehicle = (vehicle) => {
+    console.log(vehicle);
+    setVehicle(vehicle);
+    localStorage.vehicle = JSON.stringify(vehicle);
+  };
+
+  const removeVehicle = () => {
+    setVehicle(null);
+    localStorage.removeItem("vehicle");
+  };
+
   return (
     <UserContext.Provider value={activeUser}>
-      <HashRouter basename="/">
-        <Route exact path={["/schedule", "/my-skoda"]}>
-          <MySkodaNavbar handleLogOut={handleLogOut} />
-        </Route>
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
+      <VehicleContext.Provider value={vehicle}>
+        <HashRouter basename="/">
+          <Route exact path={["/schedule", "/my-skoda"]}>
+            <MySkodaNavbar handleLogOut={handleLogOut} />
           </Route>
-          <Route path="/schedule">
-            <ScheduleServicePage handleLogOut={handleLogOut} />
-          </Route>
-          <Route path="/my-skoda">
-            <MySkodaPage handleLogOut={handleLogOut} />
-          </Route>
-          <Route path="/signup-step-one">
-            <SignupStepOne />
-          </Route>
-          <Route path="/signup-step-two">
-            <SignupStepTwo />
-          </Route>
-          <Route path="/login">
-            <LoginPage handleLogIn={handleLogIn} />
-          </Route>
-        </Switch>
-      </HashRouter>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/schedule">
+              <ScheduleServicePage
+                handleLogOut={handleLogOut}
+                getVehicle={getVehicle}
+                removeVehicle={removeVehicle}
+              />
+            </Route>
+            <Route path="/my-skoda">
+              <MySkodaPage
+                handleLogOut={handleLogOut}
+                getVehicle={getVehicle}
+                removeVehicle={removeVehicle}
+              />
+            </Route>
+            <Route path="/signup-step-one">
+              <SignupStepOne />
+            </Route>
+            <Route path="/signup-step-two">
+              <SignupStepTwo />
+            </Route>
+            <Route path="/login">
+              <LoginPage handleLogIn={handleLogIn} />
+            </Route>
+          </Switch>
+        </HashRouter>
+      </VehicleContext.Provider>
     </UserContext.Provider>
   );
 };
