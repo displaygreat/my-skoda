@@ -85,7 +85,7 @@ const LoginPage = (props) => {
       });
   };
 
-  const handleSubmit = (plate) => {
+  const handleSubmit = () => {
     let email = userEmail;
     let pwd = userPwd;
     if (email === "" || pwd === "") {
@@ -101,6 +101,10 @@ const LoginPage = (props) => {
           setUserPwd("");
         } else {
           handleLogIn(res);
+          console.log(res.attributes.plateNumber);
+          data(res.attributes.plateNumber).then((res) => {
+            getVehicle(res);
+          });
         }
       },
       (err) => console.log(err, "error in login: no such user exists")

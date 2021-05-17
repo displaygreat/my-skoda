@@ -1,26 +1,29 @@
 import "./MySkodaService.css";
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
-import VechicleContext from "../../shared/vehicleContext";
 import UserContext from "../../shared/userContext";
+import VehicleContext from "../../shared/vehicleContext";
 import moment from "moment";
 
 const MySkodaService = () => {
-  const vehicle = useContext(VechicleContext);
-  const activeUser = useContext(UserContext);
-  let carTest = moment(vehicle.mivchan_acharon_dt).format("DD/MM/YYYY");
-  let lastInspection;
-  if (!activeUser || activeUser === "undefind") {
-    window.location = "#/login";
-  } else {
-    lastInspection = activeUser.lastInspection;
-    console.log(lastInspection);
-  }
+  // const activeUser = useContext(UserContext);
+  // const vehicle = useContext(VehicleContext);
+  // console.log(activeUser);
+  // console.log(vehicle);
+
+  // let carTest = moment(vehicle.mivchan_acharon_dt).format("DD/MM/YYYY");
+  // let lastInspection;
+  // if (!activeUser || activeUser === "undefind") {
+  //   window.location = "#/login";
+  // } else {
+  //   lastInspection = activeUser.lastInspection;
+  //   console.log(lastInspection);
+  // }
 
   return (
     <div className="c-my-skoda-service col-md-6 col-lg-4">
       <h1 className="display-4 my-skoda-title">Vehicle Service</h1>
-      <p className="text-green">Common Skoda Service</p>
+      {/* <p className="text-green">Common Skoda Service</p>
       <Card className="mb-4">
         <Card.Body>
           <p className="text-regular">
@@ -63,7 +66,7 @@ const MySkodaService = () => {
           <strong>Recommended</strong>
           <p className="text-regular">Every May and November of every year</p>
         </Card.Body>
-      </Card>
+      </Card> */}
     </div>
   );
 };

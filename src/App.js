@@ -64,18 +64,10 @@ const App = () => {
               <HomePage />
             </Route>
             <Route path="/schedule">
-              <ScheduleServicePage
-                handleLogOut={handleLogOut}
-                getVehicle={getVehicle}
-                removeVehicle={removeVehicle}
-              />
+              <ScheduleServicePage handleLogOut={handleLogOut} />
             </Route>
             <Route path="/my-skoda">
-              <MySkodaPage
-                handleLogOut={handleLogOut}
-                getVehicle={getVehicle}
-                removeVehicle={removeVehicle}
-              />
+              <MySkodaPage handleLogOut={handleLogOut} />
             </Route>
             <Route path="/signup-step-one">
               <SignupStepOne />
@@ -84,7 +76,7 @@ const App = () => {
               <SignupStepTwo />
             </Route>
             <Route path="/login">
-              <LoginPage handleLogIn={handleLogIn} />
+              <LoginPage handleLogIn={handleLogIn} getVehicle={getVehicle} />
             </Route>
           </Switch>
         </HashRouter>

@@ -1,24 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./MySkodaData.css";
 import { Image } from "react-bootstrap";
 import skodaThen from "../../assets/img/skoda-then.svg";
-import VechicleContext from "../../shared/vehicleContext";
+import VehicleContext from "../../shared/vehicleContext";
 import moment from "moment";
 
 const MySkodaData = () => {
-  const vehicle = useContext(VechicleContext);
-  let carMake = vehicle.tozeret_nm;
-  if (carMake === `סקודה צ'כיה`) {
-    carMake = "Skoda";
-  }
-  let carModel = vehicle.kinuy_mishari;
-  let userCarPlate = vehicle.mispar_rechev;
-  let carYear = vehicle.shnat_yitzur;
-  // let test = moment(vehicle.mivchan_acharon_dt).format('DD/MM/YYYY');
-  let carLicense = moment(vehicle.tokef_dt).format("DD/MM/YYYY");
-  let carVIN = vehicle.misgeret;
-  // const { userCarPlate, carMake, carModel, carYear, carLicense, carVIN } =
-  //   this.props;
+  const vehicle = useContext(VehicleContext);
+
+  const [carMake, setCarMake] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [userCarPlate, setUserCarPlate] = useState("");
+  const [carYear, setCarYear] = useState("");
+  const [carLicense, setCarLicense] = useState("");
+  const [carVIN, setCarVIN] = useState("");
+
+  useEffect(() => {
+    if (vehicle !== null) {
+      setCarMake(vehicle.tozeret_nm === `סקודה צ'כיה` ? "Skoda" : "");
+      setCarModel(vehicle.kinuy_mishari);
+      setUserCarPlate(vehicle.mispar_rechev);
+      setCarYear(vehicle.shnat_yitzur);
+      setCarLicense(moment(vehicle.tokef_dt).format("DD/MM/YYYY"));
+      setCarVIN(vehicle.misgeret);
+    }
+  }, [vehicle]);
+
   return (
     <div className="c-my-skoda-data col-md-6 col-lg-4">
       <h1 className="display-4 my-skoda-title">My Vehicle</h1>
