@@ -26,8 +26,8 @@ const LoginPage = (props) => {
   const [hideAlertIsLogin, setHideAlertIsLogin] = useState(true);
   const [hideAlertRequired, setHideAlertRequired] = useState(true);
 
-  const activeUser = useContext(UserContext);
-  console.log(activeUser);
+  // const activeUser = useContext(UserContext);
+  // console.log(activeUser);
 
   const handleChangeInputEmail = (e) => {
     e.preventDefault();
@@ -111,9 +111,9 @@ const LoginPage = (props) => {
     );
   };
 
-  if (activeUser) {
-    window.location = "#/my-skoda";
-  }
+  // if (activeUser) {
+  //   window.location = "#/my-skoda";
+  // }
 
   const handleClickOnBackButton = () => {
     window.location = "#";
