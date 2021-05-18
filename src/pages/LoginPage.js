@@ -100,7 +100,7 @@ const LoginPage = (props) => {
           setUserEmail("");
           setUserPwd("");
         } else {
-          handleLogIn(res);
+          handleLogIn(res.attributes);
           console.log(res.attributes.plateNumber);
           data(res.attributes.plateNumber).then((res) => {
             getVehicle(res);
