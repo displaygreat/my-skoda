@@ -11,117 +11,118 @@ import UserContext from "../shared/userContext";
 import Parse from "parse";
 import server from "../shared/server";
 import data from "../shared/data";
+import { LoginForm } from "../components/LoginForm/LoginForm";
 
 const LoginPage = (props) => {
   const { handleLogIn, getVehicle } = props;
-  const [userEmail, setUserEmail] = useState("");
-  const [userPwd, setUserPwd] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
+  // const [userPwd, setUserPwd] = useState("");
 
-  const [type, setType] = useState("password");
-  const [offPwd, setOffPwd] = useState("show");
-  const [onPwd, setOnPwd] = useState("hide");
-  const [hideAlertReset, setHideAlertReset] = useState(true);
-  const [hideAlertSuccess, setHideAlertSuccess] = useState(true);
-  const [resetPwd, setResetPwd] = useState("");
-  const [hideAlertIsLogin, setHideAlertIsLogin] = useState(true);
-  const [hideAlertRequired, setHideAlertRequired] = useState(true);
+  // const [type, setType] = useState("password");
+  // const [offPwd, setOffPwd] = useState("show");
+  // const [onPwd, setOnPwd] = useState("hide");
+  // const [hideAlertReset, setHideAlertReset] = useState(true);
+  // const [hideAlertSuccess, setHideAlertSuccess] = useState(true);
+  // const [resetPwd, setResetPwd] = useState("");
+  // const [hideAlertIsLogin, setHideAlertIsLogin] = useState(true);
+  // const [hideAlertRequired, setHideAlertRequired] = useState(true);
 
   // const activeUser = useContext(UserContext);
   // console.log(activeUser);
 
-  const handleChangeInputEmail = (e) => {
-    e.preventDefault();
-    setHideAlertIsLogin(true);
-    setHideAlertRequired(true);
-    setHideAlertSuccess(true);
-    setUserEmail(e.target.value);
-  };
+  // const handleChangeInputEmail = (e) => {
+  //   e.preventDefault();
+  //   setHideAlertIsLogin(true);
+  //   setHideAlertRequired(true);
+  //   setHideAlertSuccess(true);
+  //   setUserEmail(e.target.value);
+  // };
 
-  const handleChangeInputPwd = (e) => {
-    e.preventDefault();
-    setHideAlertIsLogin(true);
-    setHideAlertRequired(true);
-    setHideAlertSuccess(true);
-    setUserPwd(e.target.value);
-  };
+  // const handleChangeInputPwd = (e) => {
+  //   e.preventDefault();
+  //   setHideAlertIsLogin(true);
+  //   setHideAlertRequired(true);
+  //   setHideAlertSuccess(true);
+  //   setUserPwd(e.target.value);
+  // };
 
-  const showPassword = () => {
-    setType("text");
-    setOffPwd("hide");
-    setOnPwd("show");
-  };
+  // const showPassword = () => {
+  //   setType("text");
+  //   setOffPwd("hide");
+  //   setOnPwd("show");
+  // };
 
-  const hidePassword = () => {
-    setType("password");
-    setOffPwd("show");
-    setOnPwd("hide");
-  };
+  // const hidePassword = () => {
+  //   setType("password");
+  //   setOffPwd("show");
+  //   setOnPwd("hide");
+  // };
 
-  const forgotPassword = () => {
-    setHideAlertReset(false);
-  };
+  // const forgotPassword = () => {
+  //   setHideAlertReset(false);
+  // };
 
-  const handleChangeInputReset = (e) => {
-    e.preventDefault();
-    setResetPwd(e.target.value);
-  };
+  // const handleChangeInputReset = (e) => {
+  //   e.preventDefault();
+  //   setResetPwd(e.target.value);
+  // };
 
-  const resetPassword = () => {
-    let emailResetPwd = resetPwd;
-    // Pass the username and password to logIn function
-    Parse.User.requestPasswordReset(emailResetPwd)
-      .then(() => {
-        // Password reset request was sent successfully
-        console.log("Reset password email sent successfully");
-        setHideAlertReset(true);
-        setResetPwd("");
-        setHideAlertSuccess(false);
-      })
-      .catch((error) => {
-        console.error(
-          "Error while creating request to reset user password",
-          error
-        );
-      });
-  };
+  // const resetPassword = () => {
+  //   let emailResetPwd = resetPwd;
+  //   // Pass the username and password to logIn function
+  //   Parse.User.requestPasswordReset(emailResetPwd)
+  //     .then(() => {
+  //       // Password reset request was sent successfully
+  //       console.log("Reset password email sent successfully");
+  //       setHideAlertReset(true);
+  //       setResetPwd("");
+  //       setHideAlertSuccess(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(
+  //         "Error while creating request to reset user password",
+  //         error
+  //       );
+  //     });
+  // };
 
-  const handleSubmit = () => {
-    let email = userEmail;
-    let pwd = userPwd;
-    if (email === "" || pwd === "") {
-      setHideAlertRequired(false);
-    }
+  // const handleSubmit = () => {
+  //   let email = userEmail;
+  //   let pwd = userPwd;
+  //   if (email === "" || pwd === "") {
+  //     setHideAlertRequired(false);
+  //   }
 
-    server(email, pwd).then(
-      (res) => {
-        console.log(res);
-        if (!res) {
-          setHideAlertIsLogin(false);
-          setUserEmail("");
-          setUserPwd("");
-        } else {
-          handleLogIn(res.attributes);
-          console.log(res.attributes.plateNumber);
-          data(res.attributes.plateNumber).then((res) => {
-            getVehicle(res);
-          });
-        }
-      },
-      (err) => console.log(err, "error in login: no such user exists")
-    );
-  };
+  //   server(email, pwd).then(
+  //     (res) => {
+  //       console.log(res);
+  //       if (!res) {
+  //         setHideAlertIsLogin(false);
+  //         setUserEmail("");
+  //         setUserPwd("");
+  //       } else {
+  //         handleLogIn(res.attributes);
+  //         console.log(res.attributes.plateNumber);
+  //         data(res.attributes.plateNumber).then((res) => {
+  //           getVehicle(res);
+  //         });
+  //       }
+  //     },
+  //     (err) => console.log(err, "error in login: no such user exists")
+  //   );
+  // };
 
-  // if (activeUser) {
-  //   window.location = "#/my-skoda";
-  // }
+  // // if (activeUser) {
+  // //   window.location = "#/my-skoda";
+  // // }
 
-  const handleClickOnBackButton = () => {
-    window.location = "#";
-  };
+  // const handleClickOnBackButton = () => {
+  //   window.location = "#";
+  // };
 
-  const handleClickOnCreateAccount = () => {
-    window.location = "#/signup-step-one";
-  };
+  // const handleClickOnCreateAccount = () => {
+  //   window.location = "#/signup-step-one";
+  // };
 
   return (
     <div className="p-login-page">
@@ -134,7 +135,7 @@ const LoginPage = (props) => {
           </a>
           <h4>Login</h4>
           <p className="text">for My Skoda</p>
-          <Form noValidate onSubmit={handleSubmit}>
+          {/* <Form noValidate onSubmit={handleSubmit}>
             <Form.Group className="login-input">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -259,7 +260,8 @@ const LoginPage = (props) => {
             >
               Create account
             </Button>
-          </Form>
+          </Form> */}
+          <LoginForm handleLogIn={handleLogIn} getVehicle={getVehicle} />
         </Col>
         <Col className="login-column" xs={12} lg={8}>
           <Image className="logo" src={skodaLogo} rounded />
