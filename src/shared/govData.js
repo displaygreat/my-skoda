@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const data = (plate) => {
+const govData = (plate) => {
   console.log(plate);
   let response = axios
     .get(
@@ -16,4 +16,4 @@ const data = (plate) => {
   return response;
 };
 
-export default data;
+export default govData;

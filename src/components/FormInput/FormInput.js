@@ -5,8 +5,8 @@ import "./FormInput.css";
 export const FormInput = ({ register, error, label, id, ...inputProps }) => {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
-      <input ref={register} id={id} {...inputProps} />
+      <Form.Label htmlFor={id}>{label}</Form.Label>
+      <Form.Control {...register(id)} id={id} {...inputProps} />
       {error && <div>{error.message}</div>}
     </>
   );

@@ -10,7 +10,7 @@ import skodaLogin from "../assets/img/skoda-login.jpg";
 import UserContext from "../shared/userContext";
 import Parse from "parse";
 import server from "../shared/server";
-import data from "../shared/data";
+import govData from "../shared/govData";
 import { LoginForm } from "../components/LoginForm/LoginForm";
 
 const LoginPage = (props) => {

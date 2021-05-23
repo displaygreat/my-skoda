@@ -5,7 +5,7 @@ import ServiceCalendar from "../components/ServiceCalendar/ServiceCalendar";
 import MySkodaService from "../components/MySkodaService/MySkodaService";
 import MySkodaData from "../components/MySkodaData/MySkodaData";
 import MySkodaFooter from "../components/MySkodaFooter/MySkodaFooter";
-import data from "../shared/data";
+import govData from "../shared/govData";
 import UserContext from "../shared/userContext";
 
 const MySkodaPage = () => {
