@@ -10,6 +10,7 @@ import server from "../../shared/server";
 import govData from "../../shared/govData";
 import eye from "../../assets/img/eye.png";
 import eyeOff from "../../assets/img/eye-off.png";
+import { ResetPassword } from "../ResetPassword/ResetPassword";
 
 export const LoginForm = (props) => {
   const { handleLogIn, getVehicle } = props;
@@ -70,82 +71,85 @@ export const LoginForm = (props) => {
   };
 
   return (
-    <Form className="c-login-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
-        id="login"
-        name="login"
-        type="email"
-        label="Email"
-        placeholder="Email"
-        register={register}
-        error={errors.login}
-      />
-      <div className="input-password">
+    <>
+      <Form className="c-login-form" onSubmit={handleSubmit(onSubmit)}>
         <FormInput
-          id="password"
-          name="password"
-          type={type}
-          label="Password"
-          placeholder="Password"
+          id="login"
+          name="login"
+          type="email"
+          label="Email"
+          placeholder="Email"
           register={register}
-          error={errors.password}
+          error={errors.login}
         />
-        <Image
-          className={`icon-eye-off ${offPwd}`}
-          src={eyeOff}
-          onClick={showPassword}
-        />
-        <Image
-          className={`icon-eye ${onPwd}`}
-          src={eye}
-          onClick={hidePassword}
-        />
-      </div>
-      {Object.keys(errors).length > 0 && (
-        <Alert
-          className="error-alert"
-          hidden={hideAlertCheck}
-          onClose={() => setHideAlertCheck(true)}
-          dismissible
-        >
-          <p className="m-0">
-            Check email
-            <br />
-            and password
-            <br />
-            or{" "}
-            <Link className="login-link" to="./signup-step-one">
-              Create account
-            </Link>
-          </p>
-        </Alert>
-      )}
-      <div className="prev-next-buttons">
-        <Button
-          className="prev-button"
-          variant="outline-success"
-          onClick={() => {
-            history.push("./signup-step-one");
-          }}
-        >
-          Back
-        </Button>
-        <Button className="next-button" variant="success" type="submit">
-          Next
-        </Button>
-        <Link className="login-link" to="./signup-step-one">
-          Don't have an account?
-        </Link>
-        <Button
-          className="signup-button"
-          variant="success"
-          onClick={() => {
-            history.push("./signup-step-one");
-          }}
-        >
-          Create account
-        </Button>
-      </div>
-    </Form>
+        <div className="input-password">
+          <FormInput
+            id="password"
+            name="password"
+            type={type}
+            label="Password"
+            placeholder="Password"
+            register={register}
+            error={errors.password}
+          />
+          <Image
+            className={`icon-eye-off ${offPwd}`}
+            src={eyeOff}
+            onClick={showPassword}
+          />
+          <Image
+            className={`icon-eye ${onPwd}`}
+            src={eye}
+            onClick={hidePassword}
+          />
+        </div>
+        {Object.keys(errors).length > 0 && (
+          <Alert
+            className="error-alert"
+            hidden={hideAlertCheck}
+            onClose={() => setHideAlertCheck(true)}
+            dismissible
+          >
+            <p className="m-0">
+              Check email
+              <br />
+              and password
+              <br />
+              or{" "}
+              <Link className="login-link" to="./signup-step-one">
+                Create account
+              </Link>
+            </p>
+          </Alert>
+        )}
+        <div className="prev-next-buttons">
+          <Button
+            className="prev-button"
+            variant="outline-success"
+            onClick={() => {
+              history.push("./signup-step-one");
+            }}
+          >
+            Back
+          </Button>
+          <Button className="next-button" variant="success" type="submit">
+            Next
+          </Button>
+          <Link className="login-link" to="./signup-step-one">
+            Don't have an account?
+          </Link>
+          <Button
+            className="signup-button"
+            variant="success"
+            onClick={() => {
+              history.push("./signup-step-one");
+            }}
+          >
+            Create account
+          </Button>
+        </div>
+      </Form>
+      <ResetPassword />
+    </>
   );
 };
