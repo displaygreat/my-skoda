@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import "./LoginForm.css";
+import { Alert, Button, Form, Image } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormInput } from "../../components/FormInput/FormInput";
-import "./LoginForm.css";
 import server from "../../shared/server";
 import govData from "../../shared/govData";
-import { Alert, Button, Form, Image } from "react-bootstrap";
 import eye from "../../assets/img/eye.png";
 import eyeOff from "../../assets/img/eye-off.png";
 
@@ -70,7 +70,7 @@ export const LoginForm = (props) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form className="c-login-form" onSubmit={handleSubmit(onSubmit)}>
       <FormInput
         id="login"
         name="login"
@@ -114,24 +114,38 @@ export const LoginForm = (props) => {
             and password
             <br />
             or{" "}
-            <a className="login-link" href="/#/signup-step-one">
+            <Link className="login-link" to="./signup-step-one">
               Create account
-            </a>
+            </Link>
           </p>
         </Alert>
       )}
-      <Button
-        className="prev-button"
-        variant="outline-success"
-        onClick={() => {
-          history.push("./signup-step-one");
-        }}
-      >
-        Back
-      </Button>
-      <Button type="submit" className="next-button" variant="success">
-        Next
-      </Button>
+      <div className="prev-next-buttons">
+        <Button
+          className="prev-button"
+          variant="outline-success"
+          onClick={() => {
+            history.push("./signup-step-one");
+          }}
+        >
+          Back
+        </Button>
+        <Button className="next-button" variant="success" type="submit">
+          Next
+        </Button>
+        <Link className="login-link" to="./signup-step-one">
+          Don't have an account?
+        </Link>
+        <Button
+          className="signup-button"
+          variant="success"
+          onClick={() => {
+            history.push("./signup-step-one");
+          }}
+        >
+          Create account
+        </Button>
+      </div>
     </Form>
   );
 };

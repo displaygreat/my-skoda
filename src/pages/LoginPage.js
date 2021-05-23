@@ -12,6 +12,7 @@ import Parse from "parse";
 import server from "../shared/server";
 import govData from "../shared/govData";
 import { LoginForm } from "../components/LoginForm/LoginForm";
+import { Link } from "react-router-dom";
 
 const LoginPage = (props) => {
   const { handleLogIn, getVehicle } = props;
@@ -128,11 +129,11 @@ const LoginPage = (props) => {
     <div className="p-login-page">
       <Container className="main">
         <Col className="login-column" xs={12} lg={4}>
-          <a className="mb-2" href="/#">
+          <Link className="mb-2" to="./">
             <span className="my-skoda-login-label">
               my<span className="letter-green">Skoda</span>
             </span>
-          </a>
+          </Link>
           <h4>Login</h4>
           <p className="text">for My Skoda</p>
           {/* <Form noValidate onSubmit={handleSubmit}>

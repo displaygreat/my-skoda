@@ -16,7 +16,7 @@
   color: #28a745;
   font-weight: bold;
 }
-.p-login-page .icon-eye {
+/* .p-login-page .icon-eye {
   width: 18px;
   height: 18px;
   position: absolute;
@@ -33,11 +33,11 @@
   right: 10px;
   z-index: 100;
   cursor: pointer;
-}
-.p-login-page .input-password {
+} */
+/* .p-login-page .input-password {
   position: relative;
-}
-.p-login-page .prev-next-buttons {
+} */
+/* .p-login-page .prev-next-buttons {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -68,7 +68,7 @@
   background-color: yellow;
   border-radius: 3px;
   padding: 20px;
-}
+} */
 .p-login-page .login-img-wrap {
   position: relative;
   margin-bottom: 40px;

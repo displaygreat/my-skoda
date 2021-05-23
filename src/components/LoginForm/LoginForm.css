@@ -1,0 +1,57 @@
+.c-login-form .form-label {
+  margin-top: 1rem;
+}
+.c-login-form .input-password {
+  position: relative;
+}
+.c-login-form .icon-eye {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 58px;
+  right: 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.c-login-form .icon-eye-off {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 58px;
+  right: 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.c-login-form .prev-next-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.c-login-form .prev-button,
+.c-login-form .next-button {
+  width: 47%;
+  margin-bottom: 1rem;
+}
+.c-login-form .signup-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+.c-login-form .login-link {
+  color: #218838;
+  border-bottom: 1px solid #218838;
+}
+.c-login-form .login-link:hover {
+  text-decoration: none;
+  background-color: yellow;
+}
+.c-login-form .alert-dismissible .close {
+  top: -10px;
+  right: -10px;
+}
+.c-login-form .error-alert {
+  background-color: yellow;
+  border-radius: 3px;
+  margin-top: 2rem;
+  padding: 20px;
+}

@@ -7,7 +7,7 @@ export const FormInput = ({ register, error, label, id, ...inputProps }) => {
     <>
       <Form.Label htmlFor={id}>{label}</Form.Label>
       <Form.Control {...register(id)} id={id} {...inputProps} />
-      {error && <div>{error.message}</div>}
+      {error && <div className="mb-3 text-danger">{error.message}</div>}
     </>
   );
 };
