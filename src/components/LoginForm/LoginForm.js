@@ -30,6 +30,7 @@ export const LoginForm = (props) => {
     handleSubmit,
     formState: { errors },
     setError,
+    reset,
   } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -37,7 +38,7 @@ export const LoginForm = (props) => {
 
   const onSubmit = (data, e) => {
     console.log(data);
-    e.target.reset();
+    reset();
     server(data.login, data.password).then(
       (res) => {
         console.log(res);
@@ -72,7 +73,7 @@ export const LoginForm = (props) => {
 
   return (
     <>
-      <Form className="c-login-form" onSubmit={handleSubmit(onSubmit)}>
+      <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           id="login"
           name="login"
@@ -114,11 +115,6 @@ export const LoginForm = (props) => {
               Check email
               <br />
               and password
-              <br />
-              or{" "}
-              <Link className="login-link" to="./signup-step-one">
-                Create account
-              </Link>
             </p>
           </Alert>
         )}
@@ -135,21 +131,21 @@ export const LoginForm = (props) => {
           <Button className="next-button" variant="success" type="submit">
             Next
           </Button>
-          <Link className="login-link" to="./signup-step-one">
-            Don't have an account?
-          </Link>
-          <Button
-            className="signup-button"
-            variant="success"
-            onClick={() => {
-              history.push("./signup-step-one");
-            }}
-          >
-            Create account
-          </Button>
         </div>
       </Form>
       <ResetPassword />
+      <Link className="login-form-link" to="./signup-step-one">
+        Don't have an account?
+      </Link>
+      <Button
+        className="signup-button"
+        variant="success"
+        onClick={() => {
+          history.push("./signup-step-one");
+        }}
+      >
+        Create account
+      </Button>
     </>
   );
 };
