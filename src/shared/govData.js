@@ -10,6 +10,9 @@ const govData = (plate) => {
       let result = res.data.result.records[0];
       console.log(result);
       return result;
+    })
+    .catch((error) => {
+      console.error("Error while logging or signing", error);
     });
 
   console.log(response);
