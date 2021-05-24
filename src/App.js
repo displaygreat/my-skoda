@@ -65,7 +65,8 @@ const App = () => {
 
   const HandleSignupOne = (vehicle, email) => {
     setValues(vehicle, email);
-    history.push("./signup-step-two");
+    // history.push("./signup-step-two");
+    window.location = "#/signup-step-two";
   };
 
   return (
