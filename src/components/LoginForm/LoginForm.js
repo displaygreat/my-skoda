@@ -36,7 +36,7 @@ export const LoginForm = (props) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data) => {
     console.log(data);
     reset();
     server(data.login, data.password).then(
@@ -55,7 +55,11 @@ export const LoginForm = (props) => {
           });
         }
       },
-      (err) => console.log(err, "error in login: no such user exists")
+      (err) => {
+        console.log(err, "error in login: no such user exists");
+        setError("login-password", "check");
+        setHideAlertCheck(false);
+      }
     );
   };
 
@@ -75,6 +79,7 @@ export const LoginForm = (props) => {
     <>
       <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <FormInput
+          className="mb-2"
           id="login"
           name="login"
           type="email"
@@ -85,6 +90,7 @@ export const LoginForm = (props) => {
         />
         <div className="input-password">
           <FormInput
+            className="mb-2"
             id="password"
             name="password"
             type={type}
@@ -118,13 +124,11 @@ export const LoginForm = (props) => {
             </p>
           </Alert>
         )}
-        <div className="prev-next-buttons">
+        <div className="buttons-group">
           <Button
             className="prev-button"
             variant="outline-success"
-            onClick={() => {
-              history.push("./");
-            }}
+            onClick={() => history.push("./")}
           >
             Back
           </Button>
@@ -140,9 +144,7 @@ export const LoginForm = (props) => {
       <Button
         className="signup-button"
         variant="success"
-        onClick={() => {
-          history.push("./signup-step-one");
-        }}
+        onClick={() => history.push("./signup-step-one")}
       >
         Create account
       </Button>

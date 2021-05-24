@@ -101,7 +101,7 @@ export const ResetPassword = () => {
             register={register}
             error={errors.resetPwd}
           />
-          <div className="button-group mt-5">
+          <div className="buttons-group mt-5">
             <ButtonComp
               className="mr-3"
               content="Send"
