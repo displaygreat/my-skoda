@@ -123,7 +123,7 @@ export const LoginForm = (props) => {
             className="prev-button"
             variant="outline-success"
             onClick={() => {
-              history.push("./signup-step-one");
+              history.push("./");
             }}
           >
             Back

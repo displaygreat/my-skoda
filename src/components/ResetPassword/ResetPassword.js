@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import "./ResetPassword.css";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormInput } from "../../components/FormInput/FormInput";
 import Parse from "parse";
+import { ModalComp } from "../ModalComp/ModalComp";
+import { ButtonComp } from "../ButtonComp/ButtonComp";
 
 export const ResetPassword = () => {
-  const [hideAlertCheck, setHideAlertCheck] = useState(true);
   const [showModalReset, setShowModalReset] = useState(false);
   const [showModalSuccess, setShowModalSuccess] = useState(false);
-
-  const onCloseReset = () => {
-    setShowModalReset(false);
-    reset();
-  };
+  const [showModalError, setShowModalError] = useState(false);
 
   const schema = yup.object().shape({
     // password: yup
@@ -65,8 +62,14 @@ export const ResetPassword = () => {
           error
         );
         setError("email", "check");
-        setHideAlertCheck(false);
+        setShowModalReset(false);
+        setShowModalError(true);
       });
+  };
+
+  const onCloseReset = () => {
+    setShowModalReset(false);
+    reset();
   };
 
   return (
@@ -74,86 +77,89 @@ export const ResetPassword = () => {
       <span className="reset-link" onClick={() => setShowModalReset(true)}>
         Forgot password?
       </span>
-      <Modal
+      <ModalComp
         className="reset-modal"
-        show={showModalReset}
-        animation={false}
-        onHide={onCloseReset}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Reset password</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="m-0 mb-2">
+        title="Reset password"
+        body={
+          <p>
             Please enter your email.
             <br />
             You will get a link to reset password.
           </p>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              id="resetPwd"
-              name="resetPwd"
-              type="email"
-              placeholder="Enter email"
-              register={register}
-              error={errors.resetPwd}
-              className="mb-2 w-75"
-            />
-            <div className="send-close-btns">
-              <Button
-                className="next-button mt-3 mr-3"
-                variant="success"
-                type="submit"
-              >
-                Send
-              </Button>
-              <Button
-                className="next-button mt-3"
-                variant="outline-success"
-                onClick={onCloseReset}
-              >
-                Close
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-      <Modal
-        className="reset-modal-success"
-        show={showModalSuccess}
+        }
+        show={showModalReset}
+        onHide={onCloseReset}
         animation={false}
-        onHide={() => setShowModalSuccess(false)}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Success!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormInput
+            className="w-75 mb-2"
+            id="resetPwd"
+            name="resetPwd"
+            type="email"
+            placeholder="Enter email"
+            register={register}
+            error={errors.resetPwd}
+          />
+          <div className="button-group mt-5">
+            <ButtonComp
+              className="mr-3"
+              content="Send"
+              variant="success"
+              type="submit"
+            />
+            <ButtonComp
+              content="Close"
+              variant="outline-success"
+              onClick={onCloseReset}
+            />
+          </div>
+        </Form>
+      </ModalComp>
+      <ModalComp
+        className="reset-modal-success"
+        title="Success!"
+        body={
           <p>
             Reset password email sent successfully.
             <br />
             Check your email to reset password
           </p>
-          <Button
-            variant="outline-success"
-            onClick={() => setShowModalSuccess(false)}
-          >
-            Close
-          </Button>
-        </Modal.Body>
-      </Modal>
+        }
+        show={showModalSuccess}
+        animation={false}
+        onHide={() => setShowModalSuccess(false)}
+      >
+        <ButtonComp
+          className="mt-4"
+          content="Close"
+          variant="success"
+          onClick={() => setShowModalSuccess(false)}
+        />
+      </ModalComp>
+
       {Object.keys(errors).length > 0 && (
-        <Alert
-          className="error-alert"
-          hidden={hideAlertCheck}
-          onClose={() => setHideAlertCheck(true)}
-          dismissible
+        <ModalComp
+          className="reset-modal"
+          title="Error!"
+          body={
+            <p>
+              Error while creating request to reset user password.
+              <br />
+              Please try again later.
+            </p>
+          }
+          show={showModalError}
+          animation={false}
+          onHide={() => setShowModalError(false)}
         >
-          <p className="m-0">
-            Error while creating request to reset user password.
-            <br />
-            Please try again later.
-          </p>
-        </Alert>
+          <ButtonComp
+            className="mt-4"
+            content="Close"
+            variant="success"
+            onClick={() => setShowModalError(false)}
+          />
+        </ModalComp>
       )}
     </>
   );
