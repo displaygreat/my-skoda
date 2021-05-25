@@ -17,6 +17,7 @@ import Parse from "parse";
 
 import { useHistory } from "react-router-dom";
 import { useData } from "./shared/dataContext";
+import ScrollToTop from "./shared/ScrollToTop";
 
 Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
 Parse.initialize(
@@ -73,6 +74,7 @@ const App = () => {
     // <UserContext.Provider value={activeUser}>
     //   <VehicleContext.Provider value={vehicle}>
     <HashRouter basename="/">
+      <ScrollToTop />
       <Route exact path={["/schedule", "/my-skoda"]}>
         <MySkodaNavbar
           handleLogOut={HandleLogOut}
