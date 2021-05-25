@@ -4,7 +4,7 @@ import "./SignupStepOne.css";
 import MySkodaFooter from "../components/MySkodaFooter/MySkodaFooter";
 import skodaLogo from "../assets/img/skoda-logo.png";
 import skodaSignup from "../assets/img/skoda-signup.jpg";
-import { SignupForm } from "../components/SignupForm/SignupForm";
+import { SignupFormOne } from "../components/SignupFormOne/SignupFormOne";
 
 const SignupStepOne = (props) => {
   const { handleSignupOne } = props;
@@ -128,7 +128,7 @@ const SignupStepOne = (props) => {
           <h4>Create account</h4>
           <span className="step">Step 1</span>
           <p className="text">for My Skoda</p>
-          <SignupForm handleSignupOne={handleSignupOne} />
+          <SignupFormOne handleSignupOne={handleSignupOne} />
           {/* <Form>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>License plate number</Form.Label>

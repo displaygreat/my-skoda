@@ -1,0 +1,25 @@
+.signup-form-one .buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.signup-form-one .prev-button,
+.signup-form-one .next-button {
+  width: 47%;
+  margin-bottom: 1rem;
+}
+.signup-form-one .signup-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+.signup-form-one .alert-dismissible .close {
+  top: -10px;
+  right: -10px;
+}
+.signup-form-one .error-alert {
+  background-color: #fff3cd;
+  border-radius: 3px;
+  margin-top: 2rem;
+  padding: 20px;
+}
