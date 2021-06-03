@@ -1,8 +1,7 @@
-// import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import "./MySkodaData.css";
 import { Image } from "react-bootstrap";
 import skodaThen from "../../assets/img/skoda-then.svg";
-// import VehicleContext from "../../shared/vehicleContext";
 import moment from "moment";
 import { useData } from "../../shared/dataContext";
 
@@ -16,26 +15,6 @@ const MySkodaData = () => {
   let carYear = data.shnat_yitzur;
   let carLicense = moment(data.tokef_dt).format("DD/MM/YYYY");
   let carVIN = data.misgeret;
-
-  // const vehicle = useContext(VehicleContext);
-
-  // const [carMake, setCarMake] = useState("");
-  // const [carModel, setCarModel] = useState("");
-  // const [userCarPlate, setUserCarPlate] = useState("");
-  // const [carYear, setCarYear] = useState("");
-  // const [carLicense, setCarLicense] = useState("");
-  // const [carVIN, setCarVIN] = useState("");
-
-  // useEffect(() => {
-  //   if (vehicle !== null) {
-  //     setCarMake(vehicle.tozeret_nm === `סקודה צ'כיה` ? "Skoda" : "");
-  //     setCarModel(vehicle.kinuy_mishari);
-  //     setUserCarPlate(vehicle.mispar_rechev);
-  //     setCarYear(vehicle.shnat_yitzur);
-  //     setCarLicense(moment(vehicle.tokef_dt).format("DD/MM/YYYY"));
-  //     setCarVIN(vehicle.misgeret);
-  //   }
-  // }, [vehicle]);
 
   return (
     <div className="c-my-skoda-data col-md-6 col-lg-4">

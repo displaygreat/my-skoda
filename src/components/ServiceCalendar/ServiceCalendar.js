@@ -1,8 +1,6 @@
 import "./ServiceCalendar.css";
 import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
-import UserContext from "../../shared/userContext";
-import VehicleContext from "../../shared/vehicleContext";
 
 const ServiceCalendar = () => {
   // const activeUser = useContext(UserContext);

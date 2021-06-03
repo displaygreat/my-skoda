@@ -1,8 +1,6 @@
 import "./MySkodaService.css";
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
-import UserContext from "../../shared/userContext";
-import VehicleContext from "../../shared/vehicleContext";
 import moment from "moment";
 
 const MySkodaService = () => {

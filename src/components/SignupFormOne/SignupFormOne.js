@@ -11,6 +11,7 @@ import { ButtonComp } from "../ButtonComp/ButtonComp";
 
 export const SignupFormOne = (props) => {
   const { handleSignupOne } = props;
+
   const [hideAlertCheck, setHideAlertCheck] = useState(false);
   let history = useHistory();
 
@@ -56,6 +57,8 @@ export const SignupFormOne = (props) => {
       } else {
         let plateNumber = res.mispar_rechev;
         if (plateNumber === +carPlate) {
+          console.log(plateNumber);
+          console.log(+carPlate);
           handleSignupOne(plateNumber, email);
         }
       }
