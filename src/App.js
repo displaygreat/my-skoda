@@ -64,13 +64,13 @@ const App = () => {
           <HomePage />
         </Route>
         <Route path="/schedule">
-          <ScheduleServicePage handleLogOut={HandleLogOut} />
+          <ScheduleServicePage />
         </Route>
         <Route path="/my-skoda">
-          <MySkodaPage handleLogOut={HandleLogOut} />
+          <MySkodaPage />
         </Route>
         <Route path="/signup-step-one">
-          <SignupStepOne handleSignupOne={HandleSignupOne} />
+          <SignupStepOne HandleSignupOne={HandleSignupOne} />
         </Route>
         <Route path="/signup-step-two">
           <SignupStepTwo />
