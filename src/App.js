@@ -36,18 +36,14 @@ const App = () => {
 
   const HandleLogOut = () => {
     setValues(null);
-    localStorage.removeItem("activeUser");
+    // localStorage.removeItem("activeUser");
+    localStorage.clear();
   };
 
   const GetVehicle = (vehicle) => {
     console.log(vehicle);
     setValues(vehicle);
     localStorage.vehicle = JSON.stringify(vehicle);
-  };
-
-  const RemoveVehicle = () => {
-    setValues(null);
-    localStorage.removeItem("vehicle");
   };
 
   const HandleSignupOne = (vehicle, email) => {
@@ -61,26 +57,17 @@ const App = () => {
     <HashRouter basename="/">
       <ScrollToTop />
       <Route exact path={["/schedule", "/my-skoda"]}>
-        <MySkodaNavbar
-          handleLogOut={HandleLogOut}
-          removeVehicle={RemoveVehicle}
-        />
+        <MySkodaNavbar handleLogOut={HandleLogOut} />
       </Route>
       <Switch>
         <Route exact path="/">
           <HomePage />
         </Route>
         <Route path="/schedule">
-          <ScheduleServicePage
-            handleLogOut={HandleLogOut}
-            removeVehicle={RemoveVehicle}
-          />
+          <ScheduleServicePage handleLogOut={HandleLogOut} />
         </Route>
         <Route path="/my-skoda">
-          <MySkodaPage
-            handleLogOut={HandleLogOut}
-            removeVehicle={RemoveVehicle}
-          />
+          <MySkodaPage handleLogOut={HandleLogOut} />
         </Route>
         <Route path="/signup-step-one">
           <SignupStepOne handleSignupOne={HandleSignupOne} />

@@ -175,14 +175,20 @@ export const SignupFormTwo = (props) => {
           className="prev-button"
           content="Back"
           variant="outline-success"
-          onClick={() => history.push("./signup-step-one")}
+          onClick={() => {
+            history.push("./signup-step-one");
+            localStorage.clear();
+          }}
         />
         {status === "signedUp" && (
           <ButtonComp
             className="prev-button"
             content="LogIn"
             variant="success"
-            onClick={() => history.push("./login")}
+            onClick={() => {
+              history.push("./login");
+              localStorage.clear();
+            }}
           />
         )}
         {status === "notSignedUp" && (
