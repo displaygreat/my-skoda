@@ -1,3 +1,6 @@
+.signup-form-one .form-label {
+  margin-top: 1rem;
+}
 .signup-form-one .buttons-group {
   display: flex;
   flex-wrap: wrap;
