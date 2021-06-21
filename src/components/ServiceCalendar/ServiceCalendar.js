@@ -31,12 +31,11 @@ const ServiceCalendar = () => {
     let yearNow = new Date().getFullYear();
     let year = carYear;
     let carAge = yearNow - year;
-
     let test = carTest;
     let fullDateLastTest = getFullDate(test);
 
     let momentObjNextTest = {};
-    if (carAge <= 2) {
+    if (carAge < 3) {
       momentObjNextTest = moment(fullDateLastTest).add(3, "years");
     }
     if (carAge >= 3 && carAge < 20) {

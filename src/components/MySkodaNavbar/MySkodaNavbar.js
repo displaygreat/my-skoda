@@ -33,7 +33,7 @@ const MySkodaNavbar = (props) => {
                 />
               </Navbar.Brand>
               <Nav.Link href="#/my-skoda">My Skoda Services</Nav.Link>
-              <Nav.Link href="#/shedule">Schedule Service</Nav.Link>
+              <Nav.Link href="#/schedule">Schedule Service</Nav.Link>
             </Nav>
             <Nav className="user align-items-center">
               <span className="letter-green">{data.username}</span>
