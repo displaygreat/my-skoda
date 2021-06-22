@@ -9,84 +9,8 @@ import karoq from "../../assets/img/karoq.jpg";
 import ScheduleForm from "../ScheduleForm/ScheduleForm";
 import { useData } from "../../shared/dataContext";
 
-// const emailValidation = email => {
-//   console.log(email);
-//   if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email) && email.trim() !== '') {
-//     return null;
-//   }
-//   return 'is-invalid';
-// }
-
-// const phoneValidation = phone => {
-//   console.log(phone);
-//   if (/[0-9]{2,3}-?[0-9]{7}/.test(phone) && phone.trim() !== '') {
-//     return null;
-//   }
-//   return 'is-invalid';
-// }
-
-// const selectValidation = (select) => {
-//   console.log(select);
-//   if (select === '') {
-//     return 'is-invalid';
-//   }
-//   return null;
-// }
-
-// const dateValidation = (date) => {
-//   console.log(date);
-//   if (date === '' || date === null) {
-//     return 'is-invalid';
-//   }
-//   return null;
-// }
-
-// const validate = {
-//   dealer: selectValidation,
-//   service: selectValidation,
-//   email: emailValidation,
-//   phone: phoneValidation,
-//   date: dateValidation
-// }
-
 const ScheduleService = () => {
   const { setValues, data } = useData();
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //       carModel: '',
-  //       carLastTest: ''
-  //     }
-  // }
-
-  // componentDidMount () {
-  //   this.getVehicle();
-  // }
-
-  // useEffect(() => {
-  //   getVehicle();
-  // }, []);
-
-  // getVehicle = () => {
-  //   let plate = data.mispar_rechev;
-  //   axios
-  //     .get(
-  //       `https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters={%22mispar_rechev%22:[%22${plate}%22]}`
-  //     )
-  //     .then((result) => {
-  //       let data = result.data.result.records[0];
-  //       let model = data.kinuy_mishari;
-  //       let test = moment(data.mivchan_acharon_dt).format("DD/MM/YYYY");
-  //       this.setState({
-  //         carModel: model,
-  //         carLastTest: test,
-  //       });
-  //     });
-  // };
-
-  // const { userCarPlate, lastInspection } = this.props;
-  // const { carModel, carLastTest } = this.state;
 
   let lastTest = moment(data.mivchan_acharon_dt).format("DD/MM/YYYY");
   let lastInspection = data.lastInspection;
@@ -113,11 +37,7 @@ const ScheduleService = () => {
             your last multi-point inspection: <strong>{lastInspection}</strong>
           </p>
         )}
-        <ScheduleForm
-        // carModel={carModel}
-        // userCarPlate={userCarPlate}
-        // validate={validate}
-        />
+        <ScheduleForm />
       </div>
       <div className="col-sm-12 col-md-5 rounded">
         <h3 className="title-discount">

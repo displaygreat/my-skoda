@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./ScheduleForm.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Parse from "parse";
 import { useData } from "../../shared/dataContext";
@@ -6,6 +7,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FormSelect } from "../FormSelect/FormSelect";
+import { FormInput } from "../FormInput/FormInput";
+import { Button } from "react-bootstrap";
 
 const ScheduleForm = () => {
   const { setValues, data } = useData();
@@ -14,19 +17,28 @@ const ScheduleForm = () => {
   const [service, setervice] = useState();
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
+  const [selectedDate, setSelectedDate] = useState();
+  const [datePickerError, setDatePickerError] = useState(false);
 
   const schema = yup.object().shape({
     dealer: yup.string().required("Please choose dealer"),
     service: yup.string().required("Please choose service"),
-    date: yup.string().required("Please choose date"),
-    time: yup.string().required("Please choose time"),
-    email: yup.string().required("Please enter your email"),
-    phone: yup.string().required("Please enter your phone"),
+    email: yup
+      .string()
+      .required("Please enter your email")
+      .matches(
+        /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        "Email should include '@'. Email could contain english letters, numbers and symbols"
+      ),
+    phone: yup
+      .string()
+      .required("Please enter your phone")
+      .matches(/[0-9]{2,3}-?[0-9]{7}/, "Phone should contain 9 or 10 digits"),
   });
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
     setError,
     reset,
@@ -35,85 +47,19 @@ const ScheduleForm = () => {
     resolver: yupResolver(schema),
   });
 
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     selectedDate: {},
-  //     values: {
-  //       // dealer: '',
-  //       // service: '',
-  //       // email: '',
-  //       // phone: '',
-  //       // date: ''
-  //     },
-  //     touched: {
-  //       // dealer: '',
-  //       // service: '',
-  //       // email: '',
-  //       // phone: '',
-  //       // date: ''
-  //     },
-  //     errors: {
-  //       // dealer: '',
-  //       // service: '',
-  //       // email: '',
-  //       // phone: '',
-  //       // date: ''
-  //     },
-  //   };
-  // }
-
-  // handleChangeInput = (e) => {
-  //   const { name, value } = e.target;
-  //   this.setState({
-  //     values: {
-  //       ...this.state.values,
-  //       [name]: value,
-  //     },
-  //     touched: {
-  //       ...this.state.touched,
-  //       [name]: true,
-  //     },
-  //   });
-  // };
-
-  // handleBlur = (e) => {
-  //   const { name, value } = e.target;
-  //   const { [name]: removedError, ...rest } = this.state.errors;
-  //   const error = this.props.validate[name](value);
-  //   this.setState({
-  //     errors: {
-  //       ...rest,
-  //       ...(error && { [name]: this.state.touched[name] && error }),
-  //     },
-  //   });
-  // };
-
-  // getSelectedDate = (date) => {
-  //   const error = this.props.validate.date(date);
-  //   this.setState({
-  //     selectedDate: date,
-  //     values: {
-  //       ...this.state.values,
-  //       date: date,
-  //     },
-  //     touched: {
-  //       ...this.state.touched,
-  //       date: true,
-  //     },
-  //     errors: {
-  //       ...this.state.errors,
-  //       ...(error && { date: this.state.touched.date && error }),
-  //     },
-  //   });
-  // };
+  const getSelectedDate = (date) => {
+    setSelectedDate(date);
+  };
 
   const sheduleDate = () => {
+    if (selectedDate === null) {
+      setDatePickerError(true);
+    }
+    console.log(selectedDate);
     const Shedule = Parse.Object.extend("Shedule");
     const myNewObject = new Shedule();
 
-    myNewObject.set("sheduledDate", this.state.selectedDate.toString());
+    myNewObject.set("sheduledDate", selectedDate.toString());
     myNewObject.set("userId", Parse.User.current());
 
     myNewObject.save().then(
@@ -126,81 +72,36 @@ const ScheduleForm = () => {
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    if (datePickerError === true) return;
+    console.log(data);
+    reset();
     sheduleDate();
-    // let errors = this.state.errors;
-    // let touched = this.state.touched;
-    // let values = this.state.values;
-    // const formValidation = Object.keys(values).reduce(
-    //   (acc, key) => {
-    //     const newError = this.props.validate[key](values[key]);
-    //     const newTouched = { [key]: true };
-    //     return {
-    //       errors: {
-    //         ...acc.errors,
-    //         ...(newError && { [key]: newError }),
-    //       },
-    //       touched: {
-    //         ...acc.touched,
-    //         ...newTouched,
-    //       },
-    //     };
-    //   },
-    //   {
-    //     errors: { ...errors },
-    //     touched: { ...touched },
-    //   }
-    // );
-    // this.setState({
-    //   errors: formValidation.errors,
-    //   touched: formValidation.touched,
-    // });
-
-    // console.log(Object.values(formValidation.errors));
-    // console.log(Object.values(formValidation.touched));
-    // console.log(Object.values(this.state.values));
-
-    // if (
-    //   !Object.values(formValidation.errors).length && // errors object is empty
-    //   Object.values(formValidation.touched).length ===
-    //     Object.values(this.state.values).length && // all fields were touched
-    //   Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
-    // ) {
-    //   alert(JSON.stringify(this.state.values, null, 2));
-    // }
   };
 
   const carPlate = data.mispar_rechev;
   const carModel = data.kinuy_mishari;
+  console.log(datePickerError);
 
   return (
-    <form className="row g-3 shedule-form">
+    <form className="row g-3 shedule-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="col-md-6 mb-2">
-        <label htmlFor="validationServer01" className="form-label">
-          PlateNumber
-        </label>
+        <label className="form-label">PlateNumber</label>
         <input
           type="text"
           className="form-control is-valid"
-          // id="validationServer01"
           value={carPlate}
           readOnly
-          // required
           disabled
         />
       </div>
       <div className="col-md-6 mb-2">
-        <label htmlFor="validationServer02" className="form-label">
-          Model
-        </label>
+        <label className="form-label">Model</label>
         <input
           type="text"
           className="form-control is-valid"
-          // id="validationServer02"
           value={carModel}
           readOnly
-          // required
           disabled
         />
       </div>
@@ -238,19 +139,45 @@ const ScheduleForm = () => {
           ]}
         />
       </div>
-      {/* <div className="col-md-12">
+
+      <div className="col-md-12">
         <p className="mt-2">Select Date and Time</p>
-        <label htmlFor="validationServer03" className="mt-2">
-          Select Date and Time
-        </label>
-        <div id="validationServer03" className={this.state.errors.date}>
-          <DatePickerComp getSelectedDate={this.getSelectedDate} />
-        </div>
-        <div id="validationServer03Feedback" className="invalid-feedback">
-          Please select date and time.
-        </div>
+        <DatePickerComp getSelectedDate={getSelectedDate} />
+        {datePickerError === true && (
+          <div className="datepicker-error">Please select date and time.</div>
+        )}
+      </div>
+
+      <div className="col-md-12">
+        <FormInput
+          className="mb-2"
+          id="email"
+          name="email"
+          type="email"
+          label="Email"
+          placeholder="Email"
+          register={register}
+          error={errors.email}
+        />
       </div>
       <div className="col-md-12">
+        <FormInput
+          className="mb-2"
+          id="phone"
+          name="phone"
+          type="phone"
+          label="Phone"
+          placeholder="Phone"
+          register={register}
+          error={errors.phone}
+        />
+      </div>
+      <div className="col-12">
+        <Button className="btn my-4" variant="success" type="submit">
+          Submit
+        </Button>
+      </div>
+      {/* <div className="col-md-12">
         <label
           htmlFor="validationServer03"
           className="col-2 col-form-label pl-0 pt-0"
@@ -301,8 +228,9 @@ const ScheduleForm = () => {
             Please provide a valid telephone.
           </div>
         </div>
-      </div>
-      <div className="col-12">
+      </div> */}
+
+      {/* <div className="col-12">
         <button
           className="btn btn-primary shedule-submit my-4"
           type="submit"

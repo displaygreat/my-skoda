@@ -1,9 +1,9 @@
-import React from 'react';
-import moment from 'moment';
-import Parse from 'parse';
+import React, { useState } from "react";
+import moment from "moment";
+import Parse from "parse";
 import DatePicker from "react-datepicker";
-import setHours from 'date-fns/setHours';
-import setMinutes from 'date-fns/setMinutes';
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 
@@ -15,6 +15,9 @@ const Styles = styled.div`
   height: 38px;
   margin-bottom: 30px;
   display: block;
+}
+.react-datepicker-wrapper:last-child {
+  margin-bottom: .5rem;
 }
  .react-datepicker__close-icon::before,
  .react-datepicker__close-icon::after {
@@ -49,111 +52,113 @@ const Styles = styled.div`
  }
 `;
 
-class DatePickerComp extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      selectedDate: setHours(setMinutes(new Date(), 0), 8),
-      excludedTimes: []
-    }
-  }
+const DatePickerComp = (props) => {
+  const { getSelectedDate } = props;
+  const [selectedDate, setSelectedDate] = useState(
+    setHours(setMinutes(new Date(), 0), 8)
+  );
+  const [excludedTimes, setExcludedTimes] = useState([]);
 
-  handleSelectedDate = (date) => {
-    this.setState({
-      selectedDate: date
-    })
-    this.props.getSelectedDate(date);
-  }
+  const handleSelectedDate = (date) => {
+    setSelectedDate(date);
+    getSelectedDate(date);
+  };
 
-  getExcludedTimes = (date) => {
-    this.setState({
-      excludedTimes: []
-    })
-    
-    const Shedule = Parse.Object.extend('Shedule');
+  const getExcludedTimes = (date) => {
+    setExcludedTimes([]);
+
+    const Shedule = Parse.Object.extend("Shedule");
     const query = new Parse.Query(Shedule);
-    
-    query.find().then((results) => {
-      let arrDates = [];
-      for (let i=0; i<results.length; i++) {
-         arrDates.push(results[i].attributes.sheduledDate);
-      }
-      
-      let arrExcludeDates = [];
-      for (let i=0; i<arrDates.length; i++) {
-        if (moment(date, moment.ISO_8601).format('YYYY/MM/DD') === moment(new Date(arrDates[i]), moment.ISO_8601).format('YYYY/MM/DD')) {
-          arrExcludeDates.push(moment(new Date(arrDates[i]), moment.ISO_8601).toObject());
-        }
-      }
-      
-      let arrExcludedTimes = [];
-        for (let j=0; j<arrExcludeDates.length; j++) {
-          arrExcludedTimes.push(setHours(setMinutes(new Date(), arrExcludeDates[j].minutes), arrExcludeDates[j].hours))
-          this.setState({
-            excludedTimes: arrExcludedTimes
-          })
-        }
-        
-    }, (error) => {
-      console.error('Error while fetching Shedule', error);
-    });
-  }
 
-  render () {
-    const { selectedDate, excludedTimes } = this.state;
-      return (
-        <Styles>
-          <DatePicker
-            isClearable
-            selected={selectedDate}
-            onChange={this.handleSelectedDate}
-            onSelect={this.getExcludedTimes}
-            placeholderText="Select Date and Time"
-            popperPlacement="top-start"
-            popperModifiers={{
-              offset: {
-                enabled: true,
-                offset: "0px, 10px"
-              },
-              preventOverflow: {
-                enabled: true,
-                escapeWithReference: false,
-                boundariesElement: "viewport"
-              }
-            }}
-            dateFormat="dd/MM/yyy"
-            minDate={new Date()}
-          />
-          <DatePicker
-            isClearable
-            selected={selectedDate}
-            excludeTimes={excludedTimes}
-            onChange={this.handleSelectedDate}
-            onSelect={this.getExcludedTimes}
-            placeholderText="Select Date and Time"
-            popperPlacement="top-start"
-            popperModifiers={{
-              offset: {
-                enabled: true,
-                offset: "0px, 10px"
-              },
-              preventOverflow: {
-                enabled: true,
-                escapeWithReference: false,
-                boundariesElement: "viewport"
-              }
-            }}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={15}
-            timeFormat="HH:mm"
-            dateFormat="hh:mm aa"
-            minDate={new Date()}
-            minTime={setHours(setMinutes(new Date(), 0), 8)}
-            maxTime={setHours(setMinutes(new Date(), 45), 14)}
-          />
-        </Styles>
-    )
-  }
-}
+    query.find().then(
+      (results) => {
+        let arrDates = [];
+        for (let i = 0; i < results.length; i++) {
+          arrDates.push(results[i].attributes.sheduledDate);
+        }
+
+        let arrExcludeDates = [];
+        for (let i = 0; i < arrDates.length; i++) {
+          if (
+            moment(date, moment.ISO_8601).format("YYYY/MM/DD") ===
+            moment(new Date(arrDates[i]), moment.ISO_8601).format("YYYY/MM/DD")
+          ) {
+            arrExcludeDates.push(
+              moment(new Date(arrDates[i]), moment.ISO_8601).toObject()
+            );
+          }
+        }
+
+        let arrExcludedTimes = [];
+        for (let j = 0; j < arrExcludeDates.length; j++) {
+          arrExcludedTimes.push(
+            setHours(
+              setMinutes(new Date(), arrExcludeDates[j].minutes),
+              arrExcludeDates[j].hours
+            )
+          );
+          setExcludedTimes(arrExcludedTimes);
+        }
+        console.log(arrExcludedTimes);
+      },
+      (error) => {
+        console.error("Error while fetching Shedule", error);
+      }
+    );
+  };
+
+  return (
+    <Styles>
+      <DatePicker
+        isClearable
+        selected={selectedDate}
+        onChange={handleSelectedDate}
+        onSelect={getExcludedTimes}
+        placeholderText="Select Date and Time"
+        popperPlacement="top-start"
+        popperModifiers={{
+          offset: {
+            enabled: true,
+            offset: "0px, 10px",
+          },
+          preventOverflow: {
+            enabled: true,
+            escapeWithReference: false,
+            boundariesElement: "viewport",
+          },
+        }}
+        dateFormat="dd/MM/yyy"
+        minDate={new Date()}
+      />
+      <DatePicker
+        isClearable
+        selected={selectedDate}
+        excludeTimes={excludedTimes}
+        onChange={handleSelectedDate}
+        onSelect={getExcludedTimes}
+        placeholderText="Select Date and Time"
+        popperPlacement="top-start"
+        popperModifiers={{
+          offset: {
+            enabled: true,
+            offset: "0px, 10px",
+          },
+          preventOverflow: {
+            enabled: true,
+            escapeWithReference: false,
+            boundariesElement: "viewport",
+          },
+        }}
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeFormat="HH:mm"
+        dateFormat="hh:mm aa"
+        minDate={new Date()}
+        minTime={setHours(setMinutes(new Date(), 0), 8)}
+        maxTime={setHours(setMinutes(new Date(), 45), 14)}
+      />
+    </Styles>
+  );
+};
 export default DatePickerComp;
