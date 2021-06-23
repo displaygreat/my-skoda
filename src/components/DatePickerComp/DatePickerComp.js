@@ -63,12 +63,10 @@ const Styles = styled.div`
 const DatePickerComp = (props) => {
   const { getSelectedDate } = props;
   const [selectedDate, setSelectedDate] = useState();
-  // setHours(setMinutes(new Date(), 0), 8)
   const [excludedTimes, setExcludedTimes] = useState([]);
   const {
     control,
     register,
-    handleSubmit,
     setError,
     clearErrors,
     formState: { errors },
@@ -132,7 +130,6 @@ const DatePickerComp = (props) => {
           <DatePicker
             isClearable
             selected={selectedDate}
-            // onClick={() => clearErrors(["date", "time"])}
             onChange={(date) => {
               field.onChange(date);
               handleSelectedDate(date);
@@ -141,9 +138,7 @@ const DatePickerComp = (props) => {
                 message: "Please choose date and time",
               });
             }}
-            onBlur={(date) => {
-              // field.onChange(date);
-              // handleSelectedDate(date);
+            onBlur={() => {
               setError("date", {
                 type: "manual",
                 message: "Please choose date and time",
@@ -179,10 +174,8 @@ const DatePickerComp = (props) => {
         render={({ field }) => (
           <DatePicker
             isClearable
-            // selected={field.value}
             selected={selectedDate}
             excludeTimes={excludedTimes}
-            // onClick={() => clearErrors(["date", "time"])}
             onChange={(date) => {
               field.onChange(date);
               handleSelectedDate(date);
@@ -191,9 +184,7 @@ const DatePickerComp = (props) => {
                 message: "Please choose date",
               });
             }}
-            onBlur={(date) => {
-              // field.onChange(date);
-              // handleSelectedDate(date);
+            onBlur={() => {
               setError("date", {
                 type: "manual",
                 message: "Please choose date",
@@ -203,11 +194,6 @@ const DatePickerComp = (props) => {
               getExcludedTimes();
               clearErrors(["time"]);
             }}
-            // onSelect={(date) => {
-            //   handleSelectedDate(date);
-            //   getExcludedTimes(date);
-            //   clearErrors(["date", "time"]);
-            // }}
             placeholderText="Select Date and Time"
             popperPlacement="top-start"
             popperModifiers={{

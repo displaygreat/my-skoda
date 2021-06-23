@@ -18,7 +18,6 @@ const ScheduleForm = () => {
   const [email, setEmail] = useState();
   const [phone, setPhone] = useState();
   const [selectedDate, setSelectedDate] = useState();
-  // const [datePickerError, setDatePickerError] = useState(false);
 
   const schema = yup.object().shape({
     dealer: yup.string().required("Please choose dealer"),
@@ -52,10 +51,6 @@ const ScheduleForm = () => {
   };
 
   const sheduleDate = () => {
-    // if (selectedDate === null) {
-    //   setDatePickerError(true);
-    // }
-    console.log(selectedDate);
     const Shedule = Parse.Object.extend("Shedule");
     const myNewObject = new Shedule();
 
@@ -73,7 +68,6 @@ const ScheduleForm = () => {
   };
 
   const onSubmit = (data) => {
-    // if (datePickerError === true) return;
     console.log(data, selectedDate);
     reset();
     sheduleDate();
@@ -81,7 +75,6 @@ const ScheduleForm = () => {
 
   const carPlate = data.mispar_rechev;
   const carModel = data.kinuy_mishari;
-  // console.log(datePickerError);
 
   return (
     <form className="row g-3 shedule-form" onSubmit={handleSubmit(onSubmit)}>
@@ -143,9 +136,6 @@ const ScheduleForm = () => {
       <div className="col-md-12">
         <p className="mt-2">Select Date and Time</p>
         <DatePickerComp getSelectedDate={getSelectedDate} />
-        {/* {datePickerError === true && (
-          <div className="datepicker-error">Please select date and time.</div>
-        )} */}
       </div>
 
       <div className="col-md-12">
