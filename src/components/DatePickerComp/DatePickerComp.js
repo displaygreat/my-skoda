@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
+import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const Styles = styled.div`
@@ -16,8 +17,15 @@ const Styles = styled.div`
   margin-bottom: 30px;
   display: block;
 }
-.react-datepicker-wrapper:last-child {
-  margin-bottom: .5rem;
+.react-datepicker-wrapper + p {
+  margin-top: -1.3rem;
+  color: #dc3545;
+}
+.react-datepicker__input-container > input {
+  padding: .375rem .75rem;
+}
+.react-datepicker__close-icon {
+  padding: 0 .75rem 0 0;
 }
  .react-datepicker__close-icon::before,
  .react-datepicker__close-icon::after {
@@ -54,10 +62,18 @@ const Styles = styled.div`
 
 const DatePickerComp = (props) => {
   const { getSelectedDate } = props;
-  const [selectedDate, setSelectedDate] = useState(
-    setHours(setMinutes(new Date(), 0), 8)
-  );
+  const [selectedDate, setSelectedDate] = useState();
+  // setHours(setMinutes(new Date(), 0), 8)
   const [excludedTimes, setExcludedTimes] = useState([]);
+  const {
+    control,
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm();
+  const { onChange, ...rest } = register("date");
 
   const handleSelectedDate = (date) => {
     setSelectedDate(date);
@@ -109,55 +125,114 @@ const DatePickerComp = (props) => {
 
   return (
     <Styles>
-      <DatePicker
-        isClearable
-        selected={selectedDate}
-        onChange={handleSelectedDate}
-        onSelect={getExcludedTimes}
-        placeholderText="Select Date and Time"
-        popperPlacement="top-start"
-        popperModifiers={{
-          offset: {
-            enabled: true,
-            offset: "0px, 10px",
-          },
-          preventOverflow: {
-            enabled: true,
-            escapeWithReference: false,
-            boundariesElement: "viewport",
-          },
-        }}
-        dateFormat="dd/MM/yyy"
-        minDate={new Date()}
+      <Controller
+        control={control}
+        name="date"
+        render={({ field }) => (
+          <DatePicker
+            isClearable
+            selected={selectedDate}
+            // onClick={() => clearErrors(["date", "time"])}
+            onChange={(date) => {
+              field.onChange(date);
+              handleSelectedDate(date);
+              setError("date", {
+                type: "manual",
+                message: "Please choose date and time",
+              });
+            }}
+            onBlur={(date) => {
+              // field.onChange(date);
+              // handleSelectedDate(date);
+              setError("date", {
+                type: "manual",
+                message: "Please choose date and time",
+              });
+            }}
+            onSelect={(date) => {
+              handleSelectedDate(date);
+              getExcludedTimes(date);
+              clearErrors(["date"]);
+            }}
+            placeholderText="Select Date and Time"
+            popperPlacement="top-start"
+            popperModifiers={{
+              offset: {
+                enabled: true,
+                offset: "0px, 10px",
+              },
+              preventOverflow: {
+                enabled: true,
+                escapeWithReference: false,
+                boundariesElement: "viewport",
+              },
+            }}
+            dateFormat="dd/MM/yyy"
+            minDate={new Date()}
+          />
+        )}
       />
-      <DatePicker
-        isClearable
-        selected={selectedDate}
-        excludeTimes={excludedTimes}
-        onChange={handleSelectedDate}
-        onSelect={getExcludedTimes}
-        placeholderText="Select Date and Time"
-        popperPlacement="top-start"
-        popperModifiers={{
-          offset: {
-            enabled: true,
-            offset: "0px, 10px",
-          },
-          preventOverflow: {
-            enabled: true,
-            escapeWithReference: false,
-            boundariesElement: "viewport",
-          },
-        }}
-        showTimeSelect
-        showTimeSelectOnly
-        timeIntervals={15}
-        timeFormat="HH:mm"
-        dateFormat="hh:mm aa"
-        minDate={new Date()}
-        minTime={setHours(setMinutes(new Date(), 0), 8)}
-        maxTime={setHours(setMinutes(new Date(), 45), 14)}
+      {errors.date && <p>{errors.date.message}</p>}
+      <Controller
+        control={control}
+        name="time"
+        render={({ field }) => (
+          <DatePicker
+            isClearable
+            // selected={field.value}
+            selected={selectedDate}
+            excludeTimes={excludedTimes}
+            // onClick={() => clearErrors(["date", "time"])}
+            onChange={(date) => {
+              field.onChange(date);
+              handleSelectedDate(date);
+              setError("time", {
+                type: "manual",
+                message: "Please choose date",
+              });
+            }}
+            onBlur={(date) => {
+              // field.onChange(date);
+              // handleSelectedDate(date);
+              setError("date", {
+                type: "manual",
+                message: "Please choose date",
+              });
+            }}
+            onSelect={() => {
+              getExcludedTimes();
+              clearErrors(["time"]);
+            }}
+            // onSelect={(date) => {
+            //   handleSelectedDate(date);
+            //   getExcludedTimes(date);
+            //   clearErrors(["date", "time"]);
+            // }}
+            placeholderText="Select Date and Time"
+            popperPlacement="top-start"
+            popperModifiers={{
+              offset: {
+                enabled: true,
+                offset: "0px, 10px",
+              },
+              preventOverflow: {
+                enabled: true,
+                escapeWithReference: false,
+                boundariesElement: "viewport",
+              },
+            }}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeFormat="HH:mm"
+            dateFormat="hh:mm aa"
+            minDate={new Date()}
+            minTime={setHours(setMinutes(new Date(), 0), 8)}
+            maxTime={setHours(setMinutes(new Date(), 45), 14)}
+          />
+        )}
       />
+      {errors.date && <p>{errors.date.message}</p>}
     </Styles>
   );
 };
