@@ -5,7 +5,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import MySkodaNavbar from "./components/MySkodaNavbar/MySkodaNavbar";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupStepTwo from "./pages/SignupStepTwo";
 import SignupStepOne from "./pages/SignupStepOne";
@@ -13,123 +13,74 @@ import MySkodaPage from "./pages/MySkodaPage";
 import ScheduleServicePage from "./pages/ScheduleServicePage";
 import Parse from "parse";
 
+import { useHistory } from "react-router-dom";
+import { useData } from "./shared/dataContext";
+import ScrollToTop from "./shared/ScrollToTop";
+
 Parse.serverURL = "https://parseapi.back4app.com"; // This is your Server URL
 Parse.initialize(
   "Iwo7VyOadOaF4eiiOJjWPPRpYkypMvslH1TxL1Jq", // This is your Application ID
   "eRJ2OisGhdgtimmV0E815KDSnEcmogdtUZqxFnc1" // This is your Javascript key
 );
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeUser: null,
-      userId: "",
-      userEmail: "",
-      userCarPlate: "",
-      userLastInspection: "",
-    };
-  }
+const App = () => {
+  const { setValues, data } = useData();
+  const history = useHistory();
 
-  handleLogin = (email) => {
-    this.setState({
-      activeUser: email,
-    });
+  const HandleLogIn = (activeUser) => {
+    console.log(activeUser);
+    setValues(activeUser);
+    localStorage.activeUser = JSON.stringify(activeUser);
+    window.location = "#/my-skoda";
   };
 
-  handleLogOut = () => {
-    this.setState({
-      activeUser: null,
-      userId: "",
-      userEmail: "",
-      userCarPlate: "",
-      userLastInspection: "",
-    });
+  const HandleLogOut = () => {
+    setValues(null);
+    // localStorage.removeItem("activeUser");
+    localStorage.clear();
   };
 
-  handleCallbackUserId = (id) => {
-    this.setState({
-      userId: id,
-    });
+  const GetVehicle = (vehicle) => {
+    console.log(vehicle);
+    setValues(vehicle);
+    localStorage.vehicle = JSON.stringify(vehicle);
   };
 
-  handleCallbackUserEmail = (email) => {
-    this.setState({
-      userEmail: email,
-    });
+  const HandleSignupOne = (vehicle, email) => {
+    setValues({ newUserVehicle: vehicle, newUserEmail: email });
+    console.log(vehicle, email);
+    // history.push("./signup-step-two");
+    window.location = "#/signup-step-two";
   };
 
-  handleCallbackUserCarPlate = (plate) => {
-    this.setState({
-      userCarPlate: plate,
-    });
-  };
-
-  handleCallbackLastInspection = (lastInspection) => {
-    this.setState({
-      userLastInspection: lastInspection,
-    });
-  };
-
-  render() {
-    const {
-      activeUser,
-      userId,
-      userEmail,
-      userCarPlate,
-      userLastInspection,
-    } = this.state;
-    return (
-      <HashRouter basename="/">
-        <Route exact path={["/schedule", "/my-skoda"]}>
-          <MySkodaNavbar
-            handleLogOut={this.handleLogOut}
-            activeUser={activeUser}
-          />
+  return (
+    <HashRouter basename="/">
+      <ScrollToTop />
+      <Route exact path={["/schedule", "/my-skoda"]}>
+        <MySkodaNavbar handleLogOut={HandleLogOut} />
+      </Route>
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
         </Route>
-        <Switch>
-          <Route exact path="/" component={HomePage}>
-            <HomePage />
-          </Route>
-          <Route path="/schedule" component={ScheduleServicePage}>
-            <ScheduleServicePage
-              activeUser={activeUser}
-              userId={userId}
-              userCarPlate={userCarPlate}
-              lastInspection={userLastInspection}
-            />
-          </Route>
-          <Route path="/my-skoda" component={MySkodaPage}>
-            <MySkodaPage
-              activeUser={activeUser}
-              sendUserCarPlate={userCarPlate}
-              lastInspection={userLastInspection}
-            />
-          </Route>
-          <Route path="/signup-step-one" component={SignupStepOne}>
-            <SignupStepOne
-              callbackUserEmail={this.handleCallbackUserEmail}
-              callbackUserCarPlate={this.handleCallbackUserCarPlate}
-            />
-          </Route>
-          <Route path="/signup-step-two" component={SignupStepTwo}>
-            <SignupStepTwo
-              sendUserEmail={userEmail}
-              sendUserCarPlate={userCarPlate}
-            />
-          </Route>
-          <Route path="/login" component={LoginPage}>
-            <LoginPage
-              handleLogin={this.handleLogin}
-              callbackUserId={this.handleCallbackUserId}
-              callbackUserCarPlate={this.handleCallbackUserCarPlate}
-              callbackLastInspection={this.handleCallbackLastInspection}
-            />
-          </Route>
-        </Switch>
-      </HashRouter>
-    );
-  }
-}
+        <Route path="/schedule">
+          <ScheduleServicePage />
+        </Route>
+        <Route path="/my-skoda">
+          <MySkodaPage />
+        </Route>
+        <Route path="/signup-step-one">
+          <SignupStepOne HandleSignupOne={HandleSignupOne} />
+        </Route>
+        <Route path="/signup-step-two">
+          <SignupStepTwo />
+        </Route>
+        <Route path="/login">
+          <LoginPage handleLogIn={HandleLogIn} getVehicle={GetVehicle} />
+        </Route>
+      </Switch>
+    </HashRouter>
+  );
+};
 
 export default App;

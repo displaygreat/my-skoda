@@ -1,0 +1,59 @@
+.login-form .form-label {
+  margin-top: 1rem;
+}
+.login-form .input-password {
+  position: relative;
+}
+.login-form .icon-eye {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 58px;
+  right: 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.login-form .icon-eye-off {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 58px;
+  right: 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.login-form .buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.login-form .prev-button,
+.login-form .next-button {
+  width: 47%;
+  margin-bottom: 1rem;
+}
+.login-form .signup-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+.login-form-link {
+  width: max-content;
+  color: #218838;
+  border-bottom: 1px solid #218838;
+  margin-bottom: 2rem;
+}
+.login-form-link:hover {
+  text-decoration: none;
+  background-color: yellow;
+}
+.login-form .alert-dismissible .close {
+  top: -10px;
+  right: -10px;
+}
+.login-form .error-alert {
+  background-color: #fff3cd;
+  border-radius: 3px;
+  margin-top: 2rem;
+  padding: 20px;
+}

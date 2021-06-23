@@ -1,0 +1,40 @@
+.signup-form-two .form-label {
+  margin-top: 1rem;
+}
+.signup-form-two .input-password {
+  position: relative;
+}
+.signup-form-two .icon-eye-off,
+.signup-form-two .icon-eye {
+  position: absolute;
+  top: 58px;
+  right: 20px;
+}
+.signup-form-two .buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.signup-form-two .prev-button,
+.signup-form-two .next-button {
+  width: 47%;
+  margin-bottom: 1rem;
+}
+.signup-form-two .signup-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+.signup-form-two .alert-dismissible .close {
+  top: -10px;
+  right: -10px;
+}
+.signup-form-two .error-alert {
+  background-color: #fff3cd;
+  border-radius: 3px;
+  margin-top: 2rem;
+  padding: 20px;
+}
+.signup-form-two .alert-success {
+  margin-top: 2rem;
+}
