@@ -81,8 +81,8 @@ const DatePickerComp = (props) => {
   const getExcludedTimes = (date) => {
     setExcludedTimes([]);
 
-    const Shedule = Parse.Object.extend("Shedule");
-    const query = new Parse.Query(Shedule);
+    const Schedule = Parse.Object.extend("Schedule");
+    const query = new Parse.Query(Schedule);
 
     query.find().then(
       (results) => {
