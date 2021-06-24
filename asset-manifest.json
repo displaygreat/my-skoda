@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/my-skoda/static/css/main.c613465e.chunk.css",
-    "main.js": "/my-skoda/static/js/main.e30ee9fa.chunk.js",
-    "main.js.map": "/my-skoda/static/js/main.e30ee9fa.chunk.js.map",
+    "main.js": "/my-skoda/static/js/main.094739ab.chunk.js",
+    "main.js.map": "/my-skoda/static/js/main.094739ab.chunk.js.map",
     "runtime-main.js": "/my-skoda/static/js/runtime-main.dd8dedac.js",
     "runtime-main.js.map": "/my-skoda/static/js/runtime-main.dd8dedac.js.map",
     "static/css/2.9c4c78c2.chunk.css": "/my-skoda/static/css/2.9c4c78c2.chunk.css",
@@ -29,6 +29,6 @@
     "static/css/2.9c4c78c2.chunk.css",
     "static/js/2.7cdbac51.chunk.js",
     "static/css/main.c613465e.chunk.css",
-    "static/js/main.e30ee9fa.chunk.js"
+    "static/js/main.094739ab.chunk.js"
   ]
 }
