@@ -15,7 +15,7 @@ Used:
 - moment.js
 - react-router-dom
 
-[![React](https://img.shields.io/badge/React-brightgreen)]
+![React](https://img.shields.io/badge/React-brightgreen)
 
 Technologies: React, AJAX, SaaS, REST API, SPA.
 
