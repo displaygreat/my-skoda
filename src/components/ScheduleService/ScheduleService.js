@@ -1,7 +1,6 @@
 import "./ScheduleService.css";
 import React from "react";
 import { Image } from "react-bootstrap";
-import axios from "axios";
 import moment from "moment";
 import superb from "../../assets/img/superb.jpg";
 import octavia from "../../assets/img/octavia.jpg";
@@ -10,7 +9,7 @@ import ScheduleForm from "../ScheduleForm/ScheduleForm";
 import { useData } from "../../shared/dataContext";
 
 const ScheduleService = () => {
-  const { setValues, data } = useData();
+  const { data } = useData();
 
   let lastTest = moment(data.mivchan_acharon_dt).format("DD/MM/YYYY");
   let lastInspection = data.lastInspection;

@@ -13,7 +13,6 @@ import MySkodaPage from "./pages/MySkodaPage";
 import ScheduleServicePage from "./pages/ScheduleServicePage";
 import Parse from "parse";
 
-import { useHistory } from "react-router-dom";
 import { useData } from "./shared/dataContext";
 import ScrollToTop from "./shared/ScrollToTop";
 
@@ -24,8 +23,7 @@ Parse.initialize(
 );
 
 const App = () => {
-  const { setValues, data } = useData();
-  const history = useHistory();
+  const { setValues } = useData();
 
   const HandleLogIn = (activeUser) => {
     console.log(activeUser);
@@ -36,7 +34,6 @@ const App = () => {
 
   const HandleLogOut = () => {
     setValues(null);
-    // localStorage.removeItem("activeUser");
     localStorage.clear();
   };
 
@@ -49,7 +46,6 @@ const App = () => {
   const HandleSignupOne = (vehicle, email) => {
     setValues({ newUserVehicle: vehicle, newUserEmail: email });
     console.log(vehicle, email);
-    // history.push("./signup-step-two");
     window.location = "#/signup-step-two";
   };
 
@@ -70,7 +66,7 @@ const App = () => {
           <MySkodaPage />
         </Route>
         <Route path="/signup-step-one">
-          <SignupStepOne HandleSignupOne={HandleSignupOne} />
+          <SignupStepOne handleSignupOne={HandleSignupOne} />
         </Route>
         <Route path="/signup-step-two">
           <SignupStepTwo />

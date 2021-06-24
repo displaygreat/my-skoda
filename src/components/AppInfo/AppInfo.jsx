@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Alert } from 'react-bootstrap';
 import './AppInfo.css';
 
@@ -44,8 +45,7 @@ const AppInfo = () => {
                 </li>
               </ul>
             </div>
-            <p>
-              Or <a href="/#/signup-step-one">signin</a> with your Skoda.
+            <p>Or <Link to="./signup-step-one">sigin</Link> with your Skoda (only registered in Israel).
             </p>
           </Alert>
   );

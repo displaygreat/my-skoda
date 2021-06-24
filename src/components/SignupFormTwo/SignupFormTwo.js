@@ -11,9 +11,10 @@ import { FormInput } from "../FormInput/FormInput";
 import { ButtonComp } from "../ButtonComp/ButtonComp";
 import Parse from "parse";
 import { useData } from "../../shared/dataContext";
+import { Link } from "react-router-dom";
 
 export const SignupFormTwo = (props) => {
-  const { data, setValues } = useData();
+  const { data } = useData();
   const email = data?.newUserEmail;
   const vehicle = data?.newUserVehicle?.toString();
 
@@ -47,7 +48,6 @@ export const SignupFormTwo = (props) => {
     handleSubmit,
     formState: { errors },
     getValues,
-    setError,
     reset,
   } = useForm({
     mode: "onBlur",
@@ -76,7 +76,7 @@ export const SignupFormTwo = (props) => {
     user.set("username", email);
     user.set("email", email);
     user.set("password", pwd);
-    user.set("plateNumber", vehicle);
+    user.set("plateNumber", +vehicle);
 
     user
       .signUp()
@@ -150,9 +150,9 @@ export const SignupFormTwo = (props) => {
           You are signed up.
           <br />
           Please{" "}
-          <a className="signup-link" href="#/login">
+          <Link className="signup-link" to="./login">
             Login
-          </a>
+          </Link>
         </p>
       </Alert>
       <Alert

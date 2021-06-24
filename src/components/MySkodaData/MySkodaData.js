@@ -6,7 +6,7 @@ import moment from "moment";
 import { useData } from "../../shared/dataContext";
 
 const MySkodaData = () => {
-  const { setValues, data } = useData();
+  const { data } = useData();
   console.log(data);
 
   let carMake = data.tozeret_nm === `סקודה צ'כיה` ? "Skoda" : "";

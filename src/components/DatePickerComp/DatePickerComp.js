@@ -66,12 +66,10 @@ const DatePickerComp = (props) => {
   const [excludedTimes, setExcludedTimes] = useState([]);
   const {
     control,
-    register,
     setError,
     clearErrors,
     formState: { errors },
   } = useForm();
-  const { onChange, ...rest } = register("date");
 
   const handleSelectedDate = (date) => {
     setSelectedDate(date);

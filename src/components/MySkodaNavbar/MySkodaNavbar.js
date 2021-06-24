@@ -6,7 +6,7 @@ import { useData } from "../../shared/dataContext";
 
 const MySkodaNavbar = (props) => {
   const { handleLogOut } = props;
-  const { setValues, data } = useData();
+  const { data } = useData();
 
   const logOut = () => {
     handleLogOut();

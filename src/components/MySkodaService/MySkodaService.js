@@ -5,7 +5,7 @@ import moment from "moment";
 import { useData } from "../../shared/dataContext";
 
 const MySkodaService = () => {
-  const { setValues, data } = useData();
+  const { data } = useData();
 
   let carTest = moment(data.mivchan_acharon_dt).format("DD/MM/YYYY");
   let lastInspection = data.lastInspection;

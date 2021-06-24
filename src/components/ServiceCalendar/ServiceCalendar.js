@@ -2,9 +2,10 @@ import "./ServiceCalendar.css";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useData } from "../../shared/dataContext";
+import { Link } from "react-router-dom";
 
 const ServiceCalendar = () => {
-  const { setValues, data } = useData();
+  const { data } = useData();
 
   const [inspectionBeforeTest, setInspectionBeforeTest] = useState("");
   const [multiPointInspection, setMultiPointInspection] = useState("");
@@ -19,6 +20,7 @@ const ServiceCalendar = () => {
     getInspectionBeforeTest();
     getMultiPointInspection();
     getSeasonInspection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getFullDate = (date) => {
@@ -139,9 +141,9 @@ const ServiceCalendar = () => {
           <td className="service-cell">
             <small>schedule</small>
             <br />
-            <a className="schedule-link" href="#/schedule">
+            <Link className="schedule-link" to="./schedule">
               {service.shedule}
-            </a>
+            </Link>
           </td>
         </tr>
       </tbody>

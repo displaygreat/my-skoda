@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./ScheduleForm.css";
 import DatePickerComp from "../DatePickerComp/DatePickerComp";
 import Parse from "parse";
@@ -14,7 +14,7 @@ import { ButtonComp } from "../ButtonComp/ButtonComp";
 import moment from "moment";
 
 const ScheduleForm = () => {
-  const { setValues, data } = useData();
+  const { data } = useData();
 
   const [dealer, setDealer] = useState();
   const [service, setService] = useState();
@@ -43,7 +43,6 @@ const ScheduleForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
     reset,
   } = useForm({
     mode: "onBlur",

@@ -15,13 +15,6 @@ export const ResetPassword = () => {
   const [showModalError, setShowModalError] = useState(false);
 
   const schema = yup.object().shape({
-    // password: yup
-    //   .string()
-    //   .required("Please enter your password")
-    //   .matches(
-    //     /(?=.*\d)(?=.*[a-z]).{8,}/,
-    //     "Password should contain at least one number and one lowercase letter, and at least 8 characters"
-    //   ),
     resetPwd: yup
       .string()
       .required("Please enter your email")
