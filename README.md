@@ -15,6 +15,8 @@ Used:
 - moment.js
 - react-router-dom
 
+[![React](https://img.shields.io/badge/React-brightgreen)](https://www.npmjs.com/package/vue-js-modal)
+
 Technologies: React, AJAX, SaaS, REST API, SPA.
 
 Demo: https://displaygreat.github.io/my-skoda/
