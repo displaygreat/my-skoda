@@ -2,3 +2,6 @@
   margin-bottom: 1rem;
   color: #dc3545;
 }
+.confirm-modal .modal-header {
+  background-color: #d1e7dd;
+}
