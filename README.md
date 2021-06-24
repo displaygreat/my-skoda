@@ -4,7 +4,16 @@ Web Application for accessing to vehicle data and booking car repair service. Bu
 
 This application based on [DATA GOV API](https://data.gov.il/dataset/private-and-commercial-vehicles/resource/053cea08-09bc-40ec-8f7a-156f0677aff3?view_id=6e5c660c-9103-4297-a6f6-33824258da50).
 
-Used: React Hooks API, Context API, Back4App (SaaS based Parse platform), Bootstrap, styled-components, react-hook-form, react-datepicker, moment.js, react-router.
+Used: 
+- React Hooks API
+- Context API
+- Back4App (SaaS based Parse platform)
+- Bootstrap
+- styled-components
+- react-hook-form
+- react-datepicker
+- moment.js
+- react-router-dom
 
 Technologies: React, AJAX, SaaS, REST API, SPA.
 
