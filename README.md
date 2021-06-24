@@ -15,7 +15,8 @@ Used:
 - moment.js
 - react-router-dom
 
-Technologies: ![React](https://img.shields.io/badge/React-brightgreen) ![SPA](https://img.shields.io/badge/SPA-brightgreen) ![REST API](https://img.shields.io/badge/RESTfullAPI-brightgreen) ![Axios](https://img.shields.io/badge/Axios-brightgreen) ![SaaS](https://img.shields.io/badge/SaaS-brightgreen) 
+Technologies:
+![React](https://img.shields.io/badge/React-informational) ![SPA](https://img.shields.io/badge/SPA-informational) ![REST API](https://img.shields.io/badge/RESTfullAPI-informational) ![Axios](https://img.shields.io/badge/Axios-informational) ![SaaS](https://img.shields.io/badge/SaaS-informational) 
 
 Demo: https://displaygreat.github.io/my-skoda/
 
