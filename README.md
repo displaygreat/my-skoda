@@ -10,7 +10,7 @@ Technologies: React, AJAX, SaaS, REST API, SPA.
 
 Demo: https://displaygreat.github.io/my-skoda/
 
-[![Click-Eat-HTML-CSS-JS](https://github.com/displaygreat/displaygreat/blob/main/Click-Eat.gif)](https://youtu.be/-vzt7G5zS94)
+[![Click-Eat-HTML-CSS-JS](https://github.com/displaygreat/displaygreat/blob/main/my-skoda.gif)](https://youtu.be/-vzt7G5zS94)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
