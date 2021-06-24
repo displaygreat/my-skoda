@@ -88,7 +88,7 @@ const DatePickerComp = (props) => {
       (results) => {
         let arrDates = [];
         for (let i = 0; i < results.length; i++) {
-          arrDates.push(results[i].attributes.sheduledDate);
+          arrDates.push(results[i].attributes.scheduledDate);
         }
 
         let arrExcludeDates = [];
