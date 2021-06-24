@@ -17,7 +17,7 @@ Used:
 
 ![React](https://img.shields.io/badge/React-brightgreen)
 
-Technologies: React, AJAX, SaaS, REST API, SPA.
+Technologies: ![React](https://img.shields.io/badge/React-brightgreen) ![SPA](https://img.shields.io/badge/SPA-brightgreen) ![REST API](https://img.shields.io/badge/REST API-brightgreen) ![Axios](https://img.shields.io/badge/Axios-brightgreen) ![SaaS](https://img.shields.io/badge/SaaS-brightgreen) 
 
 Demo: https://displaygreat.github.io/my-skoda/
 
