@@ -17,7 +17,9 @@ Used:
 
 Technologies:
 
-![React]https://img.shields.io/badge/React-informational ![SPA](https://img.shields.io/badge/SPA-informational) ![REST API](https://img.shields.io/badge/RESTfullAPI-informational) ![Axios](https://img.shields.io/badge/Axios-informational) ![SaaS](https://img.shields.io/badge/SaaS-informational) 
+<img src="https://img.shields.io/badge/React-informational"> <img src="https://img.shields.io/badge/SPA-informational">
+
+![React](https://img.shields.io/badge/React-informational) ![SPA](https://img.shields.io/badge/SPA-informational) ![REST API](https://img.shields.io/badge/RESTfullAPI-informational) ![Axios](https://img.shields.io/badge/Axios-informational) ![SaaS](https://img.shields.io/badge/SaaS-informational) 
 
 Demo: https://displaygreat.github.io/my-skoda/
 
