@@ -11,7 +11,7 @@ This application based on [DATA GOV API](https://data.gov.il/dataset/private-and
 Technologies:
 - React
 - Rest API
-- Axios
+- Ajax
 - Saas
 
 Used: 
