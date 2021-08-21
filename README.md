@@ -8,13 +8,6 @@ This application based on [DATA GOV API](https://data.gov.il/dataset/private-and
 
 ## Tech stack
 
-Technologies:
-- React
-- Rest API
-- Ajax
-- Saas
-
-Used: 
 - React Hooks API
 - Context API
 - Back4App (SaaS based Parse platform)
